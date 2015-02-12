@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><project name="Retsys-client" default="default" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>Builds, tests, and runs the project Retsys-client.</description>
     <import file="nbproject/build-impl.xml"/>
+    <path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+    <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+           uri="antlib:org.apache.maven.artifact.ant"
+           classpathref="maven-ant-tasks.classpath" />        
      <target name="-pre-init">
      <artifact:dependencies filesetId="dependency.fileset" useScope="runtime">
             <!-- Your dependency definitions go here -->
