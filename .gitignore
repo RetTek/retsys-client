@@ -1,0 +1,7 @@
+*.jar
+!/Retsys-client/lib/maven-ant-tasks-2.1.3.jar
+*.*~
+*.bak
+/Retsys-client/build/
+/Retsys-client/nbproject/private/
+/Retsys-client/dist/

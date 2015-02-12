@@ -1,6 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><project name="Retsys-client" default="default" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
+<?xml version="1.0" encoding="UTF-8"?><!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><project name="Retsys-client" default="default" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
     <description>Builds, tests, and runs the project Retsys-client.</description>
     <import file="nbproject/build-impl.xml"/>
+     <target name="-pre-init">
+     <artifact:dependencies filesetId="dependency.fileset" useScope="runtime">
+            <!-- Your dependency definitions go here -->
+            <dependency groupId="com.fasterxml.jackson.core" artifactId="jackson-core" version="2.5.0" scope="compile"/>
+            <dependency groupId="com.fasterxml.jackson.core" artifactId="jackson-databind" version="2.5.0" scope="compile"/>
+            <dependency groupId="org.apache.httpcomponents" artifactId="httpclient" version="4.3.6" scope="compile"/>
+            <dependency groupId="org.apache.httpcomponents" artifactId="httpmime" version="4.3.6" scope="compile"/>
+            <dependency groupId="javax.json" artifactId="javax.json-api" version="1.0" scope="compile"/>
+            <dependency groupId="org.apache.velocity" artifactId="velocity" version="1.7" scope="compile"/>
+            <dependency groupId="com.fasterxml.jackson.datatype" artifactId="jackson-datatype-jsr310" version="2.5.0" scope="compile"/>
+            <dependency groupId="org.controlsfx" artifactId="controlsfx" version="8.20.8" scope="compile"/>
+        </artifact:dependencies>         
+        <copy todir="lib">
+          <fileset refid="dependency.fileset" />
+          <!-- This mapper strips off all leading directory information -->
+          <mapper type="flatten" />
+        </copy> 
+    </target>
+    
     <!--
 
     There exist several targets which are by default empty and which can be 
