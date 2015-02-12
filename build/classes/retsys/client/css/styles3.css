@@ -1,0 +1,1154 @@
+/*
+    Document   : style.css
+    Created on : Jan 10, 2014, 1:40:04 AM
+    Author     : Narayan G. Maharjan <me@ngopal.com.np>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.label,.text{
+    -fx-font-family:Verdana;
+    -fx-text-fill:#3C3C3C;
+}
+.list-view .list-cell ,.table-view .table-cell, .table-view .table-cell:hover{
+    -fx-font-size:11px;
+    -fx-font-family:Verdana;
+}
+
+.button{
+    -fx-background-color:#666666,linear-gradient(#ffffff,#E6E7E8);/*linear-gradient(#ffffff,derive(gray,50%));*/
+    -fx-background-insets: 0px,0.047em;
+    -fx-background-radius:3 , 3px;
+    -fx-border-width:0px;
+    -fx-font-family:Verdana;
+    -fx-font-size:10px;
+    -fx-text-fill:#319BE4;
+}
+
+.button-func{
+    -fx-background-insets: 0px,0.047em;
+    -fx-background-radius:3 , 3px; 
+    -fx-font-family:Verdana;
+    -fx-font-size:12px;
+    -fx-text-fill:black;    
+}
+
+.label-func-head{
+    -fx-font-family:Verdana;
+    -fx-font-size:14px;
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+}
+/*
+.button:hover{
+    -fx-background-color:#666666,linear-gradient(#ffffff,#E6E7E8),linear-gradient(to top,#ffffff,transparent);
+    -fx-background-insets: 0px,1px;
+}*/
+.button:focused,.button:pressed{
+    -fx-background-color:#319BE4,#666666,linear-gradient(#ffffff,#E6E7E8),linear-gradient(to top,#ffffff,transparent);
+    -fx-background-insets: 0px,1px;
+}
+
+
+
+.bold{
+    -fx-font-weight:bold;
+}
+
+.app-blue-color{
+    -fx-text-fill:#319BE4;
+}
+.app-green-color{
+    -fx-text-fill:#8CC63F;
+}
+.app-light-gray-color{
+    -fx-text-fill:#808080;
+}
+.app-text-dark-gray{
+    -fx-text-fill:#3C3C3C;
+}
+.app-text-medium-gray{
+    -fx-text-fill:#595959;
+}
+.app-text-light-gray{
+    -fx-text-fill:#808080;
+}
+
+.underline{
+    -fx-underline:true;
+}
+
+
+.header{
+    -fx-background-color:linear-gradient(to right, #2D2A2B,#3B3B3C 80%);
+}
+.header .combo-box,.header-pane .combo-box{
+    -fx-background-color:#999999,linear-gradient(to bottom,#d1d2d4,white 30%);
+    -fx-background-insets:0 ,1px;
+    -fx-background-radius:0px;
+    -fx-min-height:5px;
+    -fx-border-width:0px;
+}
+.header .combo-box > .list-cell{
+    -fx-padding:0 0 0 4px;
+}
+.header .combo-box > .list-cell,.header-pane .combo-box > .list-cell{
+    -fx-text-fill:#3ea8f4;
+    -fx-font-family:Verdana;
+    -fx-font-size:11px;
+    -fx-fill:#3ea8f4;
+}
+.header .combo-box .arrow-button,.header-pane .combo-box .arrow-button{
+    -fx-background-color:#999999,#dcdcdc,
+        linear-gradient(to top,#505050 ,#DCDCDC 2%,#DCDCDC 80%,white);
+    /*linear-gradient(to bottom, white,transparent 20%);*/
+    -fx-background-insets:0,1,2px;
+    -fx-background-radius:0px;
+    -fx-padding:8 6 8 6px;
+}
+.header .combo-box .arrow, .header-pane .combo-box .arrow{
+    -fx-background-color:#4e4e4e;
+    -fx-padding: 3 4 3 4 px;
+}
+
+.footer-pane .arrow-down{
+    -fx-background-color: #0099FF;
+}
+
+.points{
+    -fx-text-fill:#3FA9F5;
+    -fx-font-size:22px;
+    -fx-font-weight:bold;
+}
+.points-plus{
+    -fx-text-fill:#A7C6D9;
+    -fx-font-size:18px;
+}
+.points-to,.current-time{
+    -fx-text-fill:#3FA9F5;
+    -fx-font-size:14px;
+}
+.points-info,.current-date{
+    -fx-text-fill:#CCCCCC;
+    -fx-font-size:11px;
+}
+
+.current-date{
+    -fx-font-size:14px;
+}
+.current-time{
+    -fx-font-size:27px;
+}
+.swap-menu,.swap-menu:focused{
+    -fx-max-width:25px;
+    -fx-min-width:25px;
+    -fx-max-height:22px;
+    -fx-min-height:22px;
+    -fx-shape:"M14.581,0h24.478v4.458H14.581V0z M14.581,12.783h24.478V8.325H14.581V12.783z M14.581,21.108h24.478 v-4.457H14.581V21.108z ";
+    -fx-background-insets:0px;
+}
+.swap-menu-arrow{
+    -fx-max-width:9px;
+    -fx-min-width:9px;
+    -fx-max-height:9px;
+    -fx-min-height:9px;
+    -fx-shape:"M7.268,14.562V6.547L0,10.554L7.268,14.562z";
+}
+.swap-menu-arrow:default{
+    -fx-shape:"M7.268,14.562V6.547L0,10.554L7.268,14.562z";
+    -fx-background-color:#3FA9F5;
+}
+.search {
+    -fx-shape:"M11.893,11.36l-3.089-3.09c0.753-0.877,1.214-2.015,1.214-3.262C10.018,2.242,7.774,0,5.009,0 C2.242,0,0,2.242,0,5.008c0,2.767,2.242,5.008,5.009,5.008c0.852,0,1.65-0.213,2.352-0.586l3.233,3.23L11.893,11.36z M1.839,5.008 c0-1.749,1.42-3.169,3.17-3.169c1.749,0,3.167,1.42,3.167,3.169c0,1.75-1.418,3.168-3.167,3.168 C3.259,8.177,1.839,6.759,1.839,5.008";
+}
+.search-box{
+    -fx-background-color:gray,linear-gradient(to bottom,derive(gray,80%),white 40%);
+    -fx-background-insets: 0,1px;
+    -fx-background-radius:0px;
+}
+.search-box .text-field{
+    -fx-background-color:linear-gradient(to bottom,derive(gray,80%),white 40%);
+    -fx-background-radius:0px;
+    -fx-prompt-text-fill:#9BB6DE;
+}
+
+.search-box .arrow-button{
+    -fx-background-radius:0px;
+    -fx-background-color:linear-gradient(to bottom,derive(gray,80%),white 40%);
+}
+.setting{
+    -fx-max-height:20px;
+    -fx-min-width:20px;
+    -fx-max-width:20px;
+    -fx-min-height:20px;
+    -fx-background-color:#999999;
+    -fx-effect:dropshadow(gaussian,derive(black,20%),1,20,1,2);
+    -fx-shape: "M18.631,8.197h-0.895c-0.41,0-0.845-0.321-0.967-0.712l-0.514-1.248 c-0.193-0.361-0.114-0.894,0.175-1.184l0.635-0.634c0.29-0.29,0.29-0.764,0-1.054l-1.055-1.054c-0.29-0.29-0.765-0.29-1.055,0 l-0.635,0.634c-0.289,0.29-0.822,0.369-1.184,0.175l-1.247-0.513C11.5,2.486,11.179,2.05,11.179,1.64V0.746 c0-0.41-0.336-0.746-0.745-0.746h-1.49c-0.41,0-0.746,0.336-0.746,0.746V1.64c0,0.41-0.319,0.846-0.711,0.967L6.238,3.12 C5.876,3.314,5.345,3.236,5.055,2.945L4.42,2.311c-0.29-0.29-0.765-0.29-1.055,0L2.313,3.365c-0.291,0.29-0.291,0.764,0,1.053 l0.633,0.635c0.29,0.29,0.37,0.823,0.175,1.184L2.607,7.486C2.485,7.877,2.051,8.198,1.641,8.198L0.746,8.197 C0.336,8.197,0,8.533,0,8.943v1.49c0,0.409,0.336,0.745,0.746,0.745h0.895c0.41,0.001,0.844,0.32,0.965,0.713l0.515,1.248 c0.192,0.361,0.114,0.896-0.175,1.184l-0.635,0.635c-0.289,0.289-0.289,0.764,0,1.054l1.055,1.055c0.29,0.29,0.765,0.29,1.055,0 l0.634-0.634c0.289-0.289,0.822-0.368,1.183-0.174l1.25,0.515c0.392,0.121,0.711,0.556,0.711,0.965v0.892 c0,0.41,0.335,0.746,0.746,0.746h1.49c0.409,0,0.745-0.336,0.745-0.746v-0.892c0-0.409,0.321-0.844,0.712-0.965l1.249-0.515 c0.361-0.194,0.895-0.115,1.185,0.174l0.632,0.634c0.29,0.29,0.765,0.29,1.055,0l1.055-1.055c0.29-0.29,0.29-0.765,0-1.054 l-0.635-0.635c-0.289-0.287-0.368-0.822-0.175-1.184l0.514-1.248c0.122-0.393,0.558-0.712,0.967-0.712h0.895 c0.409,0,0.744-0.335,0.744-0.745V8.943C19.375,8.533,19.04,8.197,18.631,8.197 M13.416,9.687c0,2.058-1.669,3.726-3.727,3.726 s-3.727-1.668-3.727-3.726c0-2.058,1.669-3.727,3.727-3.727S13.416,7.629,13.416,9.687";
+}
+
+/* To show the setting icon for the choice box */
+.blue-choice-box .open-button, .gray-choice-box .open-button{
+    -fx-background-color:#319BE4;
+    -fx-pref-width:36px;
+    -fx-pref-height:16px;
+    -fx-padding: 5 5 5 25px;
+    -fx-background-insets: 0 15 0 5px;
+    -fx-shape: "M18.631,8.197h-0.895c-0.41,0-0.845-0.321-0.967-0.712l-0.514-1.248 c-0.193-0.361-0.114-0.894,0.175-1.184l0.635-0.634c0.29-0.29,0.29-0.764,0-1.054l-1.055-1.054c-0.29-0.29-0.765-0.29-1.055,0 l-0.635,0.634c-0.289,0.29-0.822,0.369-1.184,0.175l-1.247-0.513C11.5,2.486,11.179,2.05,11.179,1.64V0.746 c0-0.41-0.336-0.746-0.745-0.746h-1.49c-0.41,0-0.746,0.336-0.746,0.746V1.64c0,0.41-0.319,0.846-0.711,0.967L6.238,3.12 C5.876,3.314,5.345,3.236,5.055,2.945L4.42,2.311c-0.29-0.29-0.765-0.29-1.055,0L2.313,3.365c-0.291,0.29-0.291,0.764,0,1.053 l0.633,0.635c0.29,0.29,0.37,0.823,0.175,1.184L2.607,7.486C2.485,7.877,2.051,8.198,1.641,8.198L0.746,8.197 C0.336,8.197,0,8.533,0,8.943v1.49c0,0.409,0.336,0.745,0.746,0.745h0.895c0.41,0.001,0.844,0.32,0.965,0.713l0.515,1.248 c0.192,0.361,0.114,0.896-0.175,1.184l-0.635,0.635c-0.289,0.289-0.289,0.764,0,1.054l1.055,1.055c0.29,0.29,0.765,0.29,1.055,0 l0.634-0.634c0.289-0.289,0.822-0.368,1.183-0.174l1.25,0.515c0.392,0.121,0.711,0.556,0.711,0.965v0.892 c0,0.41,0.335,0.746,0.746,0.746h1.49c0.409,0,0.745-0.336,0.745-0.746v-0.892c0-0.409,0.321-0.844,0.712-0.965l1.249-0.515 c0.361-0.194,0.895-0.115,1.185,0.174l0.632,0.634c0.29,0.29,0.765,0.29,1.055,0l1.055-1.055c0.29-0.29,0.29-0.765,0-1.054 l-0.635-0.635c-0.289-0.287-0.368-0.822-0.175-1.184l0.514-1.248c0.122-0.393,0.558-0.712,0.967-0.712h0.895 c0.409,0,0.744-0.335,0.744-0.745V8.943C19.375,8.533,19.04,8.197,18.631,8.197 M13.416,9.687c0,2.058-1.669,3.726-3.727,3.726 s-3.727-1.668-3.727-3.726c0-2.058,1.669-3.727,3.727-3.727S13.416,7.629,13.416,9.687";
+}
+.gray-choice-box .open-button{
+    -fx-pref-width:34px;
+    -fx-padding: 5 5 5 25px;
+    -fx-pref-height:14px;
+}
+.tree-view .tree-cell:filled{
+    -fx-effect: innershadow(three-pass-box,rgba(0,0,0,0.3),3,0,-2,0);/*
+    -fx-effect: innershadow(three-pass-box,rgba(0,0,0,0.2),10,0,-7,0);*/
+    /*-fx-background-insets: 10px;*/
+}
+.tree-view .tree-cell .tree-disclosure-node .arrow{
+    -fx-alignment: CENTER_RIGHT;
+
+}
+
+
+.tree-view .tree-cell .tree-disclosure-node .arrow {
+    -fx-background-color: #b7b7b7;
+}
+.tree-view .tree-cell,.tree-view .tree-cell .text{
+    -fx-indent: 2px;
+    -fx-padding:10 5 10 5px;
+    -fx-fill: #CCCCCC;
+}
+.tree-view .level1:filled,
+.tree-view .level2:filled {
+    -fx-indent: 0px;
+    -fx-padding:10 5 10 5px;
+    -fx-background-color: #272727;
+}
+.tree-view  .label{
+    -fx-text-fill:#cccccc;
+}
+
+
+.tree-view .level1:filled{
+    -fx-border-color:#424242;
+    -fx-border-width:0 0 1 0px;
+
+}
+.tree-view  .level1 .tree-disclosure-node,.tree-view .level2 .tree-disclosure-node {
+    -fx-background-color:#B4B3B4;
+    -fx-padding:4 7 4 7 px;
+    -fx-background-insets:0 4 0 4px;
+}
+.tree-view .business-line .tree-disclosure-node{
+    -fx-shape:"M4.5,0L4.5,0c0.895,0.001,1.702,0.348,2.286,0.911 c0.585,0.563,0.946,1.34,0.946,2.198V3.11v0.001c0,0.857-0.361,1.636-0.946,2.199c-0.169,0.162-0.358,0.306-0.56,0.43h0.039 C7.77,5.74,9,6.923,9,8.369V11H0V8.369C0,6.923,1.23,5.74,2.734,5.74h0.04C2.572,5.616,2.383,5.472,2.213,5.309 C1.629,4.747,1.267,3.968,1.267,3.111V3.11c0-0.859,0.362-1.636,0.946-2.199C2.798,0.348,3.606,0.001,4.5,0L4.5,0z";
+}
+
+.tree-view  .corporate-business .tree-disclosure-node{
+    -fx-shape:"M7.411,5.474v1.617H4.654V5.474H0.008v4.775h12.051V5.474H7.411z M4.654,3.663h2.757v1.102h4.646 V2.588c0-0.324-0.263-0.587-0.586-0.587H9.307V1.246C9.305,0.558,8.748,0,8.059,0H3.998C3.311,0,2.752,0.558,2.752,1.246v0.755 H0.587C0.264,2.001,0,2.264,0,2.588v2.177h4.654V3.663z M3.602,1.246c0-0.219,0.178-0.396,0.396-0.396h4.061 c0.221,0,0.397,0.178,0.397,0.396v0.755H3.602V1.246z M6.717,4.352H5.342v2.047h1.375V4.352z";
+}
+.tree-view .main-menu .tree-disclosure-node{
+    -fx-shape:"M11.491,1.966v5.646L8.567,6.05v1.896L4.45,6.05V8.1L0,6.05v7.57h13.555V1.966H11.491z M10.777,0.781 c0.424-0.001,0.792,0.182,1.059,0.38c0.133,0.098,0.239,0.197,0.309,0.271c0.035,0.036,0.062,0.065,0.078,0.086 c0.008,0.01,0.015,0.017,0.019,0.021c0,0.001,0.001,0.002,0.001,0.003h0.001l0.081-0.063l0.539-0.413h-0.001 c-0.015-0.019-0.21-0.272-0.562-0.533C11.949,0.274,11.43,0.001,10.777,0c-0.652-0.003-1.395,0.288-2.131,1.027L9.2,1.579 C9.834,0.949,10.354,0.783,10.777,0.781 M4.949,2.677C5.301,2.936,5.82,3.208,6.473,3.209H6.48c0.65,0,1.39-0.292,2.121-1.026 L8.051,1.63C7.414,2.26,6.895,2.426,6.473,2.428c-0.424,0.002-0.791-0.182-1.06-0.38C5.28,1.95,5.174,1.851,5.104,1.778 C5.069,1.741,5.043,1.711,5.026,1.692C5.018,1.683,5.012,1.675,5.01,1.671C5.008,1.669,5.008,1.669,5.008,1.668L4.387,2.144 C4.402,2.162,4.598,2.416,4.949,2.677 M5.006,1.667l-0.089,0.07l0.091-0.069L5.006,1.667z M2.354,0.781 c0.424-0.001,0.791,0.182,1.059,0.38c0.133,0.098,0.239,0.197,0.309,0.271c0.035,0.036,0.062,0.065,0.078,0.086 c0.008,0.01,0.014,0.017,0.018,0.021C3.817,1.539,3.818,1.54,3.818,1.541l0.619-0.475V1.065c-0.014-0.02-0.209-0.272-0.563-0.532 C3.525,0.274,3.004,0.001,2.354,0C1.701-0.003,0.957,0.288,0.223,1.027l0.554,0.552C1.41,0.949,1.93,0.783,2.354,0.781 M3.908,1.473 l-0.09,0.068l0.001,0.001L3.908,1.473z";
+}
+.tree-view .customers .tree-disclosure-node{
+    -fx-shape:"M3.433,2.275L3.433,2.275c0.682,0,1.298,0.276,1.745,0.723 C5.624,3.443,5.899,4.061,5.9,4.74v0.002l0,0c0,0.681-0.276,1.298-0.722,1.744C5.049,6.615,4.905,6.73,4.75,6.828h0.031 c0.369,0,0.718,0.098,1.02,0.269V6.638c0-1.147,0.939-2.085,2.086-2.085h0.03C7.762,4.455,7.619,4.34,7.49,4.211 C7.043,3.765,6.768,3.148,6.768,2.467H6.767V2.466h0.001c0-0.68,0.275-1.297,0.722-1.744c0.446-0.446,1.063-0.721,1.743-0.721V0 h0.001v0.001c0.681,0,1.298,0.274,1.744,0.721C11.425,1.169,11.7,1.785,11.7,2.466v0.001c0,0.682-0.276,1.298-0.722,1.744 c-0.129,0.129-0.273,0.244-0.428,0.342h0.031c1.147,0,2.086,0.938,2.086,2.085v2.086L6.866,11H0V8.914 c0-1.146,0.939-2.086,2.086-2.086h0.031C1.962,6.73,1.818,6.615,1.689,6.486C1.243,6.04,0.968,5.423,0.967,4.742l0,0 c0-0.682,0.276-1.299,0.722-1.744C2.136,2.552,2.752,2.275,3.433,2.275";
+}
+.tree-view .current-ac .tree-disclosure-node{
+    -fx-shape:"M8.331,5.392l3.268-2.695L8.331,0v1.759h-6.72v1.875h6.72V5.392z M3.267,6.142L0,8.837l3.267,2.696 V9.774h6.705V7.899H3.267V6.142z"
+}
+
+.tree-view .special-ac .tree-disclosure-node{
+    -fx-shape:"M8.331,5.392l3.268-2.695L8.331,0v1.759h-6.72v1.875h6.72V5.392z M3.267,6.142L0,8.837l3.267,2.696 V9.774h6.705V7.899H3.267V6.142z"
+}
+.tree-view .cards .tree-disclosure-node{
+
+
+    -fx-background-insets:0 3 0 3px;
+    -fx-shape:"M12.373,1.444H0.602C0.269,1.444,0,1.715,0,2.047v7.118 c0,0.332,0.269,0.602,0.602,0.602h11.771c0.332,0,0.602-0.27,0.602-0.602V2.047C12.974,1.715,12.705,1.444,12.373,1.444 M6.843,8.043H1.858V7.53h4.985V8.043z M1.858,6.717h1.856v0.512H1.858V6.717z M4.069,6.717h2.419v0.513H4.069V6.717z M12.352,5.673 H0.646V3.214h11.706V5.673z"
+}
+
+
+.tree-view .level2:filled {
+    -fx-border-color:#393939;
+    -fx-border-width:0 0 1 0px;
+    -fx-text-fill:#cccccc;
+}
+.tree-view .level3:filled{
+    -fx-border-color:#838383;
+    -fx-border-width:0 0 1 0px;
+}
+.tree-view .level4:filled{
+    -fx-border-color:#666666;
+    -fx-border-width:0 0 1 0px;
+}
+
+
+
+
+.tree-view .level2:filled:hover, .tree-view .level2:filled:expanded {
+    -fx-border-color:#a7a7a7,#393939;
+    -fx-border-width:0 10 0 0px,0 0 1 0px;
+}
+.tree-view .open-operation2:filled,
+.tree-view .open-operation2:filled:focused,
+.tree-view .open-operation2:filled:focused:hover {
+    -fx-border-color:#5bbbef,#393939;
+    -fx-border-width:0 10 0 0px,0 0 1 0px;
+}
+
+.tree-view .level4:hover{
+    -fx-cursor: hand;
+}
+
+
+.tree-view .level3:filled:hover ,.tree-view .level3:filled:expanded {
+    -fx-border-color:#dbdbdb,#838383;
+    -fx-border-width:0 10 0 0px,0 0 1 0px;
+}
+.tree-view .open-operation3:filled,
+.tree-view .open-operation3:filled:focused,
+.tree-view .open-operation3:filled:focused:hover {
+    -fx-border-color:#5bbbef,#393939;
+    -fx-border-width:0 10 0 0px,0 0 1 0px;
+}
+
+
+.tree-view .level2:filled{
+    -fx-background-color: #3c3c3c;
+}
+.tree-view .level3:filled {
+    -fx-background-color: #b3b3b3;
+}
+.tree-view .level4:filled {
+    -fx-background-color:#dbdbdb;
+}
+.tree-view .level4:focused  {
+    -fx-background-color:linear-gradient(to right,#5DBFEF,#319BE4);
+}
+.tree-view .level4:filled:focused .text{
+    -fx-fill:white;
+}
+
+.tree-view .level4:filled .text,
+.tree-view .level3:filled .text {
+    -fx-fill:#3C3C3C;
+}
+
+
+
+.tree-view .tree-cell .arrow{
+    -fx-shape:" ";
+}
+
+.tree-view .open-operation1:filled .arrowx,
+.tree-view .open-operation1:filled:focused .arrowx,
+.tree-view .open-operation1:filled:focused:hover .arrowx{
+    -fx-background-color:#5bbbef;
+}
+
+.tree-view .tree-cell .arrowx{
+    -fx-padding: 5px;
+    -fx-scale-x:0.7;
+    -fx-scale-y:0.7;
+    -fx-background-color:#b3b3b3;
+    -fx-shape: "M 0 -4 L 8 0 L 0 4 z";
+    -fx-rotate: 90;
+}
+.tree-view .tree-cell:expanded  .arrowx{
+    -fx-rotate: -90;
+}
+
+
+
+/* The main scrollbar **track** CSS class  */
+.tree-view .scroll-bar:horizontal .track,
+.tree-view .scroll-bar:vertical .track{
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-background-radius: 0em;
+    -fx-border-radius:0em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.tree-view .scroll-bar:horizontal .increment-button ,
+.tree-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.tree-view .scroll-bar:vertical .increment-button ,
+.tree-view .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 5 0 0;
+
+}
+
+.tree-view  .scroll-bar .increment-arrow,
+.tree-view  .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0px;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.tree-view .scroll-bar:horizontal .thumb,
+.tree-view .scroll-bar:vertical .thumb {
+    -fx-background-color:#3fa9f3;/*rgba(132,197,245,1);*//*#5cbeef;*/
+    -fx-background-insets: 1, 0, 0;
+    -fx-background-radius: 0em;
+
+}
+
+.tree-cell:collapsed  .open-operation{
+    -fx-border-color:red;
+    -fx-border-width:0 10 0 0px;
+}
+
+
+/*
+.tree-cell:selected .level4,.tree-cell:selected .level4 .text{
+        -fx-background-color:linear-gradient(to right,#5cbeef,#349de5);
+        -fx-fill:white;
+}
+*/
+.tree-cell:selected .somex {
+    -fx-background-color:red ;
+}
+
+
+
+
+
+.gray-choice-box .open-button{
+    -fx-background-color:#808080;
+}
+
+
+.tab{
+    -fx-background-color:#c1c1c1;
+    /*-fx-background-insets: 5 6 0 5px;*/
+    -fx-background-insets: 0 6 1 5px;
+    -fx-background-radius:0px;
+    -fx-background-radius:3 3 0 0px;
+    -fx-padding:5 10 5 10px;
+    -fx-border-insets:0 6 1 5px;
+    -fx-border-width: 3 3 0 3px ,1 1 0 1px;
+    -fx-border-radius:3 3 0 0px;
+    -fx-border-color:white,#4d4d4d;
+
+}
+
+
+.tab-pane {
+    -fx-background-color:transparent;
+}
+
+.tab-pane *.tab-header-background{
+    -fx-background-color:transparent;
+    -fx-effect:null;
+}
+.tab-content-area{
+    -fx-background-color:#e6e6e6;
+    -fx-background-insets: 2 0 0 0px;
+    -fx-background-radius:0 0 5 5px;
+    -fx-border-width: 0 3 3 3px ,0 1 1 1px;
+    -fx-border-radius:0 0 5 5px;
+    -fx-border-color:white,#4d4d4d;
+
+}
+.tab .tab-label{
+    -fx-text-fill:#393939;
+    -fx-font:normal normal 15px Verdana;
+}
+.tab:selected .tab-label{
+    -fx-text-fill:#47b2eb;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color:#e6e6e6;
+    -fx-effect: dropshadow(three-pass-box , rgba(0, 0, 0, 0.3), 7, 0.6 , 0, 0);
+    -fx-background-insets: 0 6 -3 5px;
+}
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-border-color:#4d4d4d;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-insets:0px;
+    -fx-border-insets:0px;
+}
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+}
+
+
+
+
+
+.arrow{
+    -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em;
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+    -fx-background-color:#b3b3b3;
+
+}
+.arrow:hover,.arrow.contains{
+    -fx-background-color:#43abea;
+}
+.arrow-up{
+    -fx-rotate:180;
+}
+.arrow-right{
+    -fx-rotate:-90;
+}
+.arrow-left{
+    -fx-rotate:90;
+}
+
+.dock-pane{
+    -fx-border-color:#999999;
+    -fx-border-width:1px;
+    -fx-border-radius:3px;
+    -fx-background-color:white;
+}
+.dock-pane .header-pane{
+    -fx-padding: 0 0 0 5px;
+}
+.dock-pane .header-pane,.task-pane .header-pane{
+    -fx-background-insets:2 2 2 2px;
+
+    -fx-background-color:linear-gradient(to top, #f3f3f3,white);
+}
+.dock-pane .header-pane .label,.dock-pane .footer-pane .label{
+    -fx-padding: 0 0 0 5px;
+    -fx-font-weight:bold;
+    -fx-font:normal normal 11px Verdana;
+}
+.dock-pane .header-pane .label{
+    -fx-text-fill:#309ce5;
+}
+.dock-pane .header-pane .colleague-label{
+    -fx-font:normal normal 12px Verdana;
+}
+
+.dock-pane .header-pane .all-task{
+    -fx-font-size:11px;
+}
+.dock-pane .header-pane .select-task{
+    -fx-text-fill:#808080;
+}
+.dock-pane .header-pane .choice-box .label{
+    -fx-text-fill:derive(black,60%);
+    -fx-font-size:11px;
+}
+.dock-pane .list-view .list-cell{
+    -fx-background-insets: 0,0 0 1 0px;
+    -fx-background-color:#B3B3B3,rgba(255,255,255,0.98);
+}
+.dock-pane .list-view,.list-view{
+    -fx-border-width:1 0 1 0px;
+    -fx-border-color:#999999;
+    -fx-background-insets:3px;
+}
+.dock-pane .footer-pane,.task-pane .footer-pane{
+    -fx-background-insets:0 3 3 3px;
+    -fx-background-color:linear-gradient(to bottom, #f3f3f3,white);
+}
+
+
+.function-buttons-pane .toggle-button:selected,.function-buttons-pane .toggle-button:pressed,.function-buttons-pane .toggle-button:hover:selected {
+    -fx-background-color:#0099FF,white,linear-gradient(to bottom, #5DBFEF,#319BE4);
+    -fx-text-fill:white;
+}
+
+.function-buttons-pane .toggle-button:selected .button{
+    -fx-background-color:linear-gradient(to top, #5DBFEF,#319BE4),#999999,white;
+    -fx-background-insets:-2,0,1px;
+    -fx-text-fill: black;
+    -fx-shape:"M 100, 100
+        m -75, 0
+        a 75,75 0 1,0 150,0
+        a 75,75 0 1,0 -150,0";
+}
+.function-buttons-pane .toggle-button{
+    -fx-background-radius:0px;
+    -fx-padding:10px;
+    -fx-pref-height:150px;
+    -fx-font:normal normal 10px Verdana;
+    -fx-background-color:#999999,white,linear-gradient(to bottom, #F1F2F2,#C7C8CA);
+    -fx-background-insets: 0 ,1 ,3px;
+}
+.function-buttons-pane .toggle-button .button{
+    -fx-background-color:linear-gradient(to top, #F1F2F2,#C7C8CA),#999999,linear-gradient(to bottom, #5DBFEF,#319BE4);
+    -fx-pref-width:30px;
+    -fx-pref-height:30px;
+    -fx-font-size:10px;
+    -fx-font-weight:bold;
+    -fx-background-insets:-2,0,1px;
+    -fx-shape:"M 100, 100
+        m -75, 0
+        a 75,75 0 1,0 150,0
+        a 75,75 0 1,0 -150,0";
+    -fx-padding:0px;
+    -fx-text-fill:white;
+}
+.function-buttons-pane .toggle-button:selected .button{
+    -fx-text-fill:#666666;
+}
+
+.function-buttons-pane .toggle-button:hover {
+    -fx-background-color:#999999,white,linear-gradient(to top, #F1F2F2,#C7C8CA);
+}
+
+.function-pane{
+    -fx-padding:1 0 1 0px;
+}
+
+
+.function-pane .left-nav, .function-pane .right-nav{
+    -fx-shape:"M0,7.501C0,11.636,3.363,15,7.5,15c4.133,0,7.5-3.364,7.5-7.499C15,3.364,11.633,0,7.5,0 C3.363,0,0,3.364,0,7.501 M3.047,6.705l4.03-4.032c0.437-0.438,1.134-0.458,1.546-0.046c0.41,0.412,0.391,1.108-0.047,1.545 L6.375,6.376h4.872c0.617,0,1.125,0.507,1.125,1.125s-0.508,1.124-1.125,1.124H6.375l2.202,2.204 c0.438,0.438,0.457,1.132,0.047,1.543c-0.412,0.413-1.11,0.393-1.546-0.045l-4.03-4.032C2.609,7.858,2.609,7.142,3.047,6.705";
+    -fx-background-color:#656565;
+    -fx-min-width:16px;
+    -fx-max-width:16px;
+    -fx-min-height:16px;
+    -fx-max-height:16px;
+}
+.function-pane .right-nav{
+    -fx-rotate:180;
+}
+.function-pane .right-pane,.function-pane .left-pane{
+    -fx-background-color:#99989d,white,linear-gradient(to bottom,#fefefe,#ebebed);
+    -fx-background-insets:0, 1, 3px;
+}
+.function-pane .choice-box,.header-pane .choice-box{
+    -fx-background-color:#cdcdcd,linear-gradient(to bottom,#fefefe,#ebebed);
+    -fx-background-insets:0, 1;
+    -fx-pref-height:27px;
+}
+.function-pane .left-pane{
+    -fx-pref-width:50px;
+    -fx-padding:10px;
+    -fx-background-radius: 3 0 0 3px;
+}
+.function-pane .right-pane{
+    -fx-pref-width:150px;
+    -fx-padding:10 10 10 10px;
+    -fx-background-radius: 0 3 3 0px;
+}
+
+.function-pane .nav:focused,.function-pane .nav:pressed,.function-pane .nav:hover{
+    -fx-background-color:#5DBFEF;
+}
+
+#commentList .list-cell .label,#commentList .list-cell .customer{
+    -fx-text-fill:#3C3C3C;
+}
+.customer,
+#commentList .list-cell .employee,
+#topList .list-cell .name,
+.initiator{
+    -fx-underline: true;
+}
+
+
+
+#commentList .list-cell .employee,
+#commentList .list-cell .type,
+#wallList .list-cell .title,
+.initiator,
+#topList .list-cell .name,
+#tblViewTasklist .table-cell .process-id{
+    -fx-text-fill:#3FA9F5;
+}
+.list-cell .comment,
+#wallList .list-cell .content,
+#tblViewTasklist .table-cell .process-name{
+    -fx-text-fill:#808080;
+}
+
+#tblViewTasklist .column-header{
+    visibility:hide;
+}
+
+
+
+.task-pane .list-view .list-cell:hover,.task-pane .list-view .list-cell:selected,
+.dock-pane .list-view .list-cell:hover,.dock-pane .list-view .list-cell:selected,
+#tblViewTasklist .table-row-cell:hover,
+#tblViewTasklist
+{
+    /*-fx-padding: 0px;*/
+    -fx-background-color:#B3B3B3,#E1E1E1;
+    -fx-border-width:0 0 1 0px;
+}
+#tblViewTasklist .nested-column-header{
+    -fx-max-height:1px;
+    -fx-pref-height:1px;
+    -fx-min-height:1px;
+}
+#commentList .list-cell{
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color:#B3B3B3;
+}
+
+#wallList  .list-cell{
+    -fx-padding:0px;
+}
+
+#wallList .list-cell .content-pane{
+    -fx-padding: 0 0 0 0px;
+}
+#wallList .list-cell .date-pane, #wallList .list-cell .content-pane{
+    -fx-padding:5px;
+}
+#wallList .list-cell .date-pane{
+    -fx-border-width: 0 1 0 0px;
+    -fx-border-insets: 0 0 0 0px;
+    -fx-border-color:#B3B3B3;
+    -fx-background-color:linear-gradient(to bottom,#F1F2F2,#C7C8CA);
+}
+#wallList .list-cell:selected .date-pane{
+    -fx-background-color:linear-gradient(to top,#319BE4,#5DBFEF);
+}
+#wallList .list-cell:selected .date-pane .label{
+    -fx-text-fill:white;
+}
+
+#topList .list-cell .serial,#topList .list-cell .top-points{
+    -fx-font-weight:bold;
+    -fx-font-size:11px;
+}
+#topList .list-cell .branch{
+    -fx-text-fill:#808080;
+}
+#topList .list-cell .arrow-button{
+    -fx-background-color:#d7d9d8,linear-gradient(#e2e4e3,#fcfcfc);
+    -fx-background-insets:0,1px;
+    -fx-padding: 2 4 2 4px;
+    -fx-background-radius:3px;
+}
+#topList .list-cell .arrow{
+    -fx-padding: -3 3 -5 7px;
+}
+#topList .list-cell .up{
+    -fx-background-color:#8CC63F;
+    -fx-rotate:180;
+}
+#topList .list-cell .down{
+    -fx-background-color:derive(red,50%);
+}
+#topList .list-cell:selected  .label{
+    -fx-text-fill:black;
+}
+
+
+
+
+/* The main scrollbar **track** CSS class  */
+
+.no-scroll .scroll-bar:vertical .track{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.no-scroll .scroll-bar:vertical .increment-button ,
+.no-scroll .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 0 0;
+}
+
+.no-scroll  .scroll-bar:vertical .increment-arrow,
+.no-scroll  .scroll-bar:vertical  .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.no-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color:transparent;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 2em;
+    -fx-padding:0px;
+
+}
+.radio-button .radio{
+    -fx-background-radius:3px;
+    -fx-border-radius:3px;
+    -fx-background-color:derive(gray,70%),linear-gradient(to bottom,derive(gray,70%),white);
+    -fx-background-insets:0, 1px;
+    -fx-shape: "M7,3.5C7,5.433,5.433,7,3.5,7C1.567,7,0,5.433,0,3.5C0,1.567,1.63,0,3.5,0C5.433,0,7,1.567,7,3.5z";    
+}
+.radio-button:selected .dot {
+    -fx-background-color: #3FA9F5;
+    -fx-background-insets: -2 -2 -2 -2, 0;
+}
+
+.table-view.table-cell .label,.table-view .table-row-cell:selected .label{
+    -fx-text-fill:black;
+}
+
+
+#tblViewTasklist   .table-cell{
+    -fx-border-width:0px;
+}
+
+#tblViewTasklist .table-cell .chosen:selected .dot{
+    -fx-background-color:transparent,green;
+    -fx-background-insets: 0 0 -1 0, 0;
+}
+#tblViewTasklist .table-cell .unread:selected .dot{
+    -fx-background-color:transparent,red;
+    -fx-background-insets: 0 0 -1 0, 0;
+}
+#tblViewTasklist .table-cell .status,#tblViewTasklist .eta{
+    -fx-padding:10 0 0 15px;
+}
+#tblViewTasklist  .avatar,#tblViewTasklist .table-cell .process,#tblViewTasklist .table-cell .task
+{
+
+    -fx-padding:2 2 2 7px;
+}
+#tblViewTasklist .table-row-cell:selected .table-cell .process{
+    -fx-background-color:white;
+}
+#tblViewTasklist .action{
+    -fx-text-fill:green;
+}
+
+#tblViewTasklist .time-high{
+    -fx-text-fill:red;
+}
+#tblViewTasklist .time-medium{
+    -fx-text-fill:orange;
+}
+#tblViewTasklist .time-low{
+    -fx-text-fill:derive(black,50%);
+}
+
+.flag-button{
+    -fx-background-color:#c6c6c6,linear-gradient(to bottom,#e3e3e3,#fefefe);
+    -fx-background-radius:3px;
+    -fx-padding: 4 5 4 8px;
+    -fx-alignment:CENTER;
+}
+.flag-button .button{
+    -fx-min-width:17px;
+}
+
+.content-pane .flag-button{
+    -fx-min-width:26px;
+    -fx-padding: 2 -3 4 -2px;
+    -fx-max-width:26px;
+}
+.table-cell .flag, .content-pane .flag.button{
+    /*-fx-background-insets: 5 -10 -10 0px;*/
+    -fx-shape:"M5.044,21.337h1.91V4.913h-1.91V21.337z M13.712,13.807c3.59,3.296,7.332-5.028,7.332-5.028s-2.998,2.7-6.182-2.479v0.006 c-2.137-3.937-6.873-1.371-6.873-1.371v8.653C7.989,13.587,10.123,10.513,13.712,13.807";
+}
+.table-cell .flag.high ,.content-pane .flag.high{
+    -fx-background-color:red;
+}
+.table-cell  .flag.medium,.content-pane .flag.medium{
+    -fx-background-color:orange;
+}
+.table-cell  .flag.low, .content-pane .flag.low{
+    -fx-background-color:gray;
+}
+#tblViewTasklist{
+    -fx-background-color:#f5f5f5;
+}
+
+#tblViewTasklist .table-row-cell:selected,#tblViewTasklist .table-row-cell:focused{
+    -fx-background-insets:0 ,1,3px;
+
+    -fx-background-color:#999999,white,#e0e1e2;
+    /*-fx-shape:"M 45.00,140.00
+        C 45.00,140.00 45.00,98.00 45.00,98.00
+        45.00,98.00 385.00,98.00 385.00,98.00
+        385.00,98.00 390.67,118.00 390.67,118.00
+        390.67,118.00 385.00,140.00 385.00,140.00
+        385.00,140.00 45.00,140.00 45.00,140.00";*/
+    -fx-shape:"M76.737,576.447c-1.639,0-3.075-1.335-3.075-2.975v-29.945c0-1.641,1.334-2.975,2.974-2.975h667.108 l10.432,18.375l-10.586,17.52H76.737z";
+
+}
+
+.task-data .shadow{
+    -fx-background-color: linear-gradient(to right,rgba( 0,0,0,0.3) 0%, transparent );
+}
+
+.task-pane .header-pane .customer{
+    -fx-font-size: 14px;
+    -fx-font-weight:bold;
+    -fx-underline:false
+}
+.task-pane .header-pane .customer-id{
+    -fx-font-weight:normal;
+}
+.task-pane .coll-data-entry{
+    -fx-font-size: 14px;
+}
+
+.task-pane .content-pane{
+    -fx-background-color:linear-gradient(to right, transparent,#999999 20%),white,linear-gradient(to right, transparent,#B3B3B3 20%), linear-gradient(#e6e7e8,#f0f0f1);
+    -fx-background-insets:0,1 0 0 0,3 3 2 0, 3 3 3 0px;
+}
+.task-pane .modified-pane{
+    -fx-font-size:11px;
+}
+
+.task-pane .top-pane,.task-pane .bottom-pane,.task-pane  .list-view{
+    -fx-border-color:linear-gradient(to right, transparent,#999999 20%);
+    -fx-border-width:1px;
+    -fx-border-radius: 0 3 3 0px;
+    -fx-background-color:white;
+}
+.task-pane > .top-pane  {
+    -fx-padding: 0 0 10 10px;
+}
+.task-pane > .bottom-pane {
+    -fx-padding: 0 0 0 10px;
+}
+.task-pane .bottom-pane{
+    -fx-effect:dropshadow(three-pass-box , rgba(0, 0, 0, 0.2),7, 0.5 , 0, -2);
+}
+.bottom-pane .footer-pane .label{
+    -fx-font:normal normal 11px Verdana;
+}
+.task-pane .bottom-pane .list-view .list-cell{
+    -fx-font-size:11px;
+}
+.date{
+    -fx-text-fill:#808080;
+}
+
+/*** Styles used in function screens ***/
+
+/*For making the height and width fixed for the combobox and the selectbox of the TaskList */
+.controls .combo-box,
+.controls .choice-box{
+    -fx-min-height:20px;
+    -fx-max-height:20px;
+}
+.controls .choice-box{
+    -fx-max-width:40px;
+    -fx-min-width:40px;
+}
+
+/* Padding the divider of the vertical split pane */
+.split-pane:vertical .split-pane-divider{
+    -fx-padding: 0px;
+}
+
+/* Style for the label of action section pull up button */
+#lbl_pub{
+    -fx-font-family:verdana;
+    -fx-font-size:11px;
+}
+/* Style for the HBOX containing the action section pull up button */
+#hbox-split-vertical{
+    -fx-border-width:1px;
+    -fx-border-color:gray;
+    -fx-effect: dropshadow(three-pass-box , rgba(0, 0, 0, 0.3), 10, 0.6 , 0, 0);    
+}
+/* Up and Down arrow styles for the action section pull up and Help section*/
+#rgn_split_vertical_up{
+    -fx-shape:"M7.268,14.562V6.547L0,10.554L7.268,14.562zz";
+    -fx-rotate: 90;
+    -fx-scale-x: 0.3;
+    -fx-scale-y: 0.6;
+    -fx-background-color: #0099FF;
+}
+#rgn_split_vertical_dn{
+    -fx-shape:"M7.268,14.562V6.547L0,10.554L7.268,14.562zz";
+    -fx-rotate: 270;
+    -fx-scale-x: 0.3;
+    -fx-scale-y: 0.6;
+    -fx-background-color: #0099FF;
+
+}
+
+/* right arrow in actions section near Save button */
+#rgn_arrow_right{
+    -fx-shape:"M7.268,14.562V6.547L0,10.554L7.268,14.562zz";
+    -fx-rotate: 180;
+    -fx-scale-x: 0.3;
+    -fx-scale-y: 0.6;
+    -fx-background-color: #0099FF;
+}
+
+/* Style for action button ok :focused pseudo class is when the button is in focus (after click) */
+.button-action-ok, .button-action-ok:focused{
+    -fx-background-color:linear-gradient(#37752e,#3af920);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;    
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+
+/* style for action button ok during pressed/clicked */
+.button-action-ok:pressed{
+    -fx-background-color:linear-gradient(#3af920,#37752e);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;    
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+
+/* style for action button cancel when focused */
+.button-action-cancel, .button-action-cancel:focused{
+    -fx-background-color:linear-gradient(#ff8b8b,#ff0a08);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+
+/* style for action button cancel during pressed/clicked */
+.button-action-cancel:pressed{
+    -fx-background-color:linear-gradient(#ff0a08,#ff8b8b);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+
+/* style for action button hold on focus */
+.button-action-hold, .button-action-hold:focused{
+    -fx-background-color:linear-gradient(#58beef,#2e9fe0);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+/* style for action button hold during pressed/clicked */
+.button-action-hold:pressed{
+    -fx-background-color:linear-gradient(#2e9fe0,#58beef);
+    -fx-border-width:2px;
+    -fx-border-color:white;
+    -fx-border-insets: 1px;
+    -fx-background-radius:3 , 3px;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill:white;
+}
+
+
+.chkbox-invalid:selected .box{
+    -fx-background-color: orange;
+}
+
+.chkbox-valid:selected .box{
+    -fx-background-color: #59d449;
+}
+/* Style for action content pane grid pane containing OK button */
+.action-content-pane-ok{
+    -fx-background-color:linear-gradient(#348829,#36d321);
+}
+
+/* Style for action content pane grid pane containing HOLD button */
+.action-content-pane-hold{
+    -fx-background-color:linear-gradient(#4cafe1,#359fd9);
+}
+
+/* Style for Customer summary search result table in Customer Identification screen */
+#CUST_SUM *.table-row-cell:focused{
+    -fx-background-color: gray;
+    -fx-text-fill: black;
+}
+
+#CUST_SUM *.table-row-cell{
+    -fx-cell-size: 40px;
+}
+
+
+#CUST_SUM *.table-cell{
+    -fx-alignment:center;
+}
+
+.table-col-name column-header{
+    -fx-background-color:lightblue;
+    -fx-background-radius:3px;
+}
+
+*.table-row-cell:focused{
+    -fx-background-color:#0099FF;
+}
+
+
+.check-box > .box > .mark {
+    -fx-padding: 0.333333em; /* 4 -- this is half the size of the mark */
+    -fx-shape: "M7,3.5C7,5.433,5.433,7,3.5,7C1.567,7,0,5.433,0,3.5C0,1.567,1.63,0,3.5,0C5.433,0,7,1.567,7,3.5z";
+    -fx-scale-shape: true;
+}
+
+/* Style for validation checkboxes when validation succeeds */
+.valid-result {
+    -fx-mark-color: #59d449;
+}
+/* Style for validation checkboxes when validation fails */
+.invalid-result {
+    -fx-mark-color: orange;
+}
+
+
+.check-box:selected {
+    -fx-border-color: transparent;
+}
+
+/* Style for search button in Customer identification screen */
+.lbl-search-name{
+    -fx-background-color:lightblue;
+}
+
+/* Style for the bread crumb items based on block validation result */
+.blk-valid{
+    -fx-fill: #36d321;
+}
+
+.blk-invalid{
+    -fx-fill: orange;
+}
+
+.blk-focus{
+    -fx-fill:#359fd9;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    /* -fx-shape: "M 0 0 h 7 l -3.5 4 z"; */
+    -fx-shape: "M 0 0 h 7 l -3.5 10 z";
+}
+
+.heading-arrow-expand{
+    -fx-border-width:3px;
+    -fx-border-color:black;
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+    -fx-background-color:gray;
+}
+.heading-arrow-collapse{
+    -fx-border-width:3px;
+    -fx-border-color:black;
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+    -fx-background-color:gray;
+    -fx-rotate:180;
+}
