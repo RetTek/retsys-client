@@ -16,6 +16,7 @@
             <dependency groupId="org.apache.velocity" artifactId="velocity" version="1.7" scope="compile"/>
             <dependency groupId="com.fasterxml.jackson.datatype" artifactId="jackson-datatype-jsr310" version="2.5.0" scope="compile"/>
             <dependency groupId="org.controlsfx" artifactId="controlsfx" version="8.20.8" scope="compile"/>
+            <dependency groupId="org.apache.pdfbox" artifactId="pdfbox" version="1.8.8" scope="compile"/>
         </artifact:dependencies>         
         <copy todir="lib">
           <fileset refid="dependency.fileset" />

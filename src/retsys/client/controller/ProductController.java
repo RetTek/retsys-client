@@ -31,6 +31,7 @@ import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.TextArea;
 import java.io.StringWriter;
 import java.util.HashMap;
 import javafx.concurrent.Task;
@@ -45,7 +46,7 @@ public class ProductController implements Initializable {
     private TextField name;
 
     @FXML
-    private TextField remarks;
+    private TextArea remarks;
 
     /**
      * Initializes the controller class.
@@ -238,14 +239,14 @@ public class ProductController implements Initializable {
     /**
      * @return the remarks
      */
-    public TextField getRemarks() {
+    public TextArea getRemarks() {
         return remarks;
     }
 
     /**
      * @param remarks the remarks to set
      */
-    public void setRemarks(TextField remarks) {
+    public void setRemarks(TextArea remarks) {
         this.remarks = remarks;
     }
     

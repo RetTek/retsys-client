@@ -208,10 +208,15 @@ public class DashboardController extends AnchorPane implements Initializable {
         TreeItem<Menu> root = new TreeItem<Menu>();
         //root.setValue("");
         treeView.setRoot(root);
-        String[][] level1 = new String[][]{new String[]{"Project Management", "project","1",""}, new String[]{"Inventory Management", "inventory","2",""}};
-        String[][] level2 = new String[][]{new String[]{"Project", "project","3","1"}, new String[]{"Product", "product","4","2"}, new String[]{"Client", "client","5","1"}};
-        String[][] level3 = new String[][]{new String[]{"Project Maintainence", "project-maintainence","6","3"}, new String[]{"Product Maintenance", "product-maintenance","7","4"}, new String[]{"Client Maintenance", "product-maintenance","8","5"}};
-        String[][] level4 = new String[][]{new String[]{"Create Project", "Createproject","9","6"}, new String[]{"Open Project", "Openproject","10","6"}, new String[]{"Create Product", "/retsys/client/fxml/Product.fxml","11","7"}, new String[]{"Open Product", "/retsys/client/fxml/Product.fxml","12","7"}, new String[]{"Create Client", "CreateClient","13","8"}, new String[]{"Open Client", "CreateClient","14","8"}};
+        /*String[][] level1 = new String[][]{new String[]{"Project Management", "project"}, new String[]{"Inventory Management", "inventory"}};
+        String[][] level2 = new String[][]{new String[]{"Project", "project"}, new String[]{"Product", "product"}, new String[]{"Client", "client"}};
+        String[][] level3 = new String[][]{new String[]{"Project Maintainence", "project-maintainence"}, new String[]{"Open Project", "OpenProject"}};
+        String[][] level4 = new String[][]{new String[]{"Create Project", "Createproject"}, new String[]{"New Product", "/retsys/client/fxml/Product.fxml"},new String[]{"New Client", "/retsys/client/fxml/Client.fxml"},new String[]{"New Vendor", "/retsys/client/fxml/Vendor.fxml"},new String[]{"New Project", "/retsys/client/fxml/Project.fxml"}};*/
+
+        String[][] level1 = new String[][]{new String[]{"Project Management", "project-management","1",""}, new String[]{"Inventory Management", "inventory-management","2",""}};
+        String[][] level2 = new String[][]{new String[]{"Project", "project","3","1"}, new String[]{"Product", "product","4","2"}, new String[]{"Client", "client","5","1"},new String[]{"Vendor", "vendor","9","2"},new String[]{"Purchase Order", "purchaseorder","14","2"},new String[]{"Items", "item5","25","2"}};
+        String[][] level3 = new String[][]{new String[]{"Project Maintainence", "project-maintenance","6","3"}, new String[]{"Product Maintenance", "/retsys/client/fxml/Product.fxml","7","4"}, new String[]{"Client Maintenance", "/retsys/client/fxml/Client.fxml","8","5"}, new String[]{"Vendor Maintenance", "/retsys/client/fxml/Vendor.fxml","10","9"}, new String[]{"Purchase Order Maintenance", "/retsys/client/fxml/PurchaseOrder.fxml","15","14"}, new String[]{"Item Maintenance", "/retsys/client/fxml/PurchaseOrder.fxml","26","25"}};
+        String[][] level4 = new String[][]{new String[]{"Create Product", "/retsys/client/fxml/Product.fxml","11","7"}, new String[]{"Modify Product", "/retsys/client/fxml/Product.fxml","12","7"}, new String[]{"View Product", "/retsys/client/fxml/Product.fxml","13","7"}, new String[]{"Create Purchase Order", "/retsys/client/fxml/PurchaseOrder.fxml","16","15"},new String[]{"Modify Purchase Order", "/retsys/client/fxml/PurchaseOrder.fxml","17","15"},new String[]{"Create Purchase Order", "/retsys/client/fxml/PurchaseOrder.fxml","17","15"},new String[]{"Create Client", "/retsys/client/fxml/Client.fxml","18","8"},new String[]{"Modify Client ", "/retsys/client/fxml/Client.fxml","19","8"},new String[]{"View Client ", "/retsys/client/fxml/Client.fxml","20","8"},new String[]{"Create Vendor", "/retsys/client/fxml/Vendor.fxml","21","10"},new String[]{"Modify Vendor", "/retsys/client/fxml/Vendor.fxml","22","10"},new String[]{"View Vendor", "/retsys/client/fxml/Vendor.fxml","22","10"},new String[]{"Create Project", "/retsys/client/fxml/Project.fxml","23","6"},new String[]{"Modify Project", "/retsys/client/fxml/Project.fxml","24","6"},new String[]{"View Project", "/retsys/client/fxml/Project.fxml","24","6"},new String[]{"Create Item", "/retsys/client/fxml/Item.fxml","27","26"},new String[]{"Modify Item", "/retsys/client/fxml/Item.fxml","28","26"},new String[]{"View Item", "/retsys/client/fxml/Item.fxml","29","26"}};
         
         for (String[] l1 : level1) {
             TreeItem<Menu> ti1 = new TreeItem<Menu>();
@@ -226,7 +231,7 @@ public class DashboardController extends AnchorPane implements Initializable {
                     for (String[] l3 : level3) {
                         if(l3[3].equals(l2[2])){
                             TreeItem<Menu> ti3 = new TreeItem<Menu>();
-                            Menu m3 = new Menu(MenuOperationType.NONE, null, 3, l3[0], l3[1]);
+                            Menu m3 = new Menu(MenuOperationType.PROCESS, null, 3, l3[0], l3[1]);
                             ti3.setValue(m3);
                             for (String[] l4 : level4) {
                                 if(l4[3].equals(l3[2])){
@@ -431,9 +436,16 @@ public class DashboardController extends AnchorPane implements Initializable {
             root = (Parent) fxmlLoader.load(location.openStream());
             Tab funcTab = new Tab();
             funcTab.setClosable(true);
+            
+            funcTab.setText(screenName);
             this.landingTabPane.getTabs().add(funcTab);
+            this.landingTabPane.getSelectionModel().select(funcTab);
+           
             funcTab.setContent(root);
         } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch(Exception e){
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_item" text="Item Detail">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="brand" layoutX="125.0" layoutY="75.0" />
+                        <Label fx:id="lbl_item_brand" layoutX="35.0" layoutY="76.0" text="Item Brand" />
+                        <Label fx:id="lbl_item_name" layoutX="34.0" layoutY="47.0" text="Item Name" />
+                        <TextField fx:id="item_name" layoutX="125.0" layoutY="47.0" />
+                        <Label fx:id="lbl_item_remarks" layoutX="34.0" layoutY="317.0" text="Remarks" />
+                        <Label fx:id="lbl_rate" layoutX="36.0" layoutY="102.0" text="Rate" />
+                        <TextArea fx:id="item_remarks" layoutX="124.0" layoutY="317.0" prefHeight="107.0" prefWidth="200.0" />
+                        <TextField fx:id="quantity" layoutX="125.0" layoutY="131.0" />
+                        <Label fx:id="lbl_item_unit" layoutX="36.0" layoutY="160.0" text="Units" />
+                        <TextField fx:id="unit" layoutX="126.0" layoutY="159.0" />
+                        <TextField fx:id="color" layoutX="126.0" layoutY="187.0" />
+                        <Label fx:id="lbl_item_color" layoutX="36.0" layoutY="190.0" text="Color" />
+                        <Label fx:id="lbl_billno" layoutX="38.0" layoutY="275.0" text="Bill No" />
+                        <TextField fx:id="rate" layoutX="125.0" layoutY="103.0" />
+                        <Label fx:id="lbl_quantity" layoutX="36.0" layoutY="130.0" text="Quantity" />
+                        <TextField fx:id="size" layoutX="126.0" layoutY="215.0" />
+                        <Label fx:id="lbl_size" layoutX="37.0" layoutY="214.0" text="Size" />
+                        <Label fx:id="lbl_vendor" layoutX="37.0" layoutY="242.0" prefHeight="17.0" prefWidth="44.0" text="Vendor" />
+                        <TextField fx:id="vendor" layoutX="126.0" layoutY="242.0" />
+                        <TextField fx:id="billno" layoutX="126.0" layoutY="270.0" />
+                        <TextField fx:id="supervisor" layoutX="420.0" layoutY="48.0" />
+                        <Label fx:id="lbl_supervisor" layoutX="307.0" layoutY="48.0" text="Supervisor" />
+                        <TextField fx:id="godown_name" layoutX="420.0" layoutY="104.0" />
+                        <TextField fx:id="Site" layoutX="420.0" layoutY="76.0" />
+                        <TextField fx:id="location1" layoutX="420.0" layoutY="131.0" />
+                        <TextField fx:id="location2" layoutX="420.0" layoutY="159.0" />
+                        <TextField fx:id="location3" layoutX="420.0" layoutY="187.0" />
+                        <TextField fx:id="transport_mode" layoutX="420.0" layoutY="242.0" />
+                        <TextField fx:id="transport_charges" layoutX="420.0" layoutY="270.0" />
+                        <TextField fx:id="drawer_no" layoutX="420.0" layoutY="215.0" />
+                        <Label fx:id="lbl_site" layoutX="307.0" layoutY="77.0" text="Site Name" />
+                        <Label fx:id="lbl_godown" layoutX="308.0" layoutY="104.0" text="Godown Name" />
+                        <Label fx:id="lbl_location" layoutX="309.0" layoutY="132.0" text="Location" />
+                        <Label fx:id="lbl_supervisor1" layoutX="309.0" layoutY="161.0" text="Block" />
+                        <Label fx:id="lbl_section" layoutX="309.0" layoutY="189.0" text="Section" />
+                        <Label fx:id="lbl_drawer_no" layoutX="310.0" layoutY="218.0" text="Drawer No" />
+                        <Label fx:id="lbl_transport_mode" layoutX="310.0" layoutY="246.0" text="Transport Mode" />
+                        <Label fx:id="lbl_supervisor2" layoutX="310.0" layoutY="271.0" text="Transport Charges" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
+      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Create" />
+      <Button layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Amend" />
+   </children>
+</AnchorPane>

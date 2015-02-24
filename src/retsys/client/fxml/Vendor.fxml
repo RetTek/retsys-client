@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.fxml.VendorController">
+   <children>
+      <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_vendor" text="Vendor Detail">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lbl_vendor_name" layoutX="75.0" layoutY="50.0" text="Vendor Name" />
+                        <TextField fx:id="name" layoutX="179.0" layoutY="44.0" />
+                        <Label fx:id="lbl_vendor_remarks" layoutX="75.0" layoutY="280.0" text="Remarks" />
+                        <Label fx:id="lbl_vendor_address" layoutX="74.0" layoutY="81.0" text="Address" />
+                        <TextArea fx:id="remarks" layoutX="179.0" layoutY="280.0" prefHeight="107.0" prefWidth="200.0" />
+                        <TextArea fx:id="address" layoutX="179.0" layoutY="83.0" prefHeight="78.0" prefWidth="200.0" />
+                        <TextField fx:id="phone" layoutX="179.0" layoutY="169.0" />
+                        <Label fx:id="lbl_vendor_phone" layoutX="77.0" layoutY="171.0" text="Phone" />
+                        <TextField fx:id="mobile" layoutX="180.0" layoutY="202.0" />
+                        <TextField fx:id="email" layoutX="180.0" layoutY="239.0" />
+                        <Label fx:id="lbl_vendor_mobile" layoutX="77.0" layoutY="199.0" text="Mobile" />
+                        <Label fx:id="lbl_vendor_email" layoutX="79.0" layoutY="238.0" text="Email" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
+      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#processVendor" prefHeight="38.0" prefWidth="109.0" text="Create" />
+      <Button layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Amend" />
+   </children>
+</AnchorPane>
