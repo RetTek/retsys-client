@@ -26,6 +26,7 @@ public class RetsysClient extends Application {
         scene.getStylesheets().add(this.getClass().getResource("/retsys/client/css/styles3.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+        stage.setFullScreen(true);
     }
 
     /**

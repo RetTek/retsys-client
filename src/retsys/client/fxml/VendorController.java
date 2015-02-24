@@ -3,42 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package retsys.client.fxml;
 
-package retsys.client.controller;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javax.json.Json;
 import javax.json.JsonWriter;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import retsys.client.http.HttpHelper;
-import retsys.client.json.JsonHelper;
 import retsys.client.main.OperationHandler;
 
 /**
  * FXML Controller class
  *
- * @author ranju
+ * @author Muthu
  */
-//public class ProductController implements Initializable {
-public class ProductController implements Initializable {
+public class VendorController implements Initializable {
+    @FXML
+    private Tab tab_vendor;
+    @FXML
+    private Label lbl_vendor_name;
     @FXML
     private TextField name;
-
+    @FXML
+    private Label lbl_vendor_remarks;
+    @FXML
+    private Label lbl_vendor_address;
     @FXML
     private TextArea remarks;
+    @FXML
+    private TextArea address;
+    @FXML
+    private TextField phone;
+    @FXML
+    private Label lbl_vendor_phone;
+    @FXML
+    private TextField mobile;
+    @FXML
+    private TextField email;
+    @FXML
+    private Label lbl_vendor_mobile;
+    @FXML
+    private Label lbl_vendor_email;
 
     /**
      * Initializes the controller class.
@@ -47,17 +60,14 @@ public class ProductController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    public void processProduct(ActionEvent event){
-        String json = "";
-        HttpHelper httpHelper = new HttpHelper();
-        OperationHandler opthandler = new OperationHandler();
-        HttpPost httpPost;
+
+    @FXML
+    private void processVendor(ActionEvent event) {
         
-        ProductController pController = new ProductController();
-        TextField test = new TextField();
-        //test.setText("Test");
-        //pController.setName(test);
+        String json = "";
+        OperationHandler opthandler = new OperationHandler();      
+
+
         
         System.out.println("Entered Here.. ");
         try{
@@ -67,19 +77,20 @@ public class ProductController implements Initializable {
             try (final JsonWriter jsonWriter = Json.createWriter(out)) {
                    jsonWriter.write(Json.createObjectBuilder()
                            .add("name", this.getName().getText())
+                           .add("address", this.getAddress().getText())
+                           .add("phone", this.getPhone().getText())
+                           .add("mobile", this.getMobile().getText())
                            .add("remarks", this.getRemarks().getText())
-                           .build()
-                   );
+                           .build());
                }
-            opthandler.OperationHandler(out,"Product","Create");
-            
-        } catch(Exception e){
+            opthandler.OperationHandler(out,"Vendor","Create");
+   } catch(Exception e){
             e.printStackTrace();
         }
         
+        
     }
-    
-    
+
     /**
      * @return the name
      */
@@ -106,6 +117,48 @@ public class ProductController implements Initializable {
      */
     public void setRemarks(TextArea remarks) {
         this.remarks = remarks;
+    }
+
+    /**
+     * @return the address
+     */
+    public TextArea getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(TextArea address) {
+        this.address = address;
+    }
+
+    /**
+     * @return the phone
+     */
+    public TextField getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(TextField phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * @return the mobile
+     */
+    public TextField getMobile() {
+        return mobile;
+    }
+
+    /**
+     * @param mobile the mobile to set
+     */
+    public void setMobile(TextField mobile) {
+        this.mobile = mobile;
     }
     
 }

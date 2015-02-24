@@ -94,7 +94,7 @@
                                                         </HBox>
                                                         <GridPane gridLinesVisible="false" hgap="3.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="function-buttons-pane">
                                                             <children>
-                                                                <ToggleButton alignment="CENTER_LEFT" contentDisplay="LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" minHeight="-1.0" mnemonicParsing="false" prefHeight="-1.0" prefWidth="150.0" text="CUSTOMER &#10;OPENING" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                                <ToggleButton alignment="CENTER_LEFT" contentDisplay="LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" minHeight="-1.0" mnemonicParsing="false" prefHeight="-1.0" prefWidth="150.0" text="CREATE PURCHASE ORDER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                                     <graphic>
                                                                         <Button disable="false" focusTraversable="false" mnemonicParsing="false" text="F1" />
                                                                     </graphic>
@@ -102,17 +102,17 @@
                                                                         <Insets fx:id="x12ea1" />
                                                                     </GridPane.margin>
                                                                 </ToggleButton>
-                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" text="CUSTOMER &#10;MODIFICATION" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" text="CREATE DELIVERY CHALLAN" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                                                     <graphic>
                                                                         <Button focusTraversable="false" minHeight="-1.0" mnemonicParsing="false" prefHeight="-1.0" text="F2" />
                                                                     </graphic>
                                                                 </ToggleButton>
-                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" text="ACCOUNT&#10;OPENING" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                                                     <graphic>
                                                                         <Button focusTraversable="false" mnemonicParsing="false" text="F3" />
                                                                     </graphic>
                                                                 </ToggleButton>
-                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" text="FUNDS&#10;TRANSFER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                                                                <ToggleButton alignment="CENTER_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308" maxWidth="-1.0" mnemonicParsing="false" prefWidth="150.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                                                     <graphic>
                                                                         <Button focusTraversable="false" mnemonicParsing="false" text="F4" wrapText="true" />
                                                                     </graphic>
@@ -153,7 +153,7 @@
                                                         <ListView id="commentList" fx:id="tblMyGroupTaskComments" prefHeight="90.0" prefWidth="200.0" styleClass="no-scroll" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                                                         <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="header-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                             <children>
-                                                                <Label text="NEW COMMENTS" StackPane.alignment="CENTER_LEFT" />
+                                                                <Label fx:id="pending_po" text="PENDING PURCHASE ORDERS" StackPane.alignment="CENTER_LEFT" />
                                                                 <Region maxHeight="7.0" maxWidth="7.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="arrow-up, arrow" StackPane.alignment="CENTER_RIGHT">
                                                                     <StackPane.margin>
                                                                         <Insets right="10.0" fx:id="x1" />
@@ -181,7 +181,7 @@
                                                         <ListView fx:id="wallList" prefHeight="90.0" prefWidth="200.0" styleClass="no-scroll" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                                                         <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="header-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                             <children>
-                                                                <Label text="MY WALL" StackPane.alignment="CENTER_LEFT" />
+                                                                <Label text="AVALIABLE CREDIT NOTES" StackPane.alignment="CENTER_LEFT" />
                                                                 <Region maxHeight="7.0" maxWidth="7.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="arrow-up, arrow" StackPane.alignment="CENTER_RIGHT">
                                                                     <StackPane.margin>
                                                                         <Insets right="10.0" fx:id="x6" />
@@ -213,7 +213,7 @@
                                                         <ListView fx:id="topList" prefHeight="90.0" prefWidth="200.0" styleClass="no-scroll" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                                                         <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="header-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                             <children>
-                                                                <Label styleClass="colleague-label" text="COLLEAGUES' TOPLIST" StackPane.alignment="CENTER_LEFT" />
+                                                                <Label styleClass="colleague-label" text="ALERTS" StackPane.alignment="CENTER_LEFT" />
                                                                 <Region maxHeight="7.0" maxWidth="7.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="arrow-up, arrow" StackPane.alignment="CENTER_RIGHT">
                                                                     <StackPane.margin>
                                                                         <Insets right="10.0" fx:id="x8" />
@@ -229,14 +229,6 @@
                                                                     </StackPane.margin>
                                                                 </Region>
                                                                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="1.0">
-                                                                    <children>
-                                                                        <Label alignment="TOP_CENTER" font="$x2" prefWidth="133.0" text="You are at position">
-                                                                            <HBox.margin>
-                                                                                <Insets top="2.0" fx:id="x3" />
-                                                                            </HBox.margin>
-                                                                        </Label>
-                                                                        <Label fx:id="positionLabel" font="$x2" prefWidth="32.0" styleClass="app-blue-color" text="177" HBox.margin="$x3" />
-                                                                    </children>
                                                                     <padding>
                                                                         <Insets left="3.0" />
                                                                     </padding>
