@@ -32,7 +32,7 @@
                </GridPane.margin>
             </TextField>
             <Label text="Product description" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="BTN_SAVE" mnemonicParsing="false" onAction="#processProductQuery" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

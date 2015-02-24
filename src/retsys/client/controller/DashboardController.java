@@ -208,35 +208,41 @@ public class DashboardController extends AnchorPane implements Initializable {
         TreeItem<Menu> root = new TreeItem<Menu>();
         //root.setValue("");
         treeView.setRoot(root);
-        String[][] level1 = new String[][]{new String[]{"Project Management", "project"}, new String[]{"Inventory Management", "inventory"}, new String[]{"Main Menu", "main-menu"}};
-        String[][] level2 = new String[][]{new String[]{"Project", "project"}, new String[]{"Product", "product"}, new String[]{"Client", "client"}};
-        String[][] level3 = new String[][]{new String[]{"Project Maintainence", "project-maintainence"}, new String[]{"Open Project", "OpenProject"}};
-        String[][] level4 = new String[][]{new String[]{"Create Project", "Createproject"}, new String[]{"New Product", "/retsys/client/fxml/Product.fxml"}};
-
+        String[][] level1 = new String[][]{new String[]{"Project Management", "project","1",""}, new String[]{"Inventory Management", "inventory","2",""}};
+        String[][] level2 = new String[][]{new String[]{"Project", "project","3","1"}, new String[]{"Product", "product","4","2"}, new String[]{"Client", "client","5","1"}};
+        String[][] level3 = new String[][]{new String[]{"Project Maintainence", "project-maintainence","6","3"}, new String[]{"Product Maintenance", "product-maintenance","7","4"}, new String[]{"Client Maintenance", "product-maintenance","8","5"}};
+        String[][] level4 = new String[][]{new String[]{"Create Project", "Createproject","9","6"}, new String[]{"Open Project", "Openproject","10","6"}, new String[]{"Create Product", "/retsys/client/fxml/Product.fxml","11","7"}, new String[]{"Open Product", "/retsys/client/fxml/Product.fxml","12","7"}, new String[]{"Create Client", "CreateClient","13","8"}, new String[]{"Open Client", "CreateClient","14","8"}};
+        
         for (String[] l1 : level1) {
             TreeItem<Menu> ti1 = new TreeItem<Menu>();
             Menu m = new Menu(MenuOperationType.NONE, null, 1, l1[0], l1[1]);
 
             ti1.setValue(m);
             for (String[] l2 : level2) {
-                TreeItem<Menu> ti2 = new TreeItem<Menu>();
-                Menu m2 = new Menu(MenuOperationType.NONE, null, 2, l2[0], l2[1]);
-                ti2.setValue(m2);
-                for (String[] l3 : level3) {
-                    TreeItem<Menu> ti3 = new TreeItem<Menu>();
-                    Menu m3 = new Menu(MenuOperationType.NONE, null, 3, l3[0], l3[1]);
-                    ti3.setValue(m3);
-                    for (String[] l4 : level4) {
-                        TreeItem<Menu> ti4 = new TreeItem<Menu>();
-                        Menu m4 = new Menu(MenuOperationType.PROCESS, l4[1], 4, l4[0], l4[1]);
-                        cache = ti4;
-                        ti4.setValue(m4);
-                        ti3.getChildren().add(ti4);
-                    }
+                if(l2[3].equals(l1[2])){
+                    TreeItem<Menu> ti2 = new TreeItem<Menu>();
+                    Menu m2 = new Menu(MenuOperationType.NONE, null, 2, l2[0], l2[1]);
+                    ti2.setValue(m2);
+                    for (String[] l3 : level3) {
+                        if(l3[3].equals(l2[2])){
+                            TreeItem<Menu> ti3 = new TreeItem<Menu>();
+                            Menu m3 = new Menu(MenuOperationType.NONE, null, 3, l3[0], l3[1]);
+                            ti3.setValue(m3);
+                            for (String[] l4 : level4) {
+                                if(l4[3].equals(l3[2])){
+                                    TreeItem<Menu> ti4 = new TreeItem<Menu>();
+                                    Menu m4 = new Menu(MenuOperationType.PROCESS, l4[1], 4, l4[0], l4[1]);
+                                    cache = ti4;
+                                    ti4.setValue(m4);
+                                    ti3.getChildren().add(ti4);
+                                }
+                            }
 
-                    ti2.getChildren().add(ti3);
+                            ti2.getChildren().add(ti3);
+                        }
+                    }
+                    ti1.getChildren().add(ti2);
                 }
-                ti1.getChildren().add(ti2);
             }
             treeView.getRoot().getChildren().add(ti1);
         }

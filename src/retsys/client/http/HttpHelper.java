@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.HttpClients;
 
@@ -27,14 +28,29 @@ import org.apache.http.impl.client.HttpClients;
  */
 public class HttpHelper {
 
-    String hostName = null;
-    String hostPort = null;
-    String context = null;
+    String hostName = "localhost";
+    String hostPort = "8080";
+    String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {
         HttpGet get = null;
 
         get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
+
+        return get;
+    }
+    
+    public HttpGet getHttpGetObj(String operation, String body) throws IOException {
+        HttpGet get = null;
+
+        get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
+        
+        StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
+        
+        //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
+        StringEntity se = new StringEntity(body);
+        se.setContentEncoding("UTF-8");
+        se.setContentType("application/json");
 
         return get;
     }
@@ -44,11 +60,14 @@ public class HttpHelper {
 
         post = new HttpPost(getHttpUrl(hostName, hostPort, context) + "/" + operation);
 
-        StringBody payload = new StringBody("payload", ContentType.TEXT_PLAIN);
-
-        HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
-
-        post.setEntity(reqEntity);
+        StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
+        
+        //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
+        StringEntity se = new StringEntity(body);
+        se.setContentEncoding("UTF-8");
+        se.setContentType("application/json");
+        
+        post.setEntity(se);
 
         return post;
     }
