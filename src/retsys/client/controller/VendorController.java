@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package retsys.client.fxml;
+package retsys.client.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

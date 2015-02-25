@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package retsys.client.fxml;
+package retsys.client.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -20,14 +20,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.json.Json;
 import javax.json.JsonWriter;
+import retsys.client.json.JsonHelper;
 import retsys.client.main.OperationHandler;
+import retsys.client.model.Client;
+import retsys.client.model.Project;
 
 /**
  * FXML Controller class
  *
  * @author Muthu
  */
-public class ProjectController implements Initializable {
+public class ProjectController extends StandardController implements Initializable {
     @FXML
     private Tab tab_project;
     @FXML
@@ -141,6 +144,26 @@ public class ProjectController implements Initializable {
             e.printStackTrace();
         }
         
+    }
+
+    @Override
+    public String buildRequestMsg() {
+        Project project = new Project();
+        Client client = new Client();
+        
+        project.setName(getName().getText());
+        project.setRemarks(getRemarks().getText());
+        
+        client.setId(new Integer(1));
+        
+        project.setClient(client);
+        
+        return new JsonHelper().getJsonString(project);
+    }
+
+    @Override
+    public String getSaveUrl() {
+        return "projects";
     }
     
 }

@@ -5,10 +5,7 @@
  */
 package retsys.client.controller;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,21 +18,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javax.json.Json;
-import javax.json.JsonWriter;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import retsys.client.main.OperationHandler;
+import retsys.client.model.Client;
 
 /**
  * FXML Controller class
  *
  * @author Muthu
  */
-public class ClientController implements Initializable {
+public class ClientController extends StandardController implements Initializable{
     @FXML
     private Tab tab_vendor;
     @FXML
@@ -182,6 +176,30 @@ public class ClientController implements Initializable {
    } catch(Exception e){
             e.printStackTrace();
         }
+        
+    }
+
+    @Override
+    public String buildRequestMsg() {
+        String request = null;
+        
+        Client client = new Client();
+        
+        client.setName(this.getName().getText());
+        client.setAddress(this.getAddress().getText());
+        client.setMobile(this.getMobile().getText());
+        client.setPhone(this.getPhone().getText());
+        client.setRemarks(this.getRemarks().getText());
+        
+        JsonHelper helper = new JsonHelper();
+        request = helper.getJsonString(client);
+        
+        return request;
+    }
+    
+    public String getSaveUrl(){
+        
+        return "clients";
         
     }
     
