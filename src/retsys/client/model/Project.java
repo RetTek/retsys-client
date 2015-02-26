@@ -12,6 +12,7 @@ package retsys.client.model;
  */
 public class Project {
     private Integer id;
+    private Integer version;
     private String name;
     private String remarks;
     private Client client;
@@ -70,6 +71,20 @@ public class Project {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return the version
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
 }

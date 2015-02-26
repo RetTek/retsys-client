@@ -8,6 +8,7 @@ package retsys.client.json;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,5 +64,9 @@ public class JsonHelper {
         }
         return jsonMap;
     }
-
+    
+    public Object convertJsonStringToObject(String json, TypeReference ref) throws IOException{
+        return mapper.readValue(json, ref);
+    }
+    
 }

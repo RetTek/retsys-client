@@ -5,12 +5,16 @@
  */
 package retsys.client.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
+import com.fasterxml.jackson.core.type.TypeReference;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,8 +22,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javax.json.Json;
-import javax.json.JsonWriter;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+import org.apache.http.impl.client.HttpClients;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.control.textfield.TextFields;
+import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import retsys.client.main.OperationHandler;
 import retsys.client.model.Client;
@@ -31,6 +40,7 @@ import retsys.client.model.Project;
  * @author Muthu
  */
 public class ProjectController extends StandardController implements Initializable {
+
     @FXML
     private Tab tab_project;
     @FXML
@@ -49,16 +59,42 @@ public class ProjectController extends StandardController implements Initializab
     private Label lbl_project_desc;
     @FXML
     private TextArea remarks;
-
+    
+    private Map<String,Client> clients;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        TextFields.bindAutoCompletion(client, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() {
 
- 
+            @Override
+            public Collection<Client> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Client> list = null;
+                HttpHelper helper = new HttpHelper();
+                try {
+                    String response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj("clients/name/" + param.getUserText()));
+                    List<Client> clients = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {});
+                    list = clients;
+                } catch (IOException ex) {
+                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                return list;
+            }
+        },new StringConverter<Client>() {
+
+            @Override
+            public String toString(Client object) {
+                return object.getName();
+            }
+
+            @Override
+            public Client fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    }
 
     /**
      * @return the client
@@ -79,13 +115,6 @@ public class ProjectController extends StandardController implements Initializab
      */
     public TextField getName() {
         return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(TextField name) {
-        this.name = name;
     }
 
     /**
@@ -115,49 +144,19 @@ public class ProjectController extends StandardController implements Initializab
     public void setRemarks(TextArea remarks) {
         this.remarks = remarks;
     }
-  
-    public void processProject(ActionEvent event){
-        String json = "";
-        OperationHandler opthandler = new OperationHandler();      
-
-
-        
-        System.out.println("Entered Here.. ");
-        try{
-            /*ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            json = ow.writeValueAsString(pController.getName());*/
-            /*OutputStream out = new ByteArrayOutputStream();
-            try (final JsonWriter jsonWriter = Json.createWriter(out)) {
-                   jsonWriter.write(Json.createObjectBuilder()
-                           .add("name", this.getName().getText())
-                           .add("remarks", this.getRemarks().getText())
-                           .add("client", this.getClient().getText())
-                           .build());*/
-            
-               
-            Map reqMap = new HashMap();
-            reqMap.put("name", this.getName().getText());
-            reqMap.put("remarks", this.getName().getText());
-            reqMap.put("client_id", this.getClient().getText());
-            opthandler.OperationHandler(reqMap,"projects","POST");
-   } catch(Exception e){
-            e.printStackTrace();
-        }
-        
-    }
 
     @Override
     public String buildRequestMsg() {
         Project project = new Project();
         Client client = new Client();
-        
+
         project.setName(getName().getText());
         project.setRemarks(getRemarks().getText());
-        
+
         client.setId(new Integer(1));
-        
+
         project.setClient(client);
-        
+
         return new JsonHelper().getJsonString(project);
     }
 
@@ -165,5 +164,5 @@ public class ProjectController extends StandardController implements Initializab
     public String getSaveUrl() {
         return "projects";
     }
-    
+
 }
