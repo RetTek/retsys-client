@@ -37,14 +37,14 @@ public class HttpHelper {
 
         return get;
     }
-    
+
     public HttpGet getHttpGetObj(String operation, String body) throws IOException {
         HttpGet get = null;
 
         get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
-        
+
         StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
-        
+
         //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
         StringEntity se = new StringEntity(body);
         se.setContentEncoding("UTF-8");
@@ -59,12 +59,12 @@ public class HttpHelper {
         post = new HttpPost(getHttpUrl(hostName, hostPort, context) + "/" + operation);
 
         StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
-        
+
         //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
         StringEntity se = new StringEntity(body);
         se.setContentEncoding("UTF-8");
         se.setContentType("application/json");
-        
+
         post.setEntity(se);
 
         return post;
@@ -89,9 +89,14 @@ public class HttpHelper {
     public String executeHttpRequest(HttpClient client, HttpUriRequest req) throws IOException {
         String response = null;
         HttpResponse httpResponse = client.execute(req);
-
-        response = readFromStream(httpResponse.getEntity().getContent());
-
+        int httpStatus = httpResponse.getStatusLine().getStatusCode();
+        if(httpStatus>=200 && httpStatus<300){
+            response = readFromStream(httpResponse.getEntity().getContent());
+        }else{
+            response="!ERROR!";
+        }
+        
+        
         return response;
     }
 

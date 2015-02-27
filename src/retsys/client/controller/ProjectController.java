@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,8 +61,7 @@ public class ProjectController extends StandardController implements Initializab
     private Label lbl_project_desc;
     @FXML
     private TextArea remarks;
-    
-    private Map<String,Client> clients;
+
     /**
      * Initializes the controller class.
      */
@@ -74,24 +75,24 @@ public class ProjectController extends StandardController implements Initializab
                 HttpHelper helper = new HttpHelper();
                 try {
                     String response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj("clients/name/" + param.getUserText()));
-                    List<Client> clients = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {});
-                    list = clients;
+                    list = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {
+                    });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 return list;
             }
-        },new StringConverter<Client>() {
+        }, new StringConverter<Client>() {
 
             @Override
             public String toString(Client object) {
-                return object.getName();
+                return object.getName() + " (ID:" + object.getId() + ")";
             }
 
             @Override
             public Client fromString(String string) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
     }
@@ -153,7 +154,13 @@ public class ProjectController extends StandardController implements Initializab
         project.setName(getName().getText());
         project.setRemarks(getRemarks().getText());
 
-        client.setId(new Integer(1));
+        Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(getClient().getText());
+        Integer id = null;
+        while (m.find()) {
+            id = Integer.parseInt(m.group(1).split(":")[1]);
+        }
+
+        client.setId(id);
 
         project.setClient(client);
 
