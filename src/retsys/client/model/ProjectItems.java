@@ -9,26 +9,11 @@ package retsys.client.model;
  *
  * @author ranju
  */
-public class ProjectItems {
+public class ProjectItems extends Model{
 
-    private Integer id;
     private Item item;
     private ClientChallan challan;
     private int quantity;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * @return the item
@@ -71,5 +56,5 @@ public class ProjectItems {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
 }

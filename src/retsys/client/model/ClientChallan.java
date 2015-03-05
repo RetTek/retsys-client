@@ -11,26 +11,11 @@ import java.util.Date;
  *
  * @author ranju
  */
-public class ClientChallan {
+public class ClientChallan extends Model{
 
-    private Integer id;
     private Project project;
     private Date challanDate;
     private boolean isDelivery;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * @return the project
@@ -73,5 +58,5 @@ public class ClientChallan {
     public void setIsDelivery(boolean isDelivery) {
         this.isDelivery = isDelivery;
     }
-    
+
 }

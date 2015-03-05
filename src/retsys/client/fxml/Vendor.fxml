@@ -31,7 +31,7 @@
         </tabs>
       </TabPane>
       <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
-      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#processVendor" prefHeight="38.0" prefWidth="109.0" text="Create" />
+      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="109.0" text="Create" />
       <Button layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Amend" />
    </children>
 </AnchorPane>

@@ -9,10 +9,8 @@ package retsys.client.model;
  *
  * @author ranju
  */
-public class Item {
+public class Item extends Model {
 
-    private Integer id;
-    private String name;
     private double rate;
     private String brand;
     private String color;
@@ -26,34 +24,6 @@ public class Item {
     private double transportcharge;
     private String supervisor;
     private Vendor vendor;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @return the rate
@@ -236,5 +206,5 @@ public class Item {
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
     }
-    
+
 }

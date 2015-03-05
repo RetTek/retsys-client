@@ -5,62 +5,17 @@
  */
 package retsys.client.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  *
  * @author ranju
  */
-public class PurchaseOrderDetail {
+public class PurchaseOrderDetail extends Model{
 
-    private Integer id;
-    private PurchaseOrder purchaseOrder;
-    private Set<Item> item = new HashSet<Item>();
+    private Item item;
     private Integer quantity;
     private String confirm;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the purchaseOrder
-     */
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    /**
-     * @param purchaseOrder the purchaseOrder to set
-     */
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
-
-    /**
-     * @return the item
-     */
-    public Set<Item> getItem() {
-        return item;
-    }
-
-    /**
-     * @param item the item to set
-     */
-    public void setItem(Set<Item> item) {
-        this.item = item;
-    }
 
     /**
      * @return the quantity
@@ -89,5 +44,19 @@ public class PurchaseOrderDetail {
     public void setConfirm(String confirm) {
         this.confirm = confirm;
     }
-    
+
+    /**
+     * @return the item
+     */
+    public Item getItem() {
+        return item;
+    }
+
+    /**
+     * @param item the item to set
+     */
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
 }

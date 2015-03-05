@@ -9,15 +9,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -26,13 +23,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import org.apache.http.impl.client.HttpClients;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
+import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
-import retsys.client.main.OperationHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Project;
 
@@ -74,7 +69,8 @@ public class ProjectController extends StandardController implements Initializab
                 List<Client> list = null;
                 HttpHelper helper = new HttpHelper();
                 try {
-                    String response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj("clients/name/" + param.getUserText()));
+                    LovHandler lovHandler = new LovHandler("clients", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
                     list = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {
                     });
                 } catch (IOException ex) {

@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.ItemController">
    <children>
       <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -19,13 +19,13 @@
                         <Label fx:id="lbl_item_remarks" layoutX="34.0" layoutY="317.0" text="Remarks" />
                         <Label fx:id="lbl_rate" layoutX="36.0" layoutY="102.0" text="Rate" />
                         <TextArea fx:id="item_remarks" layoutX="124.0" layoutY="317.0" prefHeight="107.0" prefWidth="200.0" />
-                        <TextField fx:id="quantity" layoutX="125.0" layoutY="131.0" />
+                        <TextField fx:id="quantity" layoutX="125.0" layoutY="131.0" text="0.0" />
                         <Label fx:id="lbl_item_unit" layoutX="36.0" layoutY="160.0" text="Units" />
                         <TextField fx:id="unit" layoutX="126.0" layoutY="159.0" />
                         <TextField fx:id="color" layoutX="126.0" layoutY="187.0" />
                         <Label fx:id="lbl_item_color" layoutX="36.0" layoutY="190.0" text="Color" />
                         <Label fx:id="lbl_billno" layoutX="38.0" layoutY="275.0" text="Bill No" />
-                        <TextField fx:id="rate" layoutX="125.0" layoutY="103.0" />
+                        <TextField fx:id="rate" layoutX="125.0" layoutY="103.0" text="0.0" />
                         <Label fx:id="lbl_quantity" layoutX="36.0" layoutY="130.0" text="Quantity" />
                         <TextField fx:id="size" layoutX="126.0" layoutY="215.0" />
                         <Label fx:id="lbl_size" layoutX="37.0" layoutY="214.0" text="Size" />
@@ -40,7 +40,7 @@
                         <TextField fx:id="location2" layoutX="420.0" layoutY="159.0" />
                         <TextField fx:id="location3" layoutX="420.0" layoutY="187.0" />
                         <TextField fx:id="transport_mode" layoutX="420.0" layoutY="242.0" />
-                        <TextField fx:id="transport_charges" layoutX="420.0" layoutY="270.0" />
+                        <TextField fx:id="transport_charges" layoutX="420.0" layoutY="270.0" text="0.0" />
                         <TextField fx:id="drawer_no" layoutX="420.0" layoutY="215.0" />
                         <Label fx:id="lbl_site" layoutX="307.0" layoutY="77.0" text="Site Name" />
                         <Label fx:id="lbl_godown" layoutX="308.0" layoutY="104.0" text="Godown Name" />
@@ -57,7 +57,7 @@
         </tabs>
       </TabPane>
       <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
-      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Create" />
+      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="109.0" text="Create" />
       <Button layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Amend" />
    </children>
 </AnchorPane>

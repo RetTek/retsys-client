@@ -10,28 +10,12 @@ package retsys.client.model;
  *
  * @author ranju
  */
-public class Client {
-    private Integer id;
-    private Integer version;
-    private String name;
+public class Client extends Model {
     private String address;
     private String phone;
     private String mobile;
     private String remarks;
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * @return the address
@@ -89,32 +73,5 @@ public class Client {
         this.remarks = remarks;
     }
 
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the version
-     */
-    public Integer getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version the version to set
-     */
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
 }

@@ -20,14 +20,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.json.Json;
 import javax.json.JsonWriter;
+import retsys.client.json.JsonHelper;
 import retsys.client.main.OperationHandler;
+import retsys.client.model.Vendor;
 
 /**
  * FXML Controller class
  *
  * @author Muthu
  */
-public class VendorController implements Initializable {
+public class VendorController extends StandardController implements Initializable {
+
     @FXML
     private Tab tab_vendor;
     @FXML
@@ -61,37 +64,34 @@ public class VendorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void processVendor(ActionEvent event) {
-        
+
         String json = "";
-        OperationHandler opthandler = new OperationHandler();      
+        OperationHandler opthandler = new OperationHandler();
 
-
-        
         System.out.println("Entered Here.. ");
-        try{
+        try {
             /*ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            json = ow.writeValueAsString(pController.getName());*/
+             json = ow.writeValueAsString(pController.getName());*/
             OutputStream out = new ByteArrayOutputStream();
             try (final JsonWriter jsonWriter = Json.createWriter(out)) {
-                   jsonWriter.write(Json.createObjectBuilder()
-                           .add("name", this.getName().getText())
-                           .add("address", this.getAddress().getText())
-                           .add("phone", this.getPhone().getText())
-                           .add("mobile", this.getMobile().getText())
-                           .add("remarks", this.getRemarks().getText())
-                           .build());
-               }
+                jsonWriter.write(Json.createObjectBuilder()
+                        .add("name", this.getName().getText())
+                        .add("address", this.getAddress().getText())
+                        .add("phone", this.getPhone().getText())
+                        .add("mobile", this.getMobile().getText())
+                        .add("remarks", this.getRemarks().getText())
+                        .build());
+            }
             Map reqMap = new HashMap();
-            opthandler.OperationHandler(reqMap,"Vendor","Create");
-   } catch(Exception e){
+            opthandler.OperationHandler(reqMap, "Vendor", "Create");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
+
     }
 
     /**
@@ -163,5 +163,26 @@ public class VendorController implements Initializable {
     public void setMobile(TextField mobile) {
         this.mobile = mobile;
     }
-    
+
+    @Override
+    String buildRequestMsg() {
+        String message = null;
+        
+        Vendor vendorObj = new Vendor();
+        vendorObj.setName(name.getText());
+        vendorObj.setAddress(address.getText());
+        vendorObj.setMobile(mobile.getText());
+        vendorObj.setPhone(phone.getText());
+        vendorObj.setRemarks(remarks.getText());
+        
+        message = new JsonHelper().getJsonString(vendorObj);
+
+        return message;
+    }
+
+    @Override
+    String getSaveUrl() {
+        return "vendors";
+    }
+
 }

@@ -3,45 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package retsys.client.model;
 
 /**
  *
  * @author ranju
  */
-public class Product {
-   private Integer id;
-   private String name;
-   private String remarks;
+public class Product extends Model {
 
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String remarks;
 
     /**
      * @return the remarks
@@ -57,5 +27,4 @@ public class Product {
         this.remarks = remarks;
     }
 
-   
 }

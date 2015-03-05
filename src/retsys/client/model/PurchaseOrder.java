@@ -6,32 +6,19 @@
 package retsys.client.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author ranju
  */
-public class PurchaseOrder {
+public class PurchaseOrder extends Model{
 
-    private Integer id;
     private Date date;
     private Vendor vendor;
     private Client client;
     private String deliveryAddress;
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private List<PurchaseOrderDetail> purchaseOrderDetail;
 
     /**
      * @return the date
@@ -87,6 +74,20 @@ public class PurchaseOrder {
      */
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    /**
+     * @return the purchaseOrderDetail
+     */
+    public List<PurchaseOrderDetail> getPurchaseOrderDetail() {
+        return purchaseOrderDetail;
+    }
+
+    /**
+     * @param purchaseOrderDetail the purchaseOrderDetail to set
+     */
+    public void setPurchaseOrderDetail(List<PurchaseOrderDetail> purchaseOrderDetail) {
+        this.purchaseOrderDetail = purchaseOrderDetail;
     }
 
 }
