@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -24,7 +25,9 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
+import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
+import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.Model;
 import retsys.client.model.Vendor;
@@ -120,6 +123,72 @@ public class ItemController extends StandardController implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        //Begin
+        //  TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
+        AutoCompletionBinding<Item> txt_name = TextFields.bindAutoCompletion(item_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() 
+        {
+
+            @Override
+            public Collection<Item> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Item> list = null;
+                HttpHelper helper = new HttpHelper();
+                try {
+                    LovHandler lovHandler = new LovHandler("items", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
+                    list = (List<Item>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return list;
+            }
+            
+            
+        }, new StringConverter<Item>() {
+
+            @Override
+            public String toString(Item object) {
+                return object.getName() + " (ID:" + object.getId() + ")";
+            }
+
+            @Override
+            public Item fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        
+        //event handler for setting other Client fields with values from selected Client object
+        //fires after autocompletion
+        txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Item>>() {
+
+            @Override
+            public void handle(AutoCompletionBinding.AutoCompletionEvent<Item> event) {
+                Item item = event.getCompletion();
+                //fill other item related fields
+              
+                //rate.set((item.getRate()));
+                brand.setText(item.getBrand());
+                color.setText(item.getColor());
+                unit.setText(item.getUnit());
+                size.setText(item.getSize());
+                billno.setText(item.getBillno());
+                Site.setText(item.getSite());
+                item_remarks.setText(item.getRemarks());
+                //quantity.setText(item.getQuantity());
+                unit.setText(item.getUnit());
+                transport_mode.setText(item.getTransportmode());
+                //transport_charge.setText(item.getTransportcharge());
+                supervisor.setText(item.getSupervisor());
+                //vendor.setText(item.getVendor());
+                               
+            }
+        });
+        
+        
+        
+        //Ends
         TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
             @Override

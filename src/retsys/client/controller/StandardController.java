@@ -52,6 +52,22 @@ public abstract class StandardController {
 
         return response;
     }
+    
+    public String delete(ActionEvent event) throws IOException {
+        String jsonRequest = buildRequestMsg();
+        String response = null;
+
+        HttpHelper helper = new HttpHelper();
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpPostObj(getSaveUrl(), jsonRequest));
+
+        if ("!ERROR!".equals(response)) {
+            displayMessage(true, "Save failed!");
+        } else {
+            displayMessage(false, "Save success!");
+        }
+
+        return response;
+    }
 
     public void displayMessage(boolean error, String message) {
         Dialogs.create().title(error ? "Error" : "Information").message(message).showInformation();

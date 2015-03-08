@@ -12,6 +12,7 @@ package retsys.client.model;
 public class Product extends Model {
 
     private String remarks;
+    private String desc;
 
     /**
      * @return the remarks
@@ -25,6 +26,17 @@ public class Product extends Model {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+    
+     public String getDesc() {
+        return desc;
+    }
+
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
 }
