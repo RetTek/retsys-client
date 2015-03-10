@@ -313,7 +313,7 @@ public class DashboardController extends AnchorPane implements Initializable {
                                             Label content = (Label) event.getSource();
                                             Menu m = (Menu) content.getUserData();
                                             if (m.getOperation() == MenuOperationType.PROCESS) {
-                                                openScreen(m.getUnit());
+                                                openScreen(m.getUnit(),((Label)event.getSource()).getText());
                                             }
                                         }
                                     });
@@ -426,7 +426,7 @@ public class DashboardController extends AnchorPane implements Initializable {
 
     }
 
-    private void openScreen(String screenName) {
+    private void openScreen(String screenName, String title) {
         URL location = getClass().getResource(screenName);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);
@@ -437,7 +437,8 @@ public class DashboardController extends AnchorPane implements Initializable {
             Tab funcTab = new Tab();
             funcTab.setClosable(true);
             
-            funcTab.setText(screenName);
+            funcTab.setText(title);
+            
             this.landingTabPane.getTabs().add(funcTab);
             this.landingTabPane.getSelectionModel().select(funcTab);
            

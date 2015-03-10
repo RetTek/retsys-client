@@ -8,7 +8,6 @@ package retsys.client.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +37,22 @@ public abstract class StandardController {
     }
 
     public String save(ActionEvent event) throws IOException {
+        String jsonRequest = buildRequestMsg();
+        String response = null;
+
+        HttpHelper helper = new HttpHelper();
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpPostObj(getSaveUrl(), jsonRequest));
+
+        if ("!ERROR!".equals(response)) {
+            displayMessage(true, "Save failed!");
+        } else {
+            displayMessage(false, "Save success!");
+        }
+
+        return response;
+    }
+    
+    public String delete(ActionEvent event) throws IOException {
         String jsonRequest = buildRequestMsg();
         String response = null;
 

@@ -5,8 +5,19 @@
  */
 package retsys.client.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,8 +25,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
+import retsys.client.helper.LovHandler;
+import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import retsys.client.model.Client;
+import retsys.client.model.Item;
 
 /**
  * FXML Controller class
@@ -59,8 +78,56 @@ public class ClientController extends StandardController implements Initializabl
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+      //  TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
+        AutoCompletionBinding<Client> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
+        {
+
+            @Override
+            public Collection<Client> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Client> list = null;
+                HttpHelper helper = new HttpHelper();
+                try {
+                    LovHandler lovHandler = new LovHandler("clients", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
+                    list = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return list;
+            }
+            
+            
+        }, new StringConverter<Client>() {
+
+            @Override
+            public String toString(Client object) {
+                return object.getName() + " (ID:" + object.getId() + ")";
+            }
+
+            @Override
+            public Client fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        
+        //event handler for setting other Client fields with values from selected Client object
+        //fires after autocompletion
+        txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Client>>() {
+
+            @Override
+            public void handle(AutoCompletionBinding.AutoCompletionEvent<Client> event) {
+                Client client = event.getCompletion();
+                //fill other item related fields
+                phone.setText(client.getPhone());
+                address.setText(client.getAddress());
+                mobile.setText(client.getMobile());
+                remarks.setText(client.getRemarks());
+                
+            }
+        });
+    }  
 
     /**
      * @return the name

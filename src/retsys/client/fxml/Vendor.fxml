@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.VendorController">
    <children>
@@ -30,8 +31,17 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
-      <Button layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="109.0" text="Create" />
-      <Button layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Amend" />
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="213.0" text="Save" />
+        <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="213.0" styleClass="buttonDelete" text="Delete" />
+      <ImageView fitHeight="29.0" fitWidth="59.0" layoutX="237.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/delete1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="59.0" layoutX="21.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/save2.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
