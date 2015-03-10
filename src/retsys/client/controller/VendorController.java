@@ -5,23 +5,15 @@
  */
 package retsys.client.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javax.json.Json;
-import javax.json.JsonWriter;
 import retsys.client.json.JsonHelper;
-import retsys.client.main.OperationHandler;
 import retsys.client.model.Vendor;
 
 /**
@@ -64,34 +56,6 @@ public class VendorController extends StandardController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
-    @FXML
-    private void processVendor(ActionEvent event) {
-
-        String json = "";
-        OperationHandler opthandler = new OperationHandler();
-
-        System.out.println("Entered Here.. ");
-        try {
-            /*ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-             json = ow.writeValueAsString(pController.getName());*/
-            OutputStream out = new ByteArrayOutputStream();
-            try (final JsonWriter jsonWriter = Json.createWriter(out)) {
-                jsonWriter.write(Json.createObjectBuilder()
-                        .add("name", this.getName().getText())
-                        .add("address", this.getAddress().getText())
-                        .add("phone", this.getPhone().getText())
-                        .add("mobile", this.getMobile().getText())
-                        .add("remarks", this.getRemarks().getText())
-                        .build());
-            }
-            Map reqMap = new HashMap();
-            opthandler.OperationHandler(reqMap, "Vendor", "Create");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     /**

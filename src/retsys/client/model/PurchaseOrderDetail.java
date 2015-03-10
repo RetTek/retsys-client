@@ -5,8 +5,6 @@
  */
 package retsys.client.model;
 
-import java.util.List;
-
 /**
  *
  * @author ranju
@@ -14,34 +12,34 @@ import java.util.List;
 public class PurchaseOrderDetail extends Model{
 
     private Item item;
-    private Integer quantity;
-    private String confirm;
+    private Double quantity;
+    private boolean confirm;
 
     /**
      * @return the quantity
      */
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
     /**
      * @return the confirm
      */
-    public String getConfirm() {
+    public boolean getConfirm() {
         return confirm;
     }
 
     /**
      * @param confirm the confirm to set
      */
-    public void setConfirm(String confirm) {
+    public void setConfirm(boolean confirm) {
         this.confirm = confirm;
     }
 
@@ -58,5 +56,6 @@ public class PurchaseOrderDetail extends Model{
     public void setItem(Item item) {
         this.item = item;
     }
+
 
 }

@@ -5,12 +5,8 @@
  */
 package retsys.client.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,10 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.apache.http.client.methods.HttpUriRequest;
-import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
-import retsys.client.main.OperationHandler;
 import retsys.client.model.Client;
 
 /**
@@ -153,32 +146,6 @@ public class ClientController extends StandardController implements Initializabl
         this.email = email;
     }
     
-    public void processClient(ActionEvent event){
-        String json = "";
-        OperationHandler opthandler = new OperationHandler();      
-
-
-        
-        System.out.println("Entered Here.. ");
-        try{
-            /*ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            json = ow.writeValueAsString(pController.getName());*/
-            Map<String,Object> reqMap = new HashMap<String,Object>();
-            
-            reqMap.put("name", this.getName().getText());
-            reqMap.put("address", this.getAddress().getText());
-            reqMap.put("phone", this.getPhone().getText());
-            reqMap.put("mobile", this.getMobile().getText());
-            reqMap.put("remarks", this.getRemarks().getText());
-            
-            opthandler.OperationHandler(reqMap,"clients","POST");
-            
-   } catch(Exception e){
-            e.printStackTrace();
-        }
-        
-    }
-
     @Override
     public String buildRequestMsg() {
         String request = null;
