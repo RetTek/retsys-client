@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -44,6 +43,7 @@ import retsys.client.helper.PrintHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
+import retsys.client.model.Project;
 import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
@@ -70,7 +70,7 @@ public class PurchaseOrderController extends StandardController implements Initi
     @FXML
     private TextField vendor;
     @FXML
-    private TextField client;
+    private TextField project;
     @FXML
     private TextField Po_no;
     @FXML
@@ -152,15 +152,15 @@ public class PurchaseOrderController extends StandardController implements Initi
             }
         });
 
-        AutoCompletionBinding<Client> bindForClient = TextFields.bindAutoCompletion(client, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() {
+        TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Project>>() {
 
             @Override
-            public Collection<Client> call(AutoCompletionBinding.ISuggestionRequest param) {
-                List<Client> list = null;
+            public Collection<Project> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Project> list = null;
                 try {
-                    LovHandler lovHandler = new LovHandler("clients", "name");
+                    LovHandler lovHandler = new LovHandler("projects", "name");
                     String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<Client>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Client>>() {
+                    list = (List<Project>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Project>>() {
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,19 +168,20 @@ public class PurchaseOrderController extends StandardController implements Initi
 
                 return list;
             }
-        }, new StringConverter<Client>() {
+        }, new StringConverter<Project>() {
 
             @Override
-            public String toString(Client object) {
+            public String toString(Project object) {
                 return object.getName() + " (ID:" + object.getId() + ")";
             }
 
             @Override
-            public Client fromString(String string) {
+            public Project fromString(String string) {
                 throw new UnsupportedOperationException();
             }
         });
-        AutoCompletionBinding<Vendor> bindForVendor = TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
+        
+        TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
             @Override
             public Collection<Vendor> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -242,14 +243,14 @@ public class PurchaseOrderController extends StandardController implements Initi
      * @return the client
      */
     public TextField getClient() {
-        return client;
+        return project;
     }
 
     /**
      * @param client the client to set
      */
     public void setClient(TextField client) {
-        this.client = client;
+        this.project = client;
     }
 
     /**
@@ -331,9 +332,9 @@ public class PurchaseOrderController extends StandardController implements Initi
         PurchaseOrder po = new PurchaseOrder();
         po.setDate(Date.from(Instant.now()));
 
-        Client clientObj = new Client();
-        clientObj.setId(getId(client.getText()));
-        po.setClient(clientObj);
+        Project projectObj = new Project();
+        projectObj.setId(getId(project.getText()));
+        po.setProject(projectObj);
 
         po.setDeliveryAddress(delivery_address.getText());
 
@@ -353,6 +354,7 @@ public class PurchaseOrderController extends StandardController implements Initi
 
             poDetail.setItem(item);
             poDetail.setQuantity(poItem.getQuantity().get());
+            poDetail.setConfirm("N");
 
             poDetails.add(poDetail);
         }

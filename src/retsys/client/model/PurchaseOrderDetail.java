@@ -13,7 +13,7 @@ public class PurchaseOrderDetail extends Model{
 
     private Item item;
     private Double quantity;
-    private boolean confirm;
+    private String confirm;
 
     /**
      * @return the quantity
@@ -32,14 +32,14 @@ public class PurchaseOrderDetail extends Model{
     /**
      * @return the confirm
      */
-    public boolean getConfirm() {
+    public String getConfirm() {
         return confirm;
     }
 
     /**
      * @param confirm the confirm to set
      */
-    public void setConfirm(boolean confirm) {
+    public void setConfirm(String confirm) {
         this.confirm = confirm;
     }
 

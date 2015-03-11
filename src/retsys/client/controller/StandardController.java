@@ -52,6 +52,22 @@ public abstract class StandardController {
         return response;
     }
     
+    public String update(ActionEvent event) throws IOException {
+        String jsonRequest = buildRequestMsg();
+        String response = null;
+
+        HttpHelper helper = new HttpHelper();
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpPutObj(getSaveUrl(), jsonRequest));
+
+        if ("!ERROR!".equals(response)) {
+            displayMessage(true, "Update failed!");
+        } else {
+            displayMessage(false, "Update success!");
+        }
+
+        return response;
+    }
+    
     public String delete(ActionEvent event) throws IOException {
         String jsonRequest = buildRequestMsg();
         String response = null;

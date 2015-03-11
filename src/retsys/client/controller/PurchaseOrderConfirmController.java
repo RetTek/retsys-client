@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -30,14 +29,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -50,6 +48,7 @@ import retsys.client.helper.PrintHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
+import retsys.client.model.Project;
 import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
@@ -78,7 +77,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
     @FXML
     private TextField vendor;
     @FXML
-    private TextField client;
+    private TextField project;
     @FXML
     private TextField po_no;
     @FXML
@@ -97,8 +96,6 @@ public class PurchaseOrderConfirmController extends StandardController implement
     private TextField txt_model;
     @FXML
     private TextField txt_qty;
-    @FXML
-    private CheckBox isConfirm;
 
     private ObservableList<PurchaseOrderDetail> poDetailRecs = FXCollections.observableArrayList();
     int sno = 0;
@@ -115,37 +112,12 @@ public class PurchaseOrderConfirmController extends StandardController implement
         brand_name.setCellValueFactory(new PropertyValueFactory<POItem, String>("brand"));
         model_code.setCellValueFactory(new PropertyValueFactory<POItem, String>("model"));
         quantity.setCellValueFactory(new PropertyValueFactory<POItem, Integer>("quantity"));
-        confirm.setCellFactory(new Callback<TableColumn<POItem, Boolean>, TableCell<POItem, Boolean>>() {
-
-            @Override
-            public TableCell<POItem, Boolean> call(TableColumn<POItem, Boolean> param) {
-                TableCell<POItem,Boolean> cell=null;
-                
-                cell=new TableCell<POItem,Boolean>(){
-
-                    @Override
-                    protected void updateItem(Boolean item, boolean empty) {
-                        super.updateItem(item, empty);
-                        
-                        if(!empty && item!=null){
-                            CheckBox confirm = new CheckBox();
-                            confirm.setSelected(item);
-                            
-                            setGraphic(confirm);
-                        }else{
-                            setGraphic(null);
-                        }
-                    }
-                  
-                };
-                
-                return cell;
-            }
-        });
+        confirm.setCellValueFactory(new PropertyValueFactory<POItem, Boolean>("confirm"));
+        confirm.setCellFactory(CheckBoxTableCell.forTableColumn(confirm));
 
         poDetail.getColumns().setAll(loc_of_material, material_name, brand_name, model_code, quantity, confirm);
 
-        AutoCompletionBinding<PurchaseOrder> bindForTxt_name = TextFields.bindAutoCompletion(client, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<PurchaseOrder>>() {
+        AutoCompletionBinding<PurchaseOrder> bindForTxt_name = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<PurchaseOrder>>() {
 
             @Override
             public Collection<PurchaseOrder> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -166,9 +138,9 @@ public class PurchaseOrderConfirmController extends StandardController implement
             @Override
             public String toString(PurchaseOrder object) {
                 System.out.println("here..." + object);
-                
-                String strDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format( LocalDateTime.ofInstant(object.getDate().toInstant(),ZoneId.systemDefault()));
-                return "Client:" + object.getClient().getName() + " PO Date:" + strDate + " PO No.:" + object.getId();
+
+                String strDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(LocalDateTime.ofInstant(object.getDate().toInstant(), ZoneId.systemDefault()));
+                return "Project:" + object.getProject().getName() + " PO Date:" + strDate + " PO No.:" + object.getId();
             }
 
             @Override
@@ -182,12 +154,12 @@ public class PurchaseOrderConfirmController extends StandardController implement
             @Override
             public void handle(AutoCompletionBinding.AutoCompletionEvent<PurchaseOrder> event) {
                 PurchaseOrder po = event.getCompletion();
-
-                po_date.setValue(LocalDateTime.ofInstant(po.getDate().toInstant(),ZoneId.systemDefault()).toLocalDate());
+                po_no.setText(po.getId().toString());
+                po_date.setValue(LocalDateTime.ofInstant(po.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate());
                 po_no.setText(po.getId().toString());
                 delivery_address.setText(po.getDeliveryAddress());
-                vendor.setText(po.getVendor().getName());
-                client.setText(po.getClient().getName());
+                vendor.setText(po.getVendor().getName() + " (ID:"+po.getVendor().getId()+")");
+                project.setText(po.getProject().getName() + " (ID:"+po.getProject().getId()+")");
 
                 ObservableList<POItem> items = FXCollections.observableArrayList();
                 Iterator detailsIt = po.getPurchaseOrderDetail().iterator();
@@ -199,8 +171,8 @@ public class PurchaseOrderConfirmController extends StandardController implement
                     String name = item.getName();
                     String brand = item.getBrand();
                     String model = null;
-                    Double quantity = item.getQuantity();
-                    boolean confirm = detail.getConfirm();
+                    Double quantity = detail.getQuantity();
+                    Boolean confirm = "Y".equals(detail.getConfirm());
 
                     items.add(new POItem(id, site, name, brand, model, quantity, confirm));
                 }
@@ -270,14 +242,14 @@ public class PurchaseOrderConfirmController extends StandardController implement
      * @return the client
      */
     public TextField getClient() {
-        return client;
+        return project;
     }
 
     /**
      * @param client the client to set
      */
     public void setClient(TextField client) {
-        this.client = client;
+        this.project = client;
     }
 
     /**
@@ -343,7 +315,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
             list = FXCollections.observableArrayList();
         }
 
-        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), isConfirm.isSelected());
+        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), false);
         list.add(item);
         poDetail.setItems(list);
     }
@@ -356,18 +328,19 @@ public class PurchaseOrderConfirmController extends StandardController implement
 
     @Override
     String buildRequestMsg() {
-        PurchaseOrder PO = new PurchaseOrder();
-        PO.setDate(Date.from(Instant.now()));
+        PurchaseOrder po = new PurchaseOrder();
+        po.setId(Integer.parseInt(po_no.getText()));
+        po.setDate(Date.from(Instant.now()));
 
-        Client clientObj = new Client();
-        clientObj.setId(getId(client.getText()));
-        PO.setClient(clientObj);
+        Project projectObj = new Project();
+        projectObj.setId(getId(project.getText()));
+        po.setProject(projectObj);
 
-        PO.setDeliveryAddress(delivery_address.getText());
+        po.setDeliveryAddress(delivery_address.getText());
 
         Vendor vendorObj = new Vendor();
         vendorObj.setId(getId(vendor.getText()));
-        PO.setVendor(vendorObj);
+        po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
         Set<PurchaseOrderDetail> poDetails = new HashSet<>();
@@ -381,18 +354,19 @@ public class PurchaseOrderConfirmController extends StandardController implement
 
             poDetail.setItem(item);
             poDetail.setQuantity(poItem.getQuantity().get());
+            poDetail.setConfirm(poItem.getConfirm().get() ? "Y" : "N");
 
             poDetails.add(poDetail);
         }
 
-        PO.setPurchaseOrderDetail(poDetails);
+        po.setPurchaseOrderDetail(poDetails);
 
-        return new JsonHelper().getJsonString(PO);
+        return new JsonHelper().getJsonString(po);
     }
 
     @Override
     String getSaveUrl() {
-        return "purchaseorders";
+        return "purchaseorders/confirm";
     }
 
 }
