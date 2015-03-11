@@ -6,7 +6,7 @@
 package retsys.client.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -16,9 +16,9 @@ public class PurchaseOrder extends Model{
 
     private Date date;
     private Vendor vendor;
-    private Client client;
+    private Project project;
     private String deliveryAddress;
-    private List<PurchaseOrderDetail> purchaseOrderDetail;
+    private Set<PurchaseOrderDetail> purchaseOrderDetail;
 
     /**
      * @return the date
@@ -49,20 +49,6 @@ public class PurchaseOrder extends Model{
     }
 
     /**
-     * @return the client
-     */
-    public Client getClient() {
-        return client;
-    }
-
-    /**
-     * @param client the client to set
-     */
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    /**
      * @return the deliveryAddress
      */
     public String getDeliveryAddress() {
@@ -79,15 +65,29 @@ public class PurchaseOrder extends Model{
     /**
      * @return the purchaseOrderDetail
      */
-    public List<PurchaseOrderDetail> getPurchaseOrderDetail() {
+    public Set<PurchaseOrderDetail> getPurchaseOrderDetail() {
         return purchaseOrderDetail;
     }
 
     /**
      * @param purchaseOrderDetail the purchaseOrderDetail to set
      */
-    public void setPurchaseOrderDetail(List<PurchaseOrderDetail> purchaseOrderDetail) {
+    public void setPurchaseOrderDetail(Set<PurchaseOrderDetail> purchaseOrderDetail) {
         this.purchaseOrderDetail = purchaseOrderDetail;
+    }
+
+    /**
+     * @return the project
+     */
+    public Project getProject() {
+        return project;
+    }
+
+    /**
+     * @param project the project to set
+     */
+    public void setProject(Project project) {
+        this.project = project;
     }
 
 }

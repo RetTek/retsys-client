@@ -33,7 +33,6 @@ import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
-import retsys.client.main.OperationHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Item;
 
@@ -214,32 +213,6 @@ public class ClientController extends StandardController implements Initializabl
         this.email = email;
     }
     
-    public void processClient(ActionEvent event){
-        String json = "";
-        OperationHandler opthandler = new OperationHandler();      
-
-
-        
-        System.out.println("Entered Here.. ");
-        try{
-            /*ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-            json = ow.writeValueAsString(pController.getName());*/
-            Map<String,Object> reqMap = new HashMap<String,Object>();
-            
-            reqMap.put("name", this.getName().getText());
-            reqMap.put("address", this.getAddress().getText());
-            reqMap.put("phone", this.getPhone().getText());
-            reqMap.put("mobile", this.getMobile().getText());
-            reqMap.put("remarks", this.getRemarks().getText());
-            
-            opthandler.OperationHandler(reqMap,"clients","POST");
-            
-   } catch(Exception e){
-            e.printStackTrace();
-        }
-        
-    }
-
     @Override
     public String buildRequestMsg() {
         String request = null;

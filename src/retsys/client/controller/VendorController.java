@@ -34,7 +34,6 @@ import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
-import retsys.client.main.OperationHandler;
 import retsys.client.model.Vendor;
 
 /**

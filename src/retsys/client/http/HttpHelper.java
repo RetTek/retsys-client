@@ -14,6 +14,7 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -27,7 +28,7 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpHelper {
 
     String hostName = "localhost";
-    String hostPort = "8080";
+    String hostPort = "8082";
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {
@@ -70,6 +71,20 @@ public class HttpHelper {
         return post;
     }
 
+    public HttpPut getHttpPutObj(String operation, String body) throws IOException {
+        HttpPut put = null;
+
+        put = new HttpPut(getHttpUrl(hostName, hostPort, context) + "/" + operation);
+
+        StringEntity se = new StringEntity(body);
+        se.setContentEncoding("UTF-8");
+        se.setContentType("application/json");
+
+        put.setEntity(se);
+
+        return put;
+    }
+
     public String getHttpUrl(String host, String port, String context) {
         return new StringBuilder("http://").append(host).append(":").append(port).append("/").append(context).toString();
     }
@@ -90,13 +105,14 @@ public class HttpHelper {
         String response = null;
         HttpResponse httpResponse = client.execute(req);
         int httpStatus = httpResponse.getStatusLine().getStatusCode();
-        if(httpStatus>=200 && httpStatus<300){
-            response = readFromStream(httpResponse.getEntity().getContent());
-        }else{
-            response="!ERROR!";
+        if (httpStatus >= 200 && httpStatus < 300) {
+            if (!HttpPut.METHOD_NAME.equals(req.getMethod())) { 
+                response = readFromStream(httpResponse.getEntity().getContent());
+            }
+        } else {
+            response = "!ERROR!";
         }
-        
-        
+
         return response;
     }
 
