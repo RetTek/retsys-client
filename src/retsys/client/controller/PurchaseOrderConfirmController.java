@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -45,7 +46,6 @@ import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.json.JsonHelper;
 import retsys.client.helper.PrintHandler;
-import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
 import retsys.client.model.Project;
@@ -158,8 +158,8 @@ public class PurchaseOrderConfirmController extends StandardController implement
                 po_date.setValue(LocalDateTime.ofInstant(po.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate());
                 po_no.setText(po.getId().toString());
                 delivery_address.setText(po.getDeliveryAddress());
-                vendor.setText(po.getVendor().getName() + " (ID:"+po.getVendor().getId()+")");
-                project.setText(po.getProject().getName() + " (ID:"+po.getProject().getId()+")");
+                vendor.setText(po.getVendor().getName() + " (ID:" + po.getVendor().getId() + ")");
+                project.setText(po.getProject().getName() + " (ID:" + po.getProject().getId() + ")");
 
                 ObservableList<POItem> items = FXCollections.observableArrayList();
                 Iterator detailsIt = po.getPurchaseOrderDetail().iterator();
@@ -174,7 +174,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
                     Double quantity = detail.getQuantity();
                     Boolean confirm = "Y".equals(detail.getConfirm());
 
-                    items.add(new POItem(id, site, name, brand, model, quantity, confirm));
+                    items.add(new POItem(detail.getId(), site, name + " (ID:" + id + ")", brand, model, quantity, confirm));
                 }
                 poDetail.setItems(items);
             }
@@ -343,16 +343,17 @@ public class PurchaseOrderConfirmController extends StandardController implement
         po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
-        Set<PurchaseOrderDetail> poDetails = new HashSet<>();
+        List<PurchaseOrderDetail> poDetails = new ArrayList<>();
 
         while (items.hasNext()) {
             POItem poItem = items.next();
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
 
             Item item = new Item();
-            item.setId(poItem.getId().get());
-
+            item.setId(getId(poItem.getName().get()));
             poDetail.setItem(item);
+
+            poDetail.setId(poItem.getId().get());
             poDetail.setQuantity(poItem.getQuantity().get());
             poDetail.setConfirm(poItem.getConfirm().get() ? "Y" : "N");
 

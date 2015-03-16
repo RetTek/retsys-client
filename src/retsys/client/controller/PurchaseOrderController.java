@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -343,14 +344,14 @@ public class PurchaseOrderController extends StandardController implements Initi
         po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
-        Set<PurchaseOrderDetail> poDetails = new HashSet<>();
+        List<PurchaseOrderDetail> poDetails = new ArrayList<>();
 
         while (items.hasNext()) {
             POItem poItem = items.next();
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
             
             Item item = new Item();
-            item.setId(poItem.getId().get());
+            item.setId(getId(poItem.getName().get()));
 
             poDetail.setItem(item);
             poDetail.setQuantity(poItem.getQuantity().get());

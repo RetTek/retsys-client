@@ -106,9 +106,13 @@ public class HttpHelper {
         HttpResponse httpResponse = client.execute(req);
         int httpStatus = httpResponse.getStatusLine().getStatusCode();
         if (httpStatus >= 200 && httpStatus < 300) {
-            if (!HttpPut.METHOD_NAME.equals(req.getMethod())) { 
+            if (!HttpPut.METHOD_NAME.equals(req.getMethod())) {
                 response = readFromStream(httpResponse.getEntity().getContent());
             }
+        } else if (httpStatus == 409) {
+            response = readFromStream(httpResponse.getEntity().getContent());
+            System.out.println("response:  " + response);
+            response = "!ERROR!";
         } else {
             response = "!ERROR!";
         }

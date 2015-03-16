@@ -6,6 +6,7 @@
 package retsys.client.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +19,7 @@ public class PurchaseOrder extends Model{
     private Vendor vendor;
     private Project project;
     private String deliveryAddress;
-    private Set<PurchaseOrderDetail> purchaseOrderDetail;
+    private List<PurchaseOrderDetail> purchaseOrderDetail;
 
     /**
      * @return the date
@@ -65,14 +66,14 @@ public class PurchaseOrder extends Model{
     /**
      * @return the purchaseOrderDetail
      */
-    public Set<PurchaseOrderDetail> getPurchaseOrderDetail() {
+    public List<PurchaseOrderDetail> getPurchaseOrderDetail() {
         return purchaseOrderDetail;
     }
 
     /**
      * @param purchaseOrderDetail the purchaseOrderDetail to set
      */
-    public void setPurchaseOrderDetail(Set<PurchaseOrderDetail> purchaseOrderDetail) {
+    public void setPurchaseOrderDetail(List<PurchaseOrderDetail> purchaseOrderDetail) {
         this.purchaseOrderDetail = purchaseOrderDetail;
     }
 
