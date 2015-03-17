@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -31,6 +33,11 @@ import retsys.client.model.Model;
  * @author ranju
  */
 public abstract class StandardController {
+
+    @FXML
+    protected TextArea remarks;
+    @FXML
+    protected TextField name;
 
     public void init() {
 
@@ -51,7 +58,7 @@ public abstract class StandardController {
 
         return response;
     }
-    
+
     public String update(ActionEvent event) throws IOException {
         String jsonRequest = buildRequestMsg();
         String response = null;
@@ -67,7 +74,7 @@ public abstract class StandardController {
 
         return response;
     }
-    
+
     public String delete(ActionEvent event) throws IOException {
         String jsonRequest = buildRequestMsg();
         String response = null;
@@ -97,7 +104,7 @@ public abstract class StandardController {
 
         return id;
     }
-    
+
     //generic method to bind auto completion to text fields!
     //set AutoCompletionBinding.AutoCompletionEvent to handle auto completion event using setOnAutoCompleted
     protected <T extends Model> AutoCompletionBinding<T> bindForAutocompletion(TextField control, String entity, String filter) {
@@ -109,7 +116,7 @@ public abstract class StandardController {
                 try {
                     LovHandler lovHandler = new LovHandler(entity, filter);
                     String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<T>)  new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<T>>() {
+                    list = (List<T>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<T>>() {
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);

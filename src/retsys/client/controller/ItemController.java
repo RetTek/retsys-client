@@ -17,7 +17,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
@@ -27,9 +26,7 @@ import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
-import retsys.client.model.Client;
 import retsys.client.model.Item;
-import retsys.client.model.Model;
 import retsys.client.model.Vendor;
 
 /**
@@ -40,51 +37,23 @@ import retsys.client.model.Vendor;
 public class ItemController extends StandardController implements Initializable {
 
     @FXML
-    private Tab tab_item;
-    @FXML
     private TextField brand;
     @FXML
-    private Label lbl_item_brand;
-    @FXML
-    private Label lbl_item_name;
-    @FXML
-    private TextField item_name;
-    @FXML
-    private Label lbl_item_remarks;
-    @FXML
-    private Label lbl_rate;
-    @FXML
-    private TextArea item_remarks;
-    @FXML
     private TextField quantity;
-    @FXML
-    private Label lbl_item_unit;
     @FXML
     private TextField unit;
     @FXML
     private TextField color;
     @FXML
-    private Label lbl_item_color;
-    @FXML
-    private Label lbl_billno;
-    @FXML
     private TextField rate;
     @FXML
-    private Label lbl_quantity;
-    @FXML
     private TextField size;
-    @FXML
-    private Label lbl_size;
-    @FXML
-    private Label lbl_vendor;
     @FXML
     private TextField vendor;
     @FXML
     private TextField billno;
     @FXML
     private TextField supervisor;
-    @FXML
-    private Label lbl_supervisor;
     @FXML
     private TextField godown_name;
     @FXML
@@ -101,33 +70,16 @@ public class ItemController extends StandardController implements Initializable 
     private TextField transport_charges;
     @FXML
     private TextField drawer_no;
-    @FXML
-    private Label lbl_site;
-    @FXML
-    private Label lbl_godown;
-    @FXML
-    private Label lbl_location;
-    @FXML
-    private Label lbl_supervisor1;
-    @FXML
-    private Label lbl_section;
-    @FXML
-    private Label lbl_drawer_no;
-    @FXML
-    private Label lbl_transport_mode;
-    @FXML
-    private Label lbl_supervisor2;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         //Begin
         //  TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
-        AutoCompletionBinding<Item> txt_name = TextFields.bindAutoCompletion(item_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() 
-        {
+        AutoCompletionBinding<Item> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() {
 
             @Override
             public Collection<Item> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -144,8 +96,7 @@ public class ItemController extends StandardController implements Initializable 
 
                 return list;
             }
-            
-            
+
         }, new StringConverter<Item>() {
 
             @Override
@@ -158,7 +109,7 @@ public class ItemController extends StandardController implements Initializable 
                 throw new UnsupportedOperationException("Not supported yet.");
             }
         });
-        
+
         //event handler for setting other Client fields with values from selected Client object
         //fires after autocompletion
         txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Item>>() {
@@ -167,27 +118,29 @@ public class ItemController extends StandardController implements Initializable 
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Item> event) {
                 Item item = event.getCompletion();
                 //fill other item related fields
-              
-                //rate.set((item.getRate()));
+                name.setText(item.getName());
+                rate.setText(item.getRate() + "");
                 brand.setText(item.getBrand());
                 color.setText(item.getColor());
                 unit.setText(item.getUnit());
                 size.setText(item.getSize());
                 billno.setText(item.getBillno());
                 Site.setText(item.getSite());
-                item_remarks.setText(item.getRemarks());
-                //quantity.setText(item.getQuantity());
+                remarks.setText(item.getRemarks());
+                quantity.setText(item.getQuantity() + "");
                 unit.setText(item.getUnit());
                 transport_mode.setText(item.getTransportmode());
-                //transport_charge.setText(item.getTransportcharge());
+                transport_charges.setText(item.getTransportcharge() + "");
                 supervisor.setText(item.getSupervisor());
-                //vendor.setText(item.getVendor());
-                               
+                vendor.setText(item.getVendor().getName() + " (" + item.getVendor().getId() + ")");
+                godown_name.setText(item.getGodownName());
+                location1.setText(item.getLocation1());
+                location2.setText(item.getLocation2());
+                location3.setText(item.getLocation3());
+                drawer_no.setText(item.getDrawerNo());
             }
         });
-        
-        
-        
+
         //Ends
         TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
@@ -225,19 +178,23 @@ public class ItemController extends StandardController implements Initializable 
         Item item = new Item();
         Vendor vendorObj = new Vendor();
 
-        item.setName(item_name.getText());
-        item.setRate(Double.parseDouble(rate.getText()));
+        item.setName(name.getText());
+        item.setRate(new Double(rate.getText()));
         item.setBrand(brand.getText());
         item.setColor(color.getText());
         item.setUnit(unit.getText());
         item.setSize(size.getText());
         item.setBillno(billno.getText());
         item.setSite(Site.getText());
-        item.setRemarks(item_remarks.getText());
-        item.setQuantity(Double.parseDouble(quantity.getText()));
+        item.setRemarks(remarks.getText());
+        item.setQuantity(new Double(quantity.getText()));
         item.setTransportmode(transport_mode.getText());
-        item.setTransportcharge(Double.parseDouble(transport_charges.getText()));
+        item.setTransportcharge(new Double(transport_charges.getText()));
         item.setSupervisor(supervisor.getText());
+        item.setGodownName(godown_name.getText());
+        item.setLocation1(location1.getText());
+        item.setLocation2(location2.getText());
+        item.setLocation3(location3.getText());
 
         vendorObj.setId(getId(vendor.getText()));
         item.setVendor(vendorObj);

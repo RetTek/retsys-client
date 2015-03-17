@@ -6,29 +6,20 @@
 package retsys.client.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import javax.json.Json;
-import javax.json.JsonWriter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
@@ -44,31 +35,15 @@ import retsys.client.model.Vendor;
 public class VendorController extends StandardController implements Initializable {
 
     @FXML
-    private Tab tab_vendor;
-    @FXML
-    private Label lbl_vendor_name;
-    @FXML
     private TextField name;
-    @FXML
-    private Label lbl_vendor_remarks;
-    @FXML
-    private Label lbl_vendor_address;
-    @FXML
-    private TextArea remarks;
     @FXML
     private TextArea address;
     @FXML
     private TextField phone;
     @FXML
-    private Label lbl_vendor_phone;
-    @FXML
     private TextField mobile;
     @FXML
     private TextField email;
-    @FXML
-    private Label lbl_vendor_mobile;
-    @FXML
-    private Label lbl_vendor_email;
 
     /**
      * Initializes the controller class.
@@ -122,8 +97,7 @@ public class VendorController extends StandardController implements Initializabl
                 phone.setText(vendor.getPhone());
                 mobile.setText(vendor.getMobile());
                 remarks.setText(vendor.getRemarks());
-                //desc.setText(product.getDesc());
-                
+                email.setText(vendor.getEmail());
                 
             }
         });
@@ -209,6 +183,7 @@ public class VendorController extends StandardController implements Initializabl
         vendorObj.setMobile(mobile.getText());
         vendorObj.setPhone(phone.getText());
         vendorObj.setRemarks(remarks.getText());
+        vendorObj.setEmail(email.getText());
         
         message = new JsonHelper().getJsonString(vendorObj);
 

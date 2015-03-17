@@ -11,7 +11,7 @@ package retsys.client.model;
  */
 public class Item extends Model {
 
-    private double rate;
+    private Double rate;
     private String brand;
     private String color;
     private String unit;
@@ -19,23 +19,28 @@ public class Item extends Model {
     private String billno;
     private String site;
     private String remarks;
-    private double quantity;
+    private Double quantity;
     private String transportmode;
-    private double transportcharge;
+    private Double transportcharge;
     private String supervisor;
     private Vendor vendor;
+    private String godownName;
+    private String location1;
+    private String location2;
+    private String location3;
+    private String drawerNo;
 
     /**
      * @return the rate
      */
-    public double getRate() {
+    public Double getRate() {
         return rate;
     }
 
     /**
      * @param rate the rate to set
      */
-    public void setRate(double rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 
@@ -140,14 +145,14 @@ public class Item extends Model {
     /**
      * @return the quantity
      */
-    public double getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(double quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -168,14 +173,14 @@ public class Item extends Model {
     /**
      * @return the transportcharge
      */
-    public double getTransportcharge() {
+    public Double getTransportcharge() {
         return transportcharge;
     }
 
     /**
      * @param transportcharge the transportcharge to set
      */
-    public void setTransportcharge(double transportcharge) {
+    public void setTransportcharge(Double transportcharge) {
         this.transportcharge = transportcharge;
     }
 
@@ -205,6 +210,76 @@ public class Item extends Model {
      */
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    /**
+     * @return the godownName
+     */
+    public String getGodownName() {
+        return godownName;
+    }
+
+    /**
+     * @param godownName the godownName to set
+     */
+    public void setGodownName(String godownName) {
+        this.godownName = godownName;
+    }
+
+    /**
+     * @return the location1
+     */
+    public String getLocation1() {
+        return location1;
+    }
+
+    /**
+     * @param location1 the location1 to set
+     */
+    public void setLocation1(String location1) {
+        this.location1 = location1;
+    }
+
+    /**
+     * @return the location2
+     */
+    public String getLocation2() {
+        return location2;
+    }
+
+    /**
+     * @param location2 the location2 to set
+     */
+    public void setLocation2(String location2) {
+        this.location2 = location2;
+    }
+
+    /**
+     * @return the location3
+     */
+    public String getLocation3() {
+        return location3;
+    }
+
+    /**
+     * @param location3 the location3 to set
+     */
+    public void setLocation3(String location3) {
+        this.location3 = location3;
+    }
+
+    /**
+     * @return the drawerNo
+     */
+    public String getDrawerNo() {
+        return drawerNo;
+    }
+
+    /**
+     * @param drawerNo the drawerNo to set
+     */
+    public void setDrawerNo(String drawerNo) {
+        this.drawerNo = drawerNo;
     }
 
 }

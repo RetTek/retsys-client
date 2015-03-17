@@ -374,14 +374,14 @@ reportmap.put("PODETAIL", poItemRow);
         po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
-        Set<PurchaseOrderDetail> poDetails = new HashSet<>();
+        List<PurchaseOrderDetail> poDetails = new ArrayList<>();
 
         while (items.hasNext()) {
             POItem poItem = items.next();
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
             
             Item item = new Item();
-            item.setId(poItem.getId().get());
+            item.setId(getId(poItem.getName().get()));
 
             poDetail.setItem(item);
             poDetail.setQuantity(poItem.getQuantity().get());

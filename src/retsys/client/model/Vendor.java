@@ -15,6 +15,7 @@ public class Vendor extends Model{
     private String phone;
     private String mobile;
     private String remarks;
+    private String email;
 
     /**
      * @return the address
@@ -70,6 +71,20 @@ public class Vendor extends Model{
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
