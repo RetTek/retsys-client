@@ -6,35 +6,26 @@
 package retsys.client.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import retsys.client.model.Client;
-import retsys.client.model.Item;
 
 /**
  * FXML Controller class
@@ -43,35 +34,15 @@ import retsys.client.model.Item;
  */
 public class ClientController extends StandardController implements Initializable{
     @FXML
-    private Tab tab_vendor;
-    @FXML
-    private Label lbl_client_name;
-    @FXML
     private TextField name;
-    @FXML
-    private Label lbl_client_remarks;
-    @FXML
-    private Label lbl_client_address;
-    @FXML
-    private TextArea remarks;
     @FXML
     private TextArea address;
     @FXML
     private TextField phone;
     @FXML
-    private Label lbl_client_phone;
-    @FXML
     private TextField mobile;
     @FXML
     private TextField email;
-    @FXML
-    private Label lbl_client_mobile;
-    @FXML
-    private Label lbl_client_email;
-    @FXML
-    private Button btn_save;
-    @FXML
-    private Button btn_edit;
 
     /**
      * Initializes the controller class.
@@ -124,6 +95,7 @@ public class ClientController extends StandardController implements Initializabl
                 address.setText(client.getAddress());
                 mobile.setText(client.getMobile());
                 remarks.setText(client.getRemarks());
+                email.setText(client.getEmail());
                 
             }
         });
@@ -224,6 +196,7 @@ public class ClientController extends StandardController implements Initializabl
         client.setMobile(this.getMobile().getText());
         client.setPhone(this.getPhone().getText());
         client.setRemarks(this.getRemarks().getText());
+        client.setEmail(email.getText());
         
         JsonHelper helper = new JsonHelper();
         request = helper.getJsonString(client);
