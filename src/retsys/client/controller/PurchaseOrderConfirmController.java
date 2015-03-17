@@ -44,7 +44,7 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.json.JsonHelper;
-import retsys.client.helper.PrintHandler;
+import retsys.client.report.PrintHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
@@ -210,19 +210,9 @@ public class PurchaseOrderConfirmController extends StandardController implement
         });
     }
 
-    @FXML
-    private void printDoc(ActionEvent event) {
+   
 
-        PrintHandler print = new PrintHandler();
-        AnchorPane ap = new AnchorPane();
-
-        try {
-            print.Print();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
+    
 
     /**
      * @return the vendor

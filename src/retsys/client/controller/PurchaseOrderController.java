@@ -10,11 +10,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -39,7 +42,7 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.json.JsonHelper;
-import retsys.client.helper.PrintHandler;
+import retsys.client.report.PrintHandler;
 import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
@@ -213,16 +216,42 @@ public class PurchaseOrderController extends StandardController implements Initi
 
     @FXML
     private void printDoc(ActionEvent event) {
-
-        PrintHandler print = new PrintHandler();
-        AnchorPane ap = new AnchorPane();
-
-        try {
-            print.Print();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+      PrintHandler printhandler =new PrintHandler("PO", getReportDataMap());
+      System.out.println(printhandler.generatePrintData());
+    }
+    
+    public Map getReportDataMap()
+    {
+    Map reportmap =new HashMap();
+    reportmap.put("pono", Po_no.getText());
+    reportmap.put("podate", po_date.getValue());
+    reportmap.put("ShopName", vendor.getText());
+    reportmap.put("SiteName", project.getText());
+    reportmap.put("DeliveryAddress",delivery_address.getText());
+    
+    
+    //poItem.add((String))
+    Iterator<POItem> items = poDetail.getItems().iterator();
+        Set<PurchaseOrderDetail> poDetails = new HashSet<>();
+        List poItemRow =  new ArrayList();
+        while (items.hasNext()) {
+            POItem poItem = items.next();
+            List poItemList =  new ArrayList();
+            poItemList.add(sno);
+            poItemList.add((poItem.getLocation().get()));
+            poItemList.add((poItem.getName().get()));
+            poItemList.add((poItem.getBrand().get()));
+            poItemList.add((poItem.getModel().get()));
+            poItemList.add((poItem.getQuantity().get()));
+            
+            poItemRow.add(poItemList);
         }
-
+reportmap.put("PODETAIL", poItemRow);
+        
+ 
+    
+    return reportmap;
+    
     }
 
     /**
@@ -259,6 +288,8 @@ public class PurchaseOrderController extends StandardController implements Initi
     public TextField getPo_no() {
         return Po_no;
     }
+    
+    
 
     /**
      * @param Po_no the Po_no to set

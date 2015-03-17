@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +27,7 @@ import retsys.client.menu.Menu;
 import retsys.client.menu.MenuOperationType;
 
 public class DashboardController extends AnchorPane implements Initializable {
-
+public static HostServices hostServices;
     @FXML
     private AnchorPane menu;
     @FXML
