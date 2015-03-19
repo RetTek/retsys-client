@@ -35,8 +35,8 @@
             </TableView>
                         <HBox layoutY="179.0" prefHeight="27.0" prefWidth="779.0" spacing="10.0" AnchorPane.bottomAnchor="227.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="179.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#addItem" text="Update" />
-                              <Button mnemonicParsing="false" onAction="#deleteItem" text="Delete" />
+                              <Button mnemonicParsing="false" onAction="#addItem" styleClass="button-func" text="Update" />
+                              <Button mnemonicParsing="false" onAction="#deleteItem" styleClass="button-func" text="Delete" />
                            </children>
                            <opaqueInsets>
                               <Insets />
