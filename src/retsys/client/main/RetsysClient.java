@@ -23,7 +23,7 @@ public class RetsysClient extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(this.getClass().getResource("/retsys/client/css/styles3.css").toExternalForm());
+        scene.getStylesheets().add(this.getClass().getResource("/retsys/client/css/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
         stage.setFullScreen(true);

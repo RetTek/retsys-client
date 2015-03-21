@@ -156,6 +156,7 @@ public class DeliveryChallanController extends StandardController implements Ini
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Item> event) {
                 Item item = event.getCompletion();
                 //fill other item related fields
+                txt_name.setUserData(item.getId());
                 txt_brand.setText(item.getBrand());
                 txt_model.setText(null); // item doesn't have this field. add??
             }
@@ -306,7 +307,7 @@ public class DeliveryChallanController extends StandardController implements Ini
             list = FXCollections.observableArrayList();
         }
 
-        DeliveryChallanController.DCItem item = new DeliveryChallanController.DCItem(1, txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DeliveryChallanController.DCItem item = new DeliveryChallanController.DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
         list.add(item);
         dcDetail.setItems(list);
     }

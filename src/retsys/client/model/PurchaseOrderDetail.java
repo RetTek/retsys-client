@@ -5,8 +5,6 @@
  */
 package retsys.client.model;
 
-import java.util.List;
-
 /**
  *
  * @author ranju
@@ -14,20 +12,20 @@ import java.util.List;
 public class PurchaseOrderDetail extends Model{
 
     private Item item;
-    private Integer quantity;
+    private Double quantity;
     private String confirm;
 
     /**
      * @return the quantity
      */
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -58,5 +56,6 @@ public class PurchaseOrderDetail extends Model{
     public void setItem(Item item) {
         this.item = item;
     }
+
 
 }

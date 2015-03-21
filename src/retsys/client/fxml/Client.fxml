@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.ClientController">
    <children>
@@ -24,14 +25,28 @@
                         <TextField fx:id="email" layoutX="180.0" layoutY="240.0" />
                         <Label fx:id="lbl_client_mobile" layoutX="77.0" layoutY="200.0" text="Mobile" />
                         <Label fx:id="lbl_client_email" layoutX="79.0" layoutY="239.0" text="Email" />
+                        
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Query" />
-      <Button fx:id="btn_save" layoutX="126.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="109.0" text="Create" />
-      <Button fx:id="btn_edit" layoutX="243.0" layoutY="506.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Edit" />
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="213.0" text="Save">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/savetick.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="213.0" styleClass="buttonDelete" text="Delete">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete1.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>

@@ -10,14 +10,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -34,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -56,7 +59,7 @@ import retsys.client.model.Vendor;
  *
  * @author Muthu
  */
-public class PurchaseOrderController extends StandardController implements Initializable {
+public class PurchaseOrderConfirmController extends StandardController implements Initializable {
 
     @FXML
     private TableView<POItem> poDetail;
@@ -71,11 +74,13 @@ public class PurchaseOrderController extends StandardController implements Initi
     @FXML
     private TableColumn<POItem, Integer> quantity;
     @FXML
+    private TableColumn<POItem, Boolean> confirm;
+    @FXML
     private TextField vendor;
     @FXML
     private TextField project;
     @FXML
-    private TextField Po_no;
+    private TextField po_no;
     @FXML
     private Label lbl_po_no;
     @FXML
@@ -98,7 +103,8 @@ public class PurchaseOrderController extends StandardController implements Initi
 
     /**
      * Initializes the controller class.
-     */    @Override
+     */
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         po_date.setValue(LocalDate.now());
 
@@ -107,18 +113,20 @@ public class PurchaseOrderController extends StandardController implements Initi
         brand_name.setCellValueFactory(new PropertyValueFactory<POItem, String>("brand"));
         model_code.setCellValueFactory(new PropertyValueFactory<POItem, String>("model"));
         quantity.setCellValueFactory(new PropertyValueFactory<POItem, Integer>("quantity"));
+        confirm.setCellValueFactory(new PropertyValueFactory<POItem, Boolean>("confirm"));
+        confirm.setCellFactory(CheckBoxTableCell.forTableColumn(confirm));
 
-        poDetail.getColumns().setAll(loc_of_material, material_name, brand_name, model_code, quantity);
+        poDetail.getColumns().setAll(loc_of_material, material_name, brand_name, model_code, quantity, confirm);
 
-        AutoCompletionBinding<Item> bindForTxt_name = TextFields.bindAutoCompletion(txt_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() {
+        AutoCompletionBinding<PurchaseOrder> bindForTxt_name = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<PurchaseOrder>>() {
 
             @Override
-            public Collection<Item> call(AutoCompletionBinding.ISuggestionRequest param) {
-                List<Item> list = null;
+            public Collection<PurchaseOrder> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<PurchaseOrder> list = null;
                 try {
-                    LovHandler lovHandler = new LovHandler("items", "name");
+                    LovHandler lovHandler = new LovHandler("purchaseorders", "name");
                     String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<Item>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
+                    list = (List<PurchaseOrder>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<PurchaseOrder>>() {
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,64 +134,54 @@ public class PurchaseOrderController extends StandardController implements Initi
 
                 return list;
             }
-        }, new StringConverter<Item>() {
+        }, new StringConverter<PurchaseOrder>() {
 
             @Override
-            public String toString(Item object) {
+            public String toString(PurchaseOrder object) {
                 System.out.println("here..." + object);
-                return object.getName() + " (ID:" + object.getId() + ")";
+
+                String strDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(LocalDateTime.ofInstant(object.getDate().toInstant(), ZoneId.systemDefault()));
+                return "Project:" + object.getProject().getName() + " PO Date:" + strDate + " PO No.:" + object.getId();
             }
 
             @Override
-            public Item fromString(String string) {
+            public PurchaseOrder fromString(String string) {
                 throw new UnsupportedOperationException();
             }
         });
-        //event handler for setting other item fields with values from selected Item object
-        //fires after autocompletion
-        bindForTxt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Item>>() {
+
+        bindForTxt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<PurchaseOrder>>() {
 
             @Override
-            public void handle(AutoCompletionBinding.AutoCompletionEvent<Item> event) {
-                Item item = event.getCompletion();
-                //fill other item related fields
-                txt_brand.setText(item.getBrand());
-                txt_location.setText(item.getSite());
-                txt_location.setUserData(item.getId());
-                txt_model.setText(null); // item doesn't have this field. add??
-            }
-        });
+            public void handle(AutoCompletionBinding.AutoCompletionEvent<PurchaseOrder> event) {
+                PurchaseOrder po = event.getCompletion();
+                po_no.setText(po.getId().toString());
+                po_date.setValue(LocalDateTime.ofInstant(po.getDate().toInstant(), ZoneId.systemDefault()).toLocalDate());
+                po_no.setText(po.getId().toString());
+                delivery_address.setText(po.getDeliveryAddress());
+                vendor.setText(po.getVendor().getName() + " (ID:" + po.getVendor().getId() + ")");
+                project.setText(po.getProject().getName() + " (ID:" + po.getProject().getId() + ")");
 
-        TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Project>>() {
+                ObservableList<POItem> items = FXCollections.observableArrayList();
+                Iterator detailsIt = po.getPurchaseOrderDetail().iterator();
+                while (detailsIt.hasNext()) {
+                    PurchaseOrderDetail detail = (PurchaseOrderDetail) detailsIt.next();
+                    Item item = detail.getItem();
+                    int id = item.getId();
+                    String site = item.getSite();
+                    String name = item.getName();
+                    String brand = item.getBrand();
+                    String model = null;
+                    Double quantity = detail.getQuantity();
+                    Boolean confirm = "Y".equals(detail.getConfirm());
 
-            @Override
-            public Collection<Project> call(AutoCompletionBinding.ISuggestionRequest param) {
-                List<Project> list = null;
-                try {
-                    LovHandler lovHandler = new LovHandler("projects", "name");
-                    String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<Project>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Project>>() {
-                    });
-                } catch (IOException ex) {
-                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+                    items.add(new POItem(detail.getId(), site, name + " (ID:" + id + ")", brand, model, quantity, confirm));
                 }
-
-                return list;
-            }
-        }, new StringConverter<Project>() {
-
-            @Override
-            public String toString(Project object) {
-                return object.getName() + " (ID:" + object.getId() + ")";
-            }
-
-            @Override
-            public Project fromString(String string) {
-                throw new UnsupportedOperationException();
+                poDetail.setItems(items);
             }
         });
-        
-        TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
+
+        AutoCompletionBinding<Vendor> bindForVendor = TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
             @Override
             public Collection<Vendor> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -213,45 +211,9 @@ public class PurchaseOrderController extends StandardController implements Initi
         });
     }
 
-    @FXML
-    private void printDoc(ActionEvent event) {
-      PrintHandler printhandler =new PrintHandler("PO", getReportDataMap());
-      System.out.println(printhandler.generatePrintData());
-    }
+   
+
     
-    public Map getReportDataMap()
-    {
-    Map reportmap =new HashMap();
-    reportmap.put("pono", Po_no.getText());
-    reportmap.put("podate", po_date.getValue());
-    reportmap.put("ShopName", vendor.getText());
-    reportmap.put("SiteName", project.getText());
-    reportmap.put("DeliveryAddress",delivery_address.getText());
-    
-    
-    //poItem.add((String))
-    Iterator<POItem> items = poDetail.getItems().iterator();
-        Set<PurchaseOrderDetail> poDetails = new HashSet<>();
-        List poItemRow =  new ArrayList();
-        while (items.hasNext()) {
-            POItem poItem = items.next();
-            List poItemList =  new ArrayList();
-            poItemList.add(sno);
-            poItemList.add((poItem.getLocation().get()));
-            poItemList.add((poItem.getName().get()));
-            poItemList.add((poItem.getBrand().get()));
-            poItemList.add((poItem.getModel().get()));
-            poItemList.add((poItem.getQuantity().get()));
-            
-            poItemRow.add(poItemList);
-        }
-reportmap.put("PODETAIL", poItemRow);
-        
- 
-    
-    return reportmap;
-    
-    }
 
     /**
      * @return the vendor
@@ -285,16 +247,14 @@ reportmap.put("PODETAIL", poItemRow);
      * @return the Po_no
      */
     public TextField getPo_no() {
-        return Po_no;
+        return po_no;
     }
-    
-    
 
     /**
      * @param Po_no the Po_no to set
      */
     public void setPo_no(TextField Po_no) {
-        this.Po_no = Po_no;
+        this.po_no = Po_no;
     }
 
     /**
@@ -346,7 +306,7 @@ reportmap.put("PODETAIL", poItemRow);
             list = FXCollections.observableArrayList();
         }
 
-        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Double.parseDouble(txt_qty.getText()), false);
+        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), false);
         list.add(item);
         poDetail.setItems(list);
     }
@@ -360,6 +320,7 @@ reportmap.put("PODETAIL", poItemRow);
     @Override
     String buildRequestMsg() {
         PurchaseOrder po = new PurchaseOrder();
+        po.setId(Integer.parseInt(po_no.getText()));
         po.setDate(Date.from(Instant.now()));
 
         Project projectObj = new Project();
@@ -378,13 +339,14 @@ reportmap.put("PODETAIL", poItemRow);
         while (items.hasNext()) {
             POItem poItem = items.next();
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
-            
+
             Item item = new Item();
             item.setId(getId(poItem.getName().get()));
-
             poDetail.setItem(item);
+
+            poDetail.setId(poItem.getId().get());
             poDetail.setQuantity(poItem.getQuantity().get());
-            poDetail.setConfirm("N");
+            poDetail.setConfirm(poItem.getConfirm().get() ? "Y" : "N");
 
             poDetails.add(poDetail);
         }
@@ -396,7 +358,7 @@ reportmap.put("PODETAIL", poItemRow);
 
     @Override
     String getSaveUrl() {
-        return "purchaseorders";
+        return "purchaseorders/confirm";
     }
 
 }
