@@ -12,7 +12,7 @@ package retsys.client.model;
 public class ProjectItems extends Model{
 
     private Item item;
-    private ClientChallan challan;
+    private DeliveryChallan challan;
     private int quantity;
 
     /**
@@ -32,14 +32,14 @@ public class ProjectItems extends Model{
     /**
      * @return the challan
      */
-    public ClientChallan getChallan() {
+    public DeliveryChallan getChallan() {
         return challan;
     }
 
     /**
      * @param challan the challan to set
      */
-    public void setChallan(ClientChallan challan) {
+    public void setChallan(DeliveryChallan challan) {
         this.challan = challan;
     }
 

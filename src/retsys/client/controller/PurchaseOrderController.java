@@ -98,8 +98,7 @@ public class PurchaseOrderController extends StandardController implements Initi
 
     /**
      * Initializes the controller class.
-     */
-    @Override
+     */    @Override
     public void initialize(URL url, ResourceBundle rb) {
         po_date.setValue(LocalDate.now());
 
