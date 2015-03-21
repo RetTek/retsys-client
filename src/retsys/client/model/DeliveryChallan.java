@@ -6,16 +6,26 @@
 package retsys.client.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author ranju
  */
-public class ClientChallan extends Model{
+public class DeliveryChallan extends Model{
 
     private Project project;
     private Date challanDate;
     private boolean isDelivery;
+    private List<DeliveryChallanDetail> deliveryChallanDetail;
+
+    public List<DeliveryChallanDetail> getDeliveryChallanDetail() {
+        return deliveryChallanDetail;
+    }
+
+    public void setDeliveryChallanDetail(List<DeliveryChallanDetail> deliveryChallanDetail) {
+        this.deliveryChallanDetail = deliveryChallanDetail;
+    }
 
     /**
      * @return the project
