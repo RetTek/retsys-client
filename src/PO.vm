@@ -5,29 +5,33 @@
 <body>
 <h2 style="font-weight: normal; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; text-align: center;">PURCHASE ORDER SHEET</h2>
 
+<p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
 <table align="center" cellpadding="1" cellspacing="1" style="width: 650px;">
 	<tbody>
 		<tr>
-			<td>
-			<p><img alt="SUN INTERIORS &amp; DESIGNER" src="\client\images\sun2.jpg" style="width: 250px; height: 70px;" /></p>
-			</td>
+			<td><img alt="" id="sunimage" src="C:\GitHub\retsys-client\src\retsys\client\images\sun2.jpg" style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center; width: 75px; height: 50px;" /></td>
 			<td>
 			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">TIN:33865741388</span></p>
 
-			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">CST No:504730/Areacode:294</span></p>
+			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">CST Nn:504730/Areacode:294</span></p>
 			</td>
 		</tr>
 		<tr>
-			<td><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">125-C, Katchery Road, Madurai Road, Virudhunagar-626001&nbsp;</span></td>
+			<td>
+			<p><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">125-C, Katchery Road, Madurai Road,</span></p>
+
+			<p><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">Virudhunagar-626001</span></p>
+			</td>
 			<td>
 			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">Contact:9750947650</span></p>
 
-			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">email:glowsunmail@gmail.com</span></p>
+			<p style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">e-mai:glowsunmail@gmail.com</span></p>
 			</td>
 		</tr>
 		<tr>
-			<td><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">PO No:$pono&nbsp;</span></td>
-			<td style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">PO Date:$podate</span></td>
+			<td><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">PO No:$pono</span></td>
+			<td style="text-align: right;"><span style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">&nbsp;PO Date:$podate</span></td>
 		</tr>
 	</tbody>
 </table>
@@ -35,21 +39,21 @@
 <table align="center" cellpadding="1" cellspacing="2" style="width: 650px;">
 	<tbody>
 		<tr>
-			<td style="height: 10px;">Shop Name:</td>
-			<td style="height: 10px;">$ShopName</td>
+			<td style="height: 10px;">Shop Name:$ShopName</td>
+			
 		</tr>
 		<tr>
-			<td>Site Name:</td>
-			<td>$SiteName</td>
+			<td>Site Name:$SiteName</td>
+			
 		</tr>
 		<tr>
-			<td>Delivery Address:</td>
-			<td>$DeliveryAddress</td>
+			<td>Delivery Address:$DeliveryAddress</td>
+			
 		</tr>
 	</tbody>
 </table>
 
-<p>#foreach($!itemrec in $!PODETAIL) #end</p>
+
 
 <table align="center" border="1" cellpadding="1" cellspacing="1" style="width: 650px;">
 	<thead>
@@ -63,6 +67,7 @@
 		</tr>
 	</thead>
 	<tbody>
+#foreach($!itemrec in $!PODETAIL)
 		<tr>
 			<td scope="col">$!itemrec.get(0)</td>
 			<td scope="col">$!itemrec.get(1)</td>
@@ -71,8 +76,15 @@
 			<td scope="col">$!itemrec.get(4)</td>
 			<td scope="col">$!itemrec.get(5)</td>
 		</tr>
+#end
 	</tbody>
 </table>
+
+<p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">&nbsp;</p>
+
+<p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">&nbsp;</p>
+
+<p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">&nbsp;</p>
 
 <p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, 'Trebuchet MS'; font-size: 13px; line-height: 20.7999992370605px; text-align: center;">SUPERVISOR SIGN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;LABOUR SIGN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ARCHITECT</p>
 

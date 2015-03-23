@@ -14,10 +14,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -43,6 +47,10 @@ public class ClientController extends StandardController implements Initializabl
     private TextField mobile;
     @FXML
     private TextField email;
+    @FXML
+    private ImageView imgSave;
+      @FXML
+    private ImageView imgDelete;
 
     /**
      * Initializes the controller class.
@@ -209,5 +217,6 @@ public class ClientController extends StandardController implements Initializabl
         return "clients";
         
     }
+    
     
 }

@@ -32,9 +32,9 @@ public class PrintHandler {
 }
     public String generatePrintData(){
         VelocityBuildReq vm = new VelocityBuildReq();
-               
+      String k =null;        
     try {
-    String k = vm.generateReport(dataMap, reportName);//"<html><body> This is my Project </body></html>";
+    k = vm.generateReport(dataMap, reportName);//"<html><body> This is my Project </body></html>";
     OutputStream file = new FileOutputStream(new File("C:\\Temp\\Test.pdf"));
     Document document = new Document();
     PdfWriter writer = PdfWriter.getInstance(document, file);
@@ -47,7 +47,7 @@ public class PrintHandler {
     e.printStackTrace();
 }
         
-    return vm.generateReport(dataMap, reportName); 
+    return k; 
     }
     
 

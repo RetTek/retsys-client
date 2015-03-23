@@ -25,23 +25,28 @@
                         <TextField fx:id="email" layoutX="180.0" layoutY="240.0" />
                         <Label fx:id="lbl_client_mobile" layoutX="77.0" layoutY="200.0" text="Mobile" />
                         <Label fx:id="lbl_client_email" layoutX="79.0" layoutY="239.0" text="Email" />
+                        
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="213.0" text="Save" />
-        <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="213.0" styleClass="buttonDelete" text="Delete" />
-      <ImageView fitHeight="29.0" fitWidth="59.0" layoutX="237.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/delete1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="29.0" fitWidth="59.0" layoutX="21.0" layoutY="513.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/save2.jpg" />
-         </image>
-      </ImageView>
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="213.0" text="Save">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/savetick.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="213.0" styleClass="buttonDelete" text="Delete">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete1.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>
