@@ -18,6 +18,7 @@
             <dependency groupId="org.controlsfx" artifactId="controlsfx" version="8.20.8" scope="compile"/>
             <dependency groupId="org.apache.pdfbox" artifactId="pdfbox" version="1.8.8" scope="compile"/>
             <dependency groupId="com.itextpdf" artifactId="itextpdf" version="5.4.1" scope="compile"/>
+            <dependency groupId="com.itextpdf.tool" artifactId="xmlworker" version="5.5.5" scope="compile"/>
             
         </artifact:dependencies>         
         <copy todir="lib">

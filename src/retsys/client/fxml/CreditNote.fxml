@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.CreditNoteController">
+   <children>
+       <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_purchase" text="Credit Note">
+            <content>
+      <AnchorPane fx:id="purchase_anchor" layoutX="72.0" layoutY="182.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+         <children>
+             <TextField fx:id="vendor" layoutX="113.0" layoutY="80.0" prefHeight="25.0" prefWidth="203.0" />
+      <Label fx:id="lbl_shop_name" layoutX="23.0" layoutY="82.0" prefHeight="17.0" prefWidth="79.0" text="Vendor" />
+      <TextField fx:id="creditNoteNo" editable="false" layoutX="120.0" layoutY="43.0" prefHeight="25.0" prefWidth="106.0" />
+      <Label fx:id="lbl_po_no" layoutX="21.0" layoutY="47.0" prefHeight="17.0" prefWidth="97.0" text="Credit note No" />
+      <DatePicker fx:id="creationDate" layoutX="124.0" layoutY="6.0" prefHeight="25.0" prefWidth="181.0" />
+      <Label fx:id="lbl_po_date" layoutX="23.0" layoutY="12.0" prefHeight="17.0" prefWidth="92.0" text="Creation Date" />
+      <Label fx:id="lbl_Delivery_address" layoutX="357.0" layoutY="14.0" prefHeight="17.0" prefWidth="114.0" text="Remarks" />
+             <TextArea fx:id="remarks" layoutX="432.0" layoutY="14.0" prefHeight="49.0" prefWidth="273.0" />
+            <TableView fx:id="creditNoteDetail" editable="true" layoutX="29.0" layoutY="217.0" prefHeight="212.0" prefWidth="699.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="217.0">
+              <columns>
+                  <TableColumn fx:id="itemName" editable="false" prefWidth="139.0" text="Material Name" />
+                  <TableColumn fx:id="itemAmount" editable="false" prefWidth="125.0" text="Amount" />
+                  <TableColumn fx:id="returnQuantity" prefWidth="146.0" text="Return quantity" />
+                  <TableColumn fx:id="confirm" prefWidth="99.0" text="Confirm" />
+              </columns>
+            </TableView>
+                        <HBox layoutY="190.0" prefHeight="27.0" prefWidth="779.0" spacing="10.0" AnchorPane.bottomAnchor="216.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="190.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#addItem" text="Update" />
+                              <Button mnemonicParsing="false" onAction="#deleteItem" text="Delete" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </HBox>
+                        <Label layoutX="19.0" layoutY="111.0" text="Material details">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="name" layoutX="140.0" layoutY="131.0" prefHeight="25.0" prefWidth="149.0" promptText="Material name" />
+                        <TextField fx:id="amount" layoutX="404.0" layoutY="129.0" prefHeight="25.0" prefWidth="105.0" promptText="Amount" />
+                        <Label layoutX="22.0" layoutY="139.0" text="Material name" />
+                        <Label layoutX="340.0" layoutY="133.0" text="Amount" />
+                        <Label layoutX="531.0" layoutY="133.0" text="Return Quantity" />
+                        <TextField fx:id="quantity" layoutX="641.0" layoutY="130.0" prefHeight="25.0" prefWidth="53.0" promptText="Qty" />
+                        <Label layoutX="23.0" layoutY="166.0" text="Brand" />
+                        <TextField fx:id="brand" layoutX="136.0" layoutY="162.0" prefHeight="25.0" prefWidth="106.0" />
+                        <Label layoutX="346.0" layoutY="167.0" text="Model" />
+                        <TextField fx:id="model" layoutX="404.0" layoutY="162.0" />
+                        <Label layoutX="343.0" layoutY="84.0" text="Total Credit" />
+                        <TextField fx:id="totalCredit" layoutX="432.0" layoutY="80.0" />
+            
+         </children>
+      </AnchorPane>
+      
+       </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   
+      <HBox layoutX="31.0" layoutY="491.0" spacing="5.0">
+         <children>
+            <Button layoutX="208.0" layoutY="491.0" mnemonicParsing="false" onAction="#save" prefHeight="37.0" prefWidth="167.0" text="Save" />
+         </children>
+      </HBox>
+      </children>
+</AnchorPane>

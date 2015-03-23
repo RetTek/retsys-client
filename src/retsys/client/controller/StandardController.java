@@ -48,12 +48,14 @@ public abstract class StandardController {
         String response = null;
 
         HttpHelper helper = new HttpHelper();
+        System.out.println(getSaveUrl() + "\njson request: " + jsonRequest);
         response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpPostObj(getSaveUrl(), jsonRequest));
 
         if ("!ERROR!".equals(response)) {
             displayMessage(true, "Save failed!");
         } else {
             displayMessage(false, "Save success!");
+            postSave(response);
         }
 
         return response;
@@ -138,7 +140,26 @@ public abstract class StandardController {
             }
         });
     }
+    
+    protected String query(String operation) throws IOException{
+        String response = null;
 
+        HttpHelper helper = new HttpHelper();
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj(operation));
+
+        if ("!ERROR!".equals(response)) {
+            displayMessage(true, "Save failed!");
+        } else {
+            displayMessage(false, "Save success!");
+        }
+
+        return response;
+        
+    }
+    
+    protected void postSave(String response){
+    }
+    
     abstract String buildRequestMsg();
 
     abstract String getSaveUrl();
