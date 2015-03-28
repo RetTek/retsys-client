@@ -13,6 +13,7 @@ public class Project extends Model {
 
     private String remarks;
     private Client client;
+    private String desc;
 
     /**
      * @return the remarks
@@ -26,6 +27,17 @@ public class Project extends Model {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     /**
