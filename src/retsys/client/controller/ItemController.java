@@ -140,7 +140,7 @@ public class ItemController extends StandardController implements Initializable 
                 transport_mode.setText(item.getTransportmode());
                 transport_charges.setText(item.getTransportcharge() + "");
                 supervisor.setText(item.getSupervisor());
-                vendor.setText(item.getVendor().getName() + " (" + item.getVendor().getId() + ")");
+                vendor.setText(item.getVendor().getName() + " (ID:" + item.getVendor().getId() + ")");
                 godown_name.setText(item.getGodownName());
                 location1.setText(item.getLocation1());
                 

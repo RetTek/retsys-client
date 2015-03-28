@@ -28,7 +28,7 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpHelper {
 
     String hostName = "localhost";
-    String hostPort = "8080";
+    String hostPort = "8082";
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {
@@ -132,6 +132,16 @@ public class HttpHelper {
         }
 
         return response.toString();
+    }
+
+    public HttpGet getHttpGetObj(String url, boolean fullUrl) {
+        HttpGet get = null;
+        if (fullUrl) {
+
+            get = new HttpGet(url);
+
+        }
+        return get;
     }
 
 }

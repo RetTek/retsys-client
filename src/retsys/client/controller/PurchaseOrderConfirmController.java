@@ -17,11 +17,9 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -38,15 +36,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import retsys.client.helper.LovHandler;
 import retsys.client.json.JsonHelper;
-import retsys.client.report.PrintHandler;
-import retsys.client.model.Client;
 import retsys.client.model.Item;
 import retsys.client.model.POItem;
 import retsys.client.model.Project;
@@ -210,10 +205,6 @@ public class PurchaseOrderConfirmController extends StandardController implement
             }
         });
     }
-
-   
-
-    
 
     /**
      * @return the vendor
