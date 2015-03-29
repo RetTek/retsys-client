@@ -29,6 +29,10 @@ public class Item extends Model {
     private String location2;
     private String location3;
     private String drawerNo;
+    private Double discount_percentage;
+    private String minreorder;
+    private Product product;
+    
 
     /**
      * @return the rate
@@ -280,6 +284,36 @@ public class Item extends Model {
      */
     public void setDrawerNo(String drawerNo) {
         this.drawerNo = drawerNo;
+    }
+    public String getMinReorder() {
+        return minreorder;
+    }
+
+    /**
+     * @param minreorder the drawerNo to set
+     */
+    public void setMinReorder(String minreorder) {
+        this.minreorder = minreorder;
+    }
+    public Product getProduct() {
+        return product;
+    }
+
+    /**
+     * @param product the drawerNo to set
+     */
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    public Double getDiscountPercentage() {
+        return discount_percentage;
+    }
+
+    /**
+     * @param discount_percentage the drawerNo to set
+     */
+    public void setDiscountPercentage(Double discount_percentage) {
+        this.discount_percentage = discount_percentage;
     }
 
 }

@@ -27,7 +27,9 @@ import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import retsys.client.model.Item;
+import retsys.client.model.Product;
 import retsys.client.model.Vendor;
+import retsys.client.model.Project;
 
 /**
  * FXML Controller class
@@ -70,6 +72,12 @@ public class ItemController extends StandardController implements Initializable 
     private TextField transport_charges;
     @FXML
     private TextField drawer_no;
+    @FXML
+    private TextField minreorder;
+    @FXML
+    private TextField product;
+    @FXML
+    private TextField discount_percentage;
 
     /**
      * Initializes the controller class.
@@ -132,12 +140,15 @@ public class ItemController extends StandardController implements Initializable 
                 transport_mode.setText(item.getTransportmode());
                 transport_charges.setText(item.getTransportcharge() + "");
                 supervisor.setText(item.getSupervisor());
-                vendor.setText(item.getVendor().getName() + " (" + item.getVendor().getId() + ")");
+                vendor.setText(item.getVendor().getName() + " (ID:" + item.getVendor().getId() + ")");
                 godown_name.setText(item.getGodownName());
                 location1.setText(item.getLocation1());
-                location2.setText(item.getLocation2());
-                location3.setText(item.getLocation3());
-                drawer_no.setText(item.getDrawerNo());
+                
+                minreorder.setText(item.getMinReorder());
+                product.setText(item.getProduct().getName() + " ("+ item.getProduct().getId() +")");
+                discount_percentage.setText(item.getDiscountPercentage()+"");
+                
+                
             }
         });
 
@@ -170,13 +181,44 @@ public class ItemController extends StandardController implements Initializable 
                 throw new UnsupportedOperationException("Not supported yet.");
             }
         });
+//Project query
+        
+        TextFields.bindAutoCompletion(Site, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Project>>() {
 
+            @Override
+            public Collection<Project> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Project> list = null;
+                try {
+                    LovHandler lovHandler = new LovHandler("projects", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
+                    list = (List<Project>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Project>>() {
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return list;
+            }
+        }, new StringConverter<Project>() {
+
+            @Override
+            public String toString(Project object) {
+                return object.getName() + " (ID:" + object.getId() + ")";
+            }
+
+            @Override
+            public Project fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+        
     }
 
     @Override
     String buildRequestMsg() {
         Item item = new Item();
         Vendor vendorObj = new Vendor();
+        Product productObj = new Product();
 
         item.setName(name.getText());
         item.setRate(new Double(rate.getText()));
@@ -198,6 +240,11 @@ public class ItemController extends StandardController implements Initializable 
 
         vendorObj.setId(getId(vendor.getText()));
         item.setVendor(vendorObj);
+        
+        productObj.setId(getId(product.getText()));
+        item.setProduct(productObj);
+        item.setMinReorder(minreorder.getText());
+        item.setDiscountPercentage(new Double(discount_percentage.getText()));
 
         return new JsonHelper().getJsonString(item);
     }
