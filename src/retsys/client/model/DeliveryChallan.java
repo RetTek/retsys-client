@@ -18,7 +18,16 @@ public class DeliveryChallan extends Model{
     private Date challanDate;
     private boolean isDelivery;
     private List<DeliveryChallanDetail> deliveryChallanDetail;
+    private DeliveryChallan originalDeliveryChallan;
 
+    public DeliveryChallan getOriginalDeliveryChallan() {
+        return originalDeliveryChallan;
+    }
+
+    public void setOriginalDeliveryChallan(DeliveryChallan originalDeliveryChallan) {
+        this.originalDeliveryChallan = originalDeliveryChallan;
+    }
+    
     public List<DeliveryChallanDetail> getDeliveryChallanDetail() {
         return deliveryChallanDetail;
     }
