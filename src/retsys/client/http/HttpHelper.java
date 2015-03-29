@@ -134,4 +134,14 @@ public class HttpHelper {
         return response.toString();
     }
 
+    public HttpGet getHttpGetObj(String url, boolean fullUrl) {
+        HttpGet get = null;
+        if (fullUrl) {
+
+            get = new HttpGet(url);
+
+        }
+        return get;
+    }
+
 }
