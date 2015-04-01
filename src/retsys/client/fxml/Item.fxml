@@ -55,6 +55,10 @@
                         <Label fx:id="lbl_minimum_reorder" layoutX="337.0" layoutY="299.0" text="Re Order Level" />
                         <TextField fx:id="code" layoutX="132.0" layoutY="103.0" />
                         <Label fx:id="lbl_billno1" layoutX="36.0" layoutY="104.0" text="Brand Code" />
+                        <Label fx:id="lbl_product" layoutX="338.0" layoutY="327.0" text="Product" />
+                        <TextField fx:id="product" layoutX="482.0" layoutY="326.0" />
+                        <TextField fx:id="discount_percentage" layoutX="482.0" layoutY="354.0" />
+                        <Label fx:id="lbl_discount_percent" layoutX="339.0" layoutY="354.0" text="Vendor Discount %" />
                      </children>
                   </AnchorPane>
             </content>

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -62,6 +63,60 @@ public class ProjectController extends StandardController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        AutoCompletionBinding<Project> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Project>>() {
+
+            @Override
+            public Collection<Project> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Project> list = null;
+                HttpHelper helper = new HttpHelper();
+                try {
+                    LovHandler lovHandler = new LovHandler("projects", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
+                    list = (List<Project>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Project>>() {
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return list;
+            }
+
+        }, new StringConverter<Project>() {
+
+            @Override
+            public String toString(Project object) {
+                return object.getName() + " (ID:" + object.getId() + ")";
+            }
+
+            @Override
+            public Project fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+
+        //event handler for setting other Client fields with values from selected Client object
+        //fires after autocompletion
+        txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Project>>() {
+
+            @Override
+            public void handle(AutoCompletionBinding.AutoCompletionEvent<Project> event) {
+                Project project = event.getCompletion();
+                //fill other item related fields
+                name.setText(project.getName());
+               desc.setText(project.getDesc());
+                remarks.setText(project.getRemarks());
+                
+                client.setText(project.getClient().getName() + " (" + project.getClient().getId() + ")");
+                
+                
+                
+            }
+        });
+        
+        
+        
         TextFields.bindAutoCompletion(client, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() {
 
             @Override
@@ -92,6 +147,7 @@ public class ProjectController extends StandardController implements Initializab
             }
         });
     }
+     
 
     /**
      * @return the client

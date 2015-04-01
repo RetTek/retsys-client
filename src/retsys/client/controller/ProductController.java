@@ -243,7 +243,7 @@ public class ProductController extends StandardController implements Initializab
         Product product = new Product();
         
         product.setName(this.getName().getText());
-        //product.setDesc(this.getDesc().getText());
+        product.setDesc(this.getDesc().getText());
         product.setRemarks(this.getRemarks().getText());
         
         JsonHelper helper = new JsonHelper();
