@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.collections.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="retsys.client.controller.UserController">
+    <children>
+      <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_vendor" text="User Details">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lbl_user_name" layoutX="75.0" layoutY="51.0" text="User Name" />
+                        <TextField fx:id="name" layoutX="179.0" layoutY="45.0" />
+                        <Label fx:id="lbl_user_password" layoutX="77.0" layoutY="87.0" text="Password" />
+                        <PasswordField fx:id="password" layoutX="179.0" layoutY="84.0" prefHeight="23.0" prefWidth="148.0" />
+                        <ChoiceBox fx:id="usertype" layoutX="179.0" layoutY="123.0" >
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Normal"/>
+                                    <String fx:value="Admin"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                        <Label fx:id="lbl_user_type" layoutX="77.0" layoutY="125.0" text="User Type" />                        
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="9.0" layoutY="507.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="213.0" text="Save">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/savetick.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+        <Button layoutX="224.0" layoutY="507.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="213.0" styleClass="buttonDelete" text="Delete">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete1.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>

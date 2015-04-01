@@ -166,5 +166,5 @@ public abstract class StandardController {
 
     abstract String getSaveUrl();
     
-    abstract void clear();
+    //protected void clear(){};
 }
