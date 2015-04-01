@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -41,7 +42,7 @@ public class HttpHelper {
 
     public HttpGet getHttpGetObj(String operation, String body) throws IOException {
         HttpGet get = null;
-
+        
         get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
 
         StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
