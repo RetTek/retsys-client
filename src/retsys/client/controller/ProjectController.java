@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -224,4 +225,22 @@ public class ProjectController extends StandardController implements Initializab
         return "projects";
     }
 
+    public  String delete(ActionEvent event) throws IOException {
+         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
+        String response = delete("projects",getId(this.name.getText()));
+        
+        
+       clear();
+        return response;
+       
+    }
+    
+    void clear() {
+    
+       name.setText("");
+       this.client.setText("");
+       this.desc.setText("");       
+        this.remarks.setText("");
+     
+    }
 }

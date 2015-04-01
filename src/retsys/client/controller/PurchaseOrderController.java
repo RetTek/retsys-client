@@ -396,5 +396,9 @@ reportmap.put("PODETAIL", poItemRow);
     String getSaveUrl() {
         return "purchaseorders";
     }
+    
+    void clear() {
+    System.out.println("To be defined .... ");
+     }
 
 }

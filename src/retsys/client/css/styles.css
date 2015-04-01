@@ -16,7 +16,7 @@
     -fx-font-size:15px;
     -fx-font-family:Verdana;
 }
-
+.required input:after { content:"*";}
 .button{
     -fx-background-color:#666666,linear-gradient(#ffffff,#E6E7E8);/*linear-gradient(#ffffff,derive(gray,50%));*/
     -fx-background-insets: 0px,0.047em;

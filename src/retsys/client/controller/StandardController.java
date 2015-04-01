@@ -77,21 +77,23 @@ public abstract class StandardController {
         return response;
     }
 
-    public String delete(ActionEvent event) throws IOException {
-        String jsonRequest = buildRequestMsg();
+    public String delete(String operation,Integer id) throws IOException {
         String response = null;
 
         HttpHelper helper = new HttpHelper();
-        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpPostObj(getSaveUrl(), jsonRequest));
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.DeleteHttpGetObj(operation,id));
 
         if ("!ERROR!".equals(response)) {
-            displayMessage(true, "Save failed!");
+            displayMessage(true, "Delete failed!");
         } else {
-            displayMessage(false, "Save success!");
+            displayMessage(false, "Delete success!");
         }
 
         return response;
     }
+    
+    
+    
 
     public void displayMessage(boolean error, String message) {
         Dialogs.create().title(error ? "Error" : "Information").message(message).showInformation();
@@ -163,4 +165,6 @@ public abstract class StandardController {
     abstract String buildRequestMsg();
 
     abstract String getSaveUrl();
+    
+    abstract void clear();
 }

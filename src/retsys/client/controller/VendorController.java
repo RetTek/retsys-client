@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -195,4 +196,25 @@ public class VendorController extends StandardController implements Initializabl
         return "vendors";
     }
 
+    void clear() {
+    
+       name.setText("");
+       this.address.setText("");
+       this.email.setText("");
+       this.phone.setText("");
+       this.mobile.setText("");
+        this.remarks.setText("");
+     
+    }
+    
+    public  String delete(ActionEvent event) throws IOException {
+         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
+        String response = delete("vendors",getId(this.name.getText()));
+        
+        clear();
+
+        return response;
+       
+    }
+    
 }

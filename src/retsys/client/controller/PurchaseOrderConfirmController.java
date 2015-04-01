@@ -351,5 +351,8 @@ public class PurchaseOrderConfirmController extends StandardController implement
     String getSaveUrl() {
         return "purchaseorders/confirm";
     }
+     void clear() {
+    System.out.println("To be defined .... ");
+     }
 
 }
