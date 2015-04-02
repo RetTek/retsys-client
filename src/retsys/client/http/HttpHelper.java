@@ -29,7 +29,7 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpHelper {
 
     String hostName = "localhost";
-    String hostPort = "8082";
+    String hostPort = "8080";
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {
@@ -38,6 +38,14 @@ public class HttpHelper {
         get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
 
         return get;
+    }
+    
+    public HttpDelete DeleteHttpGetObj(String operation, Integer id) throws IOException {
+        HttpDelete delete = null;
+
+        delete = new HttpDelete(getHttpUrl(hostName, hostPort, context) + "/" + operation+ "/" + id);
+
+        return delete;
     }
 
     public HttpGet getHttpGetObj(String operation, String body) throws IOException {
@@ -107,7 +115,7 @@ public class HttpHelper {
         HttpResponse httpResponse = client.execute(req);
         int httpStatus = httpResponse.getStatusLine().getStatusCode();
         if (httpStatus >= 200 && httpStatus < 300) {
-            if (!HttpPut.METHOD_NAME.equals(req.getMethod())) {
+             if (!HttpDelete.METHOD_NAME.equals(req.getMethod()) && !HttpPut.METHOD_NAME.equals(req.getMethod())) {
                 response = readFromStream(httpResponse.getEntity().getContent());
             }
         } else if (httpStatus == 409) {
@@ -120,6 +128,8 @@ public class HttpHelper {
 
         return response;
     }
+    
+   
 
     private String readFromStream(InputStream stream) throws IOException {
         StringBuilder response = null;

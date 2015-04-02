@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -212,8 +213,40 @@ public class ItemController extends StandardController implements Initializable 
             }
         });
         
-    }
+    //}
+// 
+    //}
 
+   // product query
+    TextFields.bindAutoCompletion(product, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Product>>() {
+
+            @Override
+            public Collection<Product> call(AutoCompletionBinding.ISuggestionRequest param) {
+                List<Product> list = null;
+                try {
+                    LovHandler lovHandler = new LovHandler("products", "name");
+                    String response = lovHandler.getSuggestions(param.getUserText());
+                    list = (List<Product>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Product>>() {
+                    });
+                } catch (IOException ex) {
+                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return list;
+            }
+        }, new StringConverter<Product>() {
+
+            @Override
+            public String toString(Product object) {
+                return object.getName() + " (ID:" + object.getId() + ")";
+            }
+
+            @Override
+            public Product fromString(String string) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+        });
+    }   
     @Override
     String buildRequestMsg() {
         Item item = new Item();
@@ -252,6 +285,43 @@ public class ItemController extends StandardController implements Initializable 
     @Override
     String getSaveUrl() {
         return "items";
+    }
+    
+    public  String delete(ActionEvent event) throws IOException {
+         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
+        String response = delete("items",getId(this.name.getText()));     
+        
+        clear();
+        return response;
+        
+       
+    }
+    
+    void clear() {
+    
+    name.setText("");
+        rate.setText("");
+        brand.setText("");
+        color.setText("");
+        unit.setText("");
+        size.setText("");
+        billno.setText("");
+        Site.setText("");
+        remarks.setText("");
+        quantity.setText("");
+        transport_mode.setText("");
+        transport_charges.setText("");
+        supervisor.setText("");
+        godown_name.setText("");
+        location1.setText("");
+        location2.setText("");
+        location3.setText("");
+        vendor.setText("");
+        //vendorObj        
+        product.setText("");
+        //productObj
+        minreorder.setText("");
+        discount_percentage.setText("");
     }
 
 }

@@ -263,4 +263,8 @@ public class CreditNoteController extends StandardController implements Initiali
         }
 
     }
+    
+    void clear() {
+    System.out.println("To be defined .... ");
+     }
 }

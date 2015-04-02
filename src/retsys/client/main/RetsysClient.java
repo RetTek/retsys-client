@@ -20,13 +20,16 @@ public class RetsysClient extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
+        
+        Parent root =FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Login.fxml"));
+        
+        //Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
         
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(this.getClass().getResource("/retsys/client/css/styles.css").toExternalForm());
+        scene.getStylesheets().add(this.getClass().getResource("/retsys/client/css/Login.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
     }
 
     /**

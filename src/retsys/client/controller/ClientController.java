@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -218,5 +219,25 @@ public class ClientController extends StandardController implements Initializabl
         
     }
     
+     public  String delete(ActionEvent event) throws IOException {
+         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
+        String response = delete("clients",getId(this.name.getText()));
+        
+        
+        clear();
+        return response;
+       
+    }
+     void clear() {
+    System.out.println("To be defined .... ");
+       name.setText("");
+       this.address.setText("");
+       this.email.setText("");
+       this.phone.setText("");
+       this.mobile.setText("");
+        this.remarks.setText("");
+        
+     
+    }
     
 }

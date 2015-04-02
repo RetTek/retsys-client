@@ -316,6 +316,10 @@ public class DeliveryChallanController extends StandardController implements Ini
         if (dcDetail.getSelectionModel().getSelectedItem() != null) {
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
-    }    
+    } 
+    
+    void clear() {
+    System.out.println("To be defined .... ");
+     }
     
 }
