@@ -1,10 +1,15 @@
 package retsys.client.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import retsys.client.helper.DateUtils;
 
 public class POItem {
 
@@ -15,8 +20,11 @@ public class POItem {
     private SimpleStringProperty model = new SimpleStringProperty();
     private SimpleDoubleProperty quantity = new SimpleDoubleProperty();
     private SimpleBooleanProperty confirm = new SimpleBooleanProperty();
+    private SimpleObjectProperty<LocalDate> receivedDate = new SimpleObjectProperty<LocalDate>();
+    private SimpleStringProperty billNo = new SimpleStringProperty();
+    private SimpleStringProperty supervisor = new SimpleStringProperty();
 
-    public POItem(int id, String location, String name, String brand, String model, double quantity, boolean confirm) {
+    public POItem(int id, String location, String name, String brand, String model, double quantity, boolean confirm, Date receivedDate) {
         this.id.set(id);
         this.location.set(location);
         this.name.set(name);
@@ -24,6 +32,7 @@ public class POItem {
         this.model.set(model);
         this.quantity.set(quantity);
         this.confirm.set(confirm);
+        this.receivedDate.set(DateUtils.asLocalDate(receivedDate));
     }
 
     public StringProperty locationProperty() {
@@ -67,7 +76,7 @@ public class POItem {
     }
 
     public SimpleBooleanProperty confirmProperty() {
-        if (getConfirm()== null) {
+        if (getConfirm() == null) {
             setConfirm(new SimpleBooleanProperty(this, "confirm"));
         }
 
@@ -170,5 +179,71 @@ public class POItem {
      */
     public void setConfirm(SimpleBooleanProperty confirm) {
         this.confirm = confirm;
+    }
+
+    public ObjectProperty<LocalDate> receivedDateProperty() {
+        if (getReceivedDate() == null) {
+            setReceivedDate(new SimpleObjectProperty<LocalDate>(this, "receivedDate"));
+        }
+
+        return getReceivedDate();
+    }
+
+    /**
+     * @return the receivedDate
+     */
+    public SimpleObjectProperty<LocalDate> getReceivedDate() {
+        return receivedDate;
+    }
+
+    /**
+     * @param receivedDate the receivedDate to set
+     */
+    public void setReceivedDate(SimpleObjectProperty<LocalDate> receivedDate) {
+        this.receivedDate = receivedDate;
+    }
+
+    /**
+     * @return the name
+     */
+    public SimpleStringProperty getBillNo() {
+        return billNo;
+    }
+
+    /**
+     * @param billNo the billNo to set
+     */
+    public void setBillNo(SimpleStringProperty billNo) {
+        this.billNo = billNo;
+    }
+
+    /**
+     * @return the supervisor
+     */
+    public SimpleStringProperty getSupervisor() {
+        return supervisor;
+    }
+
+    /**
+     * @param supervisor the supervisor to set
+     */
+    public void setSupervisor(SimpleStringProperty supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public StringProperty billNoProperty() {
+        if (getBillNo() == null) {
+            setBillNo(new SimpleStringProperty(this, "billNo"));
+        }
+
+        return getBillNo();
+    }
+
+    public StringProperty supervisorProperty() {
+        if (getSupervisor() == null) {
+            setSupervisor(new SimpleStringProperty(this, "supervisor"));
+        }
+
+        return getSupervisor();
     }
 }

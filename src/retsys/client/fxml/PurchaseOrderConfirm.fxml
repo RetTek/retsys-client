@@ -26,12 +26,15 @@
                                 <TextArea fx:id="delivery_address" layoutX="475.0" layoutY="31.0" prefHeight="59.0" prefWidth="308.0" />
                                 <TableView fx:id="poDetail" editable="true" layoutX="29.0" layoutY="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="234.0">
                                     <columns>
-                                        <TableColumn fx:id="loc_of_material" editable="false" prefWidth="178.0" text="Loc of Material In Building" />
-                                        <TableColumn fx:id="material_name" editable="false" prefWidth="139.0" text="Material Name" />
-                                        <TableColumn fx:id="brand_name" editable="false" prefWidth="125.0" text="Brand Name" />
-                                        <TableColumn fx:id="model_code" editable="false" prefWidth="99.0" text="Model Code" />
-                                        <TableColumn fx:id="quantity" prefWidth="146.0" text="Quantity/Units" />
-                              <TableColumn fx:id="confirm" prefWidth="75.0" text="Confirm" />
+                                        <TableColumn fx:id="loc_of_material" editable="false" prefWidth="164.0" text="Loc of Material In Building" />
+                                        <TableColumn fx:id="material_name" editable="false" prefWidth="82.0" text="Material" />
+                                        <TableColumn fx:id="brand_name" editable="false" prefWidth="60.0" text="Brand" />
+                                        <TableColumn fx:id="model_code" editable="false" prefWidth="79.0" text="Model" />
+                                        <TableColumn fx:id="quantity" prefWidth="106.0" text="Quantity/Units" />
+                              <TableColumn fx:id="confirm" prefWidth="70.0" text="Confirm" />
+                              <TableColumn fx:id="receivedDate" prefWidth="164.0" text="Received Date" />
+                              <TableColumn fx:id="billNo" prefWidth="75.0" text="Bill No" />
+                              <TableColumn fx:id="supervisor" prefWidth="75.0" text="Supervisor" />
                                     </columns>
                                 </TableView>
                                 <HBox layoutX="2.0" layoutY="186.0" prefHeight="27.0" prefWidth="779.0" spacing="10.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="186.0">

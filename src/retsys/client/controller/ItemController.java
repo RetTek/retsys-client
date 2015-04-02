@@ -244,7 +244,7 @@ public class ItemController extends StandardController implements Initializable 
         productObj.setId(getId(product.getText()));
         item.setProduct(productObj);
         item.setMinReorder(minreorder.getText());
-        item.setDiscountPercentage(new Double(discount_percentage.getText()));
+        item.setDiscountPercentage(Double.parseDouble(discount_percentage.getText()));
 
         return new JsonHelper().getJsonString(item);
     }

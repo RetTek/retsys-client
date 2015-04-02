@@ -29,7 +29,7 @@ public class Item extends Model {
     private String location2;
     private String location3;
     private String drawerNo;
-    private Double discount_percentage;
+    private Double discountPercentage;
     private String minreorder;
     private Product product;
     
@@ -306,14 +306,14 @@ public class Item extends Model {
         this.product = product;
     }
     public Double getDiscountPercentage() {
-        return discount_percentage;
+        return discountPercentage;
     }
 
     /**
      * @param discount_percentage the drawerNo to set
      */
     public void setDiscountPercentage(Double discount_percentage) {
-        this.discount_percentage = discount_percentage;
+        this.discountPercentage = discount_percentage;
     }
 
 }

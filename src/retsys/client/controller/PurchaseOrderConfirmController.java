@@ -6,6 +6,7 @@
 package retsys.client.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import java.awt.Event;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
@@ -22,6 +23,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,16 +33,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
+import retsys.client.helper.DateUtils;
 import retsys.client.helper.LovHandler;
 import retsys.client.json.JsonHelper;
 import retsys.client.model.Item;
@@ -71,6 +79,12 @@ public class PurchaseOrderConfirmController extends StandardController implement
     @FXML
     private TableColumn<POItem, Boolean> confirm;
     @FXML
+    private TableColumn<POItem, LocalDate> receivedDate;
+    @FXML
+    private TableColumn<POItem, String> billNo;
+    @FXML
+    private TableColumn<POItem, String> supervisor;
+    @FXML
     private TextField vendor;
     @FXML
     private TextField project;
@@ -96,6 +110,8 @@ public class PurchaseOrderConfirmController extends StandardController implement
     private ObservableList<PurchaseOrderDetail> poDetailRecs = FXCollections.observableArrayList();
     int sno = 0;
 
+    DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+
     /**
      * Initializes the controller class.
      */
@@ -110,9 +126,79 @@ public class PurchaseOrderConfirmController extends StandardController implement
         quantity.setCellValueFactory(new PropertyValueFactory<POItem, Integer>("quantity"));
         confirm.setCellValueFactory(new PropertyValueFactory<POItem, Boolean>("confirm"));
         confirm.setCellFactory(CheckBoxTableCell.forTableColumn(confirm));
+        billNo.setCellValueFactory(new PropertyValueFactory<POItem, String>("billNo"));
+        billNo.setCellFactory(TextFieldTableCell.forTableColumn());
+        supervisor.setCellValueFactory(new PropertyValueFactory<POItem, String>("supervisor"));
+        supervisor.setCellFactory(TextFieldTableCell.forTableColumn());
+        receivedDate.setCellValueFactory(new PropertyValueFactory<POItem, LocalDate>("receivedDate"));
+        receivedDate.setCellFactory(new Callback<TableColumn<POItem, LocalDate>, TableCell<POItem, LocalDate>>() {
 
-        poDetail.getColumns().setAll(loc_of_material, material_name, brand_name, model_code, quantity, confirm);
+            @Override
+            public TableCell<POItem, LocalDate> call(TableColumn<POItem, LocalDate> param) {
+                TableCell<POItem, LocalDate> cell = new TableCell<POItem, LocalDate>() {
 
+                    @Override
+                    protected void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
+                        if (empty || item == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(formatter.format(item));
+                        }
+                    }
+
+                    @Override
+                    public void startEdit() {
+                        super.startEdit();
+                        System.out.println("start edit");
+                        DatePicker dateControl = null;
+                        if (this.getItem() != null) {
+                            dateControl = new DatePicker(this.getItem());
+                        } else {
+                            dateControl = new DatePicker();
+                        }
+
+                        dateControl.valueProperty().addListener(new ChangeListener<LocalDate>() {
+
+                            @Override
+                            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                                if(newValue==null){
+                                    cancelEdit();
+                                }else{
+                                    commitEdit(newValue);
+                                }
+                            }
+                        });
+                        this.setGraphic(dateControl);
+                    }
+
+                    @Override
+                    public void cancelEdit() {
+                        super.cancelEdit();
+                        System.out.println("cancel edit");
+                        setGraphic(null);
+                        if (this.getItem() != null) {
+                            setText(formatter.format(this.getItem()));
+                        } else {
+                            setText(null);
+                        }
+                    }
+
+                    @Override
+                    public void commitEdit(LocalDate newValue) {
+                        super.commitEdit(newValue);
+                        System.out.println("commit edit");
+                        setGraphic(null);
+                        setText(formatter.format(newValue));
+                    }
+                };
+
+                return cell;
+            }
+        });
+
+        poDetail.getColumns().setAll(loc_of_material, material_name, brand_name, model_code, quantity, confirm, receivedDate,billNo,supervisor);
         AutoCompletionBinding<PurchaseOrder> bindForTxt_name = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<PurchaseOrder>>() {
 
             @Override
@@ -170,7 +256,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
                     Double quantity = detail.getQuantity();
                     Boolean confirm = "Y".equals(detail.getConfirm());
 
-                    items.add(new POItem(detail.getId(), site, name + " (ID:" + id + ")", brand, model, quantity, confirm));
+                    items.add(new POItem(detail.getId(), site, name + " (ID:" + id + ")", brand, model, quantity, confirm, detail.getReceivedDate()));
                 }
                 poDetail.setItems(items);
             }
@@ -297,7 +383,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
             list = FXCollections.observableArrayList();
         }
 
-        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), false);
+        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), false,null);
         list.add(item);
         poDetail.setItems(list);
     }
@@ -338,7 +424,10 @@ public class PurchaseOrderConfirmController extends StandardController implement
             poDetail.setId(poItem.getId().get());
             poDetail.setQuantity(poItem.getQuantity().get());
             poDetail.setConfirm(poItem.getConfirm().get() ? "Y" : "N");
-
+            poDetail.setReceivedDate(DateUtils.asDate(poItem.getReceivedDate().get()));
+            poDetail.setBillNo(poItem.getBillNo().get());
+            poDetail.setSupervisor(poItem.getSupervisor().get());
+            
             poDetails.add(poDetail);
         }
 
