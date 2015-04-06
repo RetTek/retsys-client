@@ -10,7 +10,7 @@
    <children>
        <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab fx:id="tab_purchase" text="Credit Note">
+          <Tab fx:id="tab_purchase" text="Purchase Return">
             <content>
       <AnchorPane fx:id="purchase_anchor" layoutX="72.0" layoutY="182.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
@@ -44,7 +44,7 @@
             <Label fx:id="lbl_po_date" prefHeight="17.0" prefWidth="92.0" text="Creation Date" />
             <DatePicker fx:id="creationDate" prefHeight="25.0" prefWidth="181.0" GridPane.columnIndex="1" />
             <Label fx:id="lbl_Delivery_address" prefHeight="17.0" prefWidth="114.0" text="Remarks" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_po_no" prefHeight="17.0" prefWidth="97.0" text="Credit note No" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_po_no" prefHeight="17.0" prefWidth="131.0" text="Purchase Return No" GridPane.rowIndex="1" />
             <TextField fx:id="creditNoteNo" editable="false" prefHeight="25.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lbl_shop_name" prefHeight="17.0" prefWidth="79.0" text="Vendor" GridPane.rowIndex="2" />
                    <TextField fx:id="vendor" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

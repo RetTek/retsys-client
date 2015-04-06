@@ -81,7 +81,7 @@ public abstract class StandardController {
         String response = null;
 
         HttpHelper helper = new HttpHelper();
-        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.DeleteHttpGetObj(operation,id));
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpDeleteObj(operation,id));
 
         if ("!ERROR!".equals(response)) {
             displayMessage(true, "Delete failed!");
@@ -166,5 +166,4 @@ public abstract class StandardController {
 
     abstract String getSaveUrl();
     
-    //protected void clear(){};
 }

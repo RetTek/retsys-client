@@ -16,6 +16,7 @@ public class Vendor extends Model{
     private String mobile;
     private String remarks;
     private String email;
+    private Double credit;
 
     /**
      * @return the address
@@ -85,6 +86,20 @@ public class Vendor extends Model{
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the credit
+     */
+    public Double getCredit() {
+        return credit;
+    }
+
+    /**
+     * @param credit the credit to set
+     */
+    public void setCredit(Double credit) {
+        this.credit = credit;
     }
 
 }
