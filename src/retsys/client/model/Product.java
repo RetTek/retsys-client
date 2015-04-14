@@ -28,7 +28,7 @@ public class Product extends Model {
         this.remarks = remarks;
     }
     
-     public String productDesc() {
+     public String getProductDesc() {
         return productDesc;
     }
 

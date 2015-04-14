@@ -29,7 +29,7 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpHelper {
 
     String hostName = "localhost";
-    String hostPort = "8080";
+    String hostPort = "8082";
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {
@@ -40,7 +40,7 @@ public class HttpHelper {
         return get;
     }
     
-    public HttpDelete DeleteHttpGetObj(String operation, Integer id) throws IOException {
+    public HttpDelete getHttpDeleteObj(String operation, Integer id) throws IOException {
         HttpDelete delete = null;
 
         delete = new HttpDelete(getHttpUrl(hostName, hostPort, context) + "/" + operation+ "/" + id);
@@ -48,29 +48,11 @@ public class HttpHelper {
         return delete;
     }
 
-    public HttpGet getHttpGetObj(String operation, String body) throws IOException {
-        HttpGet get = null;
-
-        get = new HttpGet(getHttpUrl(hostName, hostPort, context) + "/" + operation);
-
-        StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
-
-        //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
-        StringEntity se = new StringEntity(body);
-        se.setContentEncoding("UTF-8");
-        se.setContentType("application/json");
-
-        return get;
-    }
-
     public HttpPost getHttpPostObj(String operation, String body) throws IOException {
         HttpPost post = null;
 
         post = new HttpPost(getHttpUrl(hostName, hostPort, context) + "/" + operation);
 
-        StringBody payload = new StringBody("payload", ContentType.APPLICATION_JSON);
-
-        //HttpEntity reqEntity = EntityBuilder.create().setText(body).build();
         StringEntity se = new StringEntity(body);
         se.setContentEncoding("UTF-8");
         se.setContentType("application/json");

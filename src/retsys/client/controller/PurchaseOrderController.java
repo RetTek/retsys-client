@@ -344,7 +344,7 @@ reportmap.put("PODETAIL", poItemRow);
             list = FXCollections.observableArrayList();
         }
 
-        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Double.parseDouble(txt_qty.getText()), false);
+        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Double.parseDouble(txt_qty.getText()), false,null);
         list.add(item);
         poDetail.setItems(list);
     }
