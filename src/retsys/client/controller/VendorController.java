@@ -93,6 +93,7 @@ public class VendorController extends StandardController implements Initializabl
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Vendor> event) {
                 Vendor vendor = event.getCompletion();
                 //fill other item related fields
+                id.setText(splitId(name.getText()) + "");
                 name.setText(vendor.getName());
                 address.setText(vendor.getAddress());
                 phone.setText(vendor.getPhone());
@@ -186,6 +187,14 @@ public class VendorController extends StandardController implements Initializabl
         vendorObj.setRemarks(remarks.getText());
         vendorObj.setEmail(email.getText());
         
+        System.out.println("getId(this.name.getText() .... " + id.getText());
+        if (id.getText().equals("")) {
+            System.out.println("id is  null... " + id.getText());
+
+        } else {
+            vendorObj.setId(Integer.valueOf(id.getText()));
+        }
+        
         message = new JsonHelper().getJsonString(vendorObj);
 
         return message;
@@ -204,17 +213,32 @@ public class VendorController extends StandardController implements Initializabl
        this.phone.setText("");
        this.mobile.setText("");
         this.remarks.setText("");
+        this.id.setText("");
      
     }
     
     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
-        String response = delete("vendors",getId(this.name.getText()));
+         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
+        String response = delete("vendors",splitId(this.name.getText()));
         
         clear();
 
         return response;
        
+    }
+    
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            Vendor vendor = (Vendor)helper.convertJsonStringToObject(response, new TypeReference<Vendor>() {
+            });
+            id.setText(vendor.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
 }

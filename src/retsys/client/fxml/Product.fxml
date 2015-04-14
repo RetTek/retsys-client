@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -17,7 +18,7 @@
                             <children>
                                 <Label fx:id="lbl_product_name" layoutX="75.0" layoutY="47.0" text="Product Name" />
                                 <TextField fx:id="name" layoutX="201.0" layoutY="47.0" />
-                                <TextField fx:id="desc" layoutX="201.0" layoutY="81.0" />
+                                <TextField fx:id="productDesc" layoutX="201.0" layoutY="81.0" />
                                 <Label fx:id="lbl_product_remarks" layoutX="75.0" layoutY="152.0" text="Remarks" />
                                 <Label fx:id="lbl_product_desc" layoutX="74.0" layoutY="81.0" text="Product Description" />
                                 <TextArea fx:id="remarks" layoutX="199.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" />

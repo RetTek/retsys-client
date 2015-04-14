@@ -37,7 +37,8 @@ import retsys.client.model.Client;
  *
  * @author Muthu
  */
-public class ClientController extends StandardController implements Initializable{
+public class ClientController extends StandardController implements Initializable {
+
     @FXML
     private TextField name;
     @FXML
@@ -50,7 +51,7 @@ public class ClientController extends StandardController implements Initializabl
     private TextField email;
     @FXML
     private ImageView imgSave;
-      @FXML
+    @FXML
     private ImageView imgDelete;
 
     /**
@@ -58,9 +59,8 @@ public class ClientController extends StandardController implements Initializabl
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      //  TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
-        AutoCompletionBinding<Client> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
-        {
+        //  TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() 
+        AutoCompletionBinding<Client> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() {
 
             @Override
             public Collection<Client> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -77,8 +77,7 @@ public class ClientController extends StandardController implements Initializabl
 
                 return list;
             }
-            
-            
+
         }, new StringConverter<Client>() {
 
             @Override
@@ -91,7 +90,7 @@ public class ClientController extends StandardController implements Initializabl
                 throw new UnsupportedOperationException("Not supported yet.");
             }
         });
-        
+
         //event handler for setting other Client fields with values from selected Client object
         //fires after autocompletion
         txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Client>>() {
@@ -100,15 +99,17 @@ public class ClientController extends StandardController implements Initializabl
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Client> event) {
                 Client client = event.getCompletion();
                 //fill other item related fields
+                id.setText(splitId(name.getText()) + "");
+                name.setText(splitName(name.getText()));
                 phone.setText(client.getPhone());
                 address.setText(client.getAddress());
                 mobile.setText(client.getMobile());
                 remarks.setText(client.getRemarks());
                 email.setText(client.getEmail());
-                
+
             }
         });
-    }  
+    }
 
     /**
      * @return the name
@@ -193,51 +194,72 @@ public class ClientController extends StandardController implements Initializabl
     public void setEmail(TextField email) {
         this.email = email;
     }
-    
+
     @Override
     public String buildRequestMsg() {
         String request = null;
-        
+
         Client client = new Client();
-        
+
         client.setName(this.getName().getText());
         client.setAddress(this.getAddress().getText());
         client.setMobile(this.getMobile().getText());
         client.setPhone(this.getPhone().getText());
         client.setRemarks(this.getRemarks().getText());
         client.setEmail(email.getText());
-        
+        System.out.println("getId(this.name.getText() .... " + id.getText());
+        if (id.getText().equals("")) {
+            System.out.println("id is  null... " + id.getText());
+
+        } else {
+            client.setId(Integer.valueOf(id.getText()));
+        }
+
         JsonHelper helper = new JsonHelper();
         request = helper.getJsonString(client);
-        
+
         return request;
     }
-    
-    public String getSaveUrl(){
-        
+
+    public String getSaveUrl() {
+
         return "clients";
-        
+
     }
-    
-     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
-        String response = delete("clients",getId(this.name.getText()));
-        
-        
+
+    public String delete(ActionEvent event) throws IOException {
+        System.out.println("getId(this.name.getText() .... " + this.id.getText());
+        String response = delete("clients", Integer.valueOf(this.id.getText()));
+
         clear();
         return response;
-       
+
     }
-     void clear() {
-    System.out.println("To be defined .... ");
-       name.setText("");
-       this.address.setText("");
-       this.email.setText("");
-       this.phone.setText("");
-       this.mobile.setText("");
+
+    void clear() {
+        System.out.println("To be defined .... ");
+        name.setText("");
+        this.address.setText("");
+        this.email.setText("");
+        this.phone.setText("");
+        this.mobile.setText("");
         this.remarks.setText("");
-        
-     
+        this.id.setText("");
+
     }
-    
+
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            Client client = (Client)helper.convertJsonStringToObject(response, new TypeReference<Client>() {
+            });
+            id.setText(client.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

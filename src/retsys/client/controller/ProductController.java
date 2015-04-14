@@ -62,7 +62,7 @@ public class ProductController extends StandardController implements Initializab
     private TextArea remarks;
     
      @FXML
-    private TextField desc;
+    private TextField productDesc;
 
     /**
      * Initializes the controller class.
@@ -164,14 +164,14 @@ public class ProductController extends StandardController implements Initializab
      * @return the name
      */
     public TextField getDesc() {
-        return desc;
+        return productDesc;
     }
 
     /**
      * @param desc the name to set
      */
     public void setDesc(TextField desc) {
-        this.desc = desc;
+        this.productDesc = productDesc;
     }
 
     /**
@@ -189,8 +189,8 @@ public class ProductController extends StandardController implements Initializab
     }
     
     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
-        String response = delete("products",getId(this.name.getText()));
+         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
+        String response = delete("products",splitId(this.name.getText()));
         
         clear();
 
@@ -200,8 +200,9 @@ public class ProductController extends StandardController implements Initializab
     void clear() {
     
        name.setText("");
-       this.desc.setText("");
+       this.productDesc.setText("");
         this.remarks.setText("");
+        
      
     }
     

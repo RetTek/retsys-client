@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -13,52 +14,129 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="brand" layoutX="132.0" layoutY="75.0" />
-                        <Label fx:id="lbl_item_brand" layoutX="35.0" layoutY="76.0" text="Brand Name" />
-                        <Label fx:id="lbl_item_name" layoutX="34.0" layoutY="47.0" text="Item Name" />
-                        <TextField fx:id="name" layoutX="132.0" layoutY="47.0" />
-                        <Label fx:id="lbl_item_remarks" layoutX="34.0" layoutY="334.0" text="Remarks" />
-                        <Label fx:id="lbl_rate" layoutX="36.0" layoutY="130.0" text="Rate" />
-                        <TextArea fx:id="remarks" layoutX="132.0" layoutY="334.0" prefHeight="107.0" prefWidth="200.0" />
-                        <TextField fx:id="quantity" layoutX="132.0" layoutY="159.0" text="0.0" />
-                        <Label fx:id="lbl_item_unit" layoutX="36.0" layoutY="188.0" text="Units" />
-                        <TextField fx:id="unit" layoutX="132.0" layoutY="187.0" />
-                        <TextField fx:id="color" layoutX="132.0" layoutY="215.0" />
-                        <Label fx:id="lbl_item_color" layoutX="36.0" layoutY="218.0" text="Color" />
-                        <Label fx:id="lbl_billno" layoutX="37.0" layoutY="303.0" text="Bill No" />
-                        <TextField fx:id="rate" layoutX="132.0" layoutY="131.0" text="0.0" />
-                        <Label fx:id="lbl_quantity" layoutX="36.0" layoutY="158.0" text="Quantity" />
-                        <TextField fx:id="size" layoutX="132.0" layoutY="243.0" />
-                        <Label fx:id="lbl_size" layoutX="37.0" layoutY="242.0" text="Size" />
-                        <Label fx:id="lbl_vendor" layoutX="36.0" layoutY="270.0" prefHeight="17.0" prefWidth="44.0" text="Vendor" />
-                        <TextField fx:id="vendor" layoutX="132.0" layoutY="270.0" />
-                        <TextField fx:id="billno" layoutX="132.0" layoutY="298.0" />
-                        <TextField fx:id="supervisor" layoutX="482.0" layoutY="48.0" />
-                        <Label fx:id="lbl_supervisor" layoutX="332.0" layoutY="48.0" text="Supervisor" />
-                        <TextField fx:id="godown_name" layoutX="482.0" layoutY="104.0" />
-                        <TextField fx:id="Site" layoutX="482.0" layoutY="76.0" />
-                        <TextField fx:id="location1" layoutX="482.0" layoutY="131.0" />
-                        <TextField fx:id="location2" layoutX="482.0" layoutY="159.0" />
-                        <TextField fx:id="location3" layoutX="482.0" layoutY="187.0" />
-                        <TextField fx:id="transport_mode" layoutX="482.0" layoutY="242.0" />
-                        <TextField fx:id="transport_charges" layoutX="482.0" layoutY="270.0" text="0.0" />
-                        <TextField fx:id="drawer_no" layoutX="482.0" layoutY="215.0" />
-                        <Label fx:id="lbl_site" layoutX="332.0" layoutY="77.0" text="Site Name" />
-                        <Label fx:id="lbl_godown" layoutX="333.0" layoutY="104.0" text="Godown Name" />
-                        <Label fx:id="lbl_location" layoutX="334.0" layoutY="132.0" text="Godown Location" />
-                        <Label fx:id="lbl_supervisor1" layoutX="334.0" layoutY="161.0" prefHeight="17.0" prefWidth="93.0" text="Godown Block" />
-                        <Label fx:id="lbl_section" layoutX="334.0" layoutY="189.0" prefHeight="17.0" prefWidth="100.0" text="Godown Section" />
-                        <Label fx:id="lbl_drawer_no" layoutX="335.0" layoutY="218.0" text="Godown Drawer No" />
-                        <Label fx:id="lbl_transport_mode" layoutX="335.0" layoutY="246.0" text="Transport Mode" />
-                        <Label fx:id="lbl_supervisor2" layoutX="335.0" layoutY="271.0" text="Transport Charges" />
-                        <TextField fx:id="minreorder" layoutX="482.0" layoutY="298.0" />
-                        <Label fx:id="lbl_minimum_reorder" layoutX="337.0" layoutY="299.0" text="Re Order Level" />
-                        <TextField fx:id="code" layoutX="132.0" layoutY="103.0" />
-                        <Label fx:id="lbl_billno1" layoutX="36.0" layoutY="104.0" text="Brand Code" />
-                        <Label fx:id="lbl_product" layoutX="338.0" layoutY="327.0" text="Product" />
-                        <TextField fx:id="product" layoutX="482.0" layoutY="326.0" />
-                        <TextField fx:id="discount_percentage" layoutX="482.0" layoutY="354.0" />
-                        <Label fx:id="lbl_discount_percent" layoutX="339.0" layoutY="354.0" text="Vendor Discount %" />
+                        <GridPane layoutX="-62.0" layoutY="6.0" prefHeight="460.0" prefWidth="671.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="92.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="178.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="137.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="lbl_item_name" text="Item Name" GridPane.rowIndex="1" />
+                              <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_item_brand" text="Brand Name" GridPane.rowIndex="2" />
+                              <TextField fx:id="brand" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField fx:id="code" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_billno1" text="Brand Code" GridPane.rowIndex="3" />
+                              <Label fx:id="lbl_rate" text="Rate" GridPane.rowIndex="4" />
+                              <TextField fx:id="rate" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_quantity" text="Quantity" GridPane.rowIndex="5" />
+                              <TextField fx:id="quantity" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_item_unit" text="Units" GridPane.rowIndex="6" />
+                              <TextField fx:id="unit" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_item_color" text="Color" GridPane.rowIndex="7" />
+                              <TextField fx:id="color" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_size" text="Size" GridPane.rowIndex="9" />
+                              <TextField fx:id="size" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_vendor" prefHeight="17.0" prefWidth="44.0" text="Vendor" GridPane.rowIndex="8" />
+                              <TextField fx:id="vendor" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_billno" text="Bill No" GridPane.rowIndex="10" />
+                              <TextField fx:id="billno" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lbl_item_remarks" text="Remarks" GridPane.rowIndex="11" />
+                              <TextArea fx:id="remarks" prefHeight="107.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextArea>
+                              <Label fx:id="lbl_supervisor" text="Supervisor" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="supervisor" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label fx:id="lbl_site" text="Site Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="Site" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <Label fx:id="lbl_godown" text="Godown Name" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="godown_name" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <Label fx:id="lbl_location" text="Godown Location" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <TextField fx:id="location1" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <TextField fx:id="location2" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <Label fx:id="lbl_supervisor1" prefHeight="17.0" prefWidth="93.0" text="Godown Block" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <TextField fx:id="location3" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Label fx:id="lbl_section" prefHeight="17.0" prefWidth="100.0" text="Godown Section" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <TextField fx:id="drawer_no" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <Label fx:id="lbl_drawer_no" text="Godown Drawer No" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <TextField fx:id="transport_mode" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                              <Label fx:id="lbl_transport_mode" text="Transport Mode" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                              <Label fx:id="lbl_supervisor2" text="Transport Charges" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                              <TextField fx:id="transport_charges" text="0.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                              <TextField fx:id="minreorder" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                              <Label fx:id="lbl_minimum_reorder" text="Re Order Level" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                              <TextField fx:id="product" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                              <Label fx:id="lbl_product" text="Product" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                              <Label fx:id="lbl_discount_percent" text="Vendor Discount %" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                              <TextField fx:id="discount_percentage" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                              <Label fx:id="lbl_item_id" text="Item ID" />
+                              <TextField fx:id="id" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
             </content>

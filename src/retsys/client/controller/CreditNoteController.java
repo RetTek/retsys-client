@@ -206,7 +206,7 @@ public class CreditNoteController extends StandardController implements Initiali
             creditNote.setId(Integer.parseInt(creditNoteNo.getText()));
         }
         Vendor vendorObj = new Vendor();
-        vendorObj.setId(getId(vendor.getText()));
+        vendorObj.setId(splitId(vendor.getText()));
         creditNote.setVendor(vendorObj);
 
         Date date = Date.from(Instant.from(creationDate.getValue().atStartOfDay(ZoneId.systemDefault())));
@@ -220,7 +220,8 @@ public class CreditNoteController extends StandardController implements Initiali
         while (items.hasNext()) {
             CreditNoteItem creditNoteItem = items.next();
             Item item = new Item();
-            item.setId(getId(creditNoteItem.getItemName().get()));
+            //item.setId(getId(creditNoteItem.getItemName().get()));
+            item.setId(splitId(creditNoteItem.getItemName().get()));
             if (creditNoteItem.getId().get() != 0) {
                 // update operation
                 details.add(new CreditNoteDetail(creditNoteItem.getId().get(), item, creditNoteItem.getReturnQuantity().get(), creditNoteItem.getItemAmount().get(), creditNoteItem.getConfirm().get()));

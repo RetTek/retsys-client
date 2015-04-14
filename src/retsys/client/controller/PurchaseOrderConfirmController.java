@@ -315,13 +315,13 @@ public class PurchaseOrderConfirmController extends StandardController implement
         po.setDate(Date.from(Instant.now()));
 
         Project projectObj = new Project();
-        projectObj.setId(getId(project.getText()));
+        projectObj.setId(splitId(project.getText()));
         po.setProject(projectObj);
 
         po.setDeliveryAddress(delivery_address.getText());
 
         Vendor vendorObj = new Vendor();
-        vendorObj.setId(getId(vendor.getText()));
+        vendorObj.setId(splitId(vendor.getText()));
         po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
@@ -332,7 +332,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
 
             Item item = new Item();
-            item.setId(getId(poItem.getName().get()));
+            item.setId(splitId(poItem.getName().get()));
             poDetail.setItem(item);
 
             poDetail.setId(poItem.getId().get());

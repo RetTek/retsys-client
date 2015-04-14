@@ -198,7 +198,7 @@ public class DeliveryChallanController extends StandardController implements Ini
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
-        proj.setId(getId(project.getText()));
+        proj.setId(splitId(project.getText()));
         dc.setProject(proj);
         dc.setIsDelivery(true);
         dc.setOriginalDeliveryChallan(null);

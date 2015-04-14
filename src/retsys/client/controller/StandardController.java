@@ -38,10 +38,15 @@ public abstract class StandardController {
     protected TextArea remarks;
     @FXML
     protected TextField name;
+    
+    @FXML
+    public TextField id;
 
     public void init() {
 
     }
+    
+    
 
     public String save(ActionEvent event) throws IOException {
         String jsonRequest = buildRequestMsg();
@@ -99,7 +104,7 @@ public abstract class StandardController {
         Dialogs.create().title(error ? "Error" : "Information").message(message).showInformation();
     }
 
-    public Integer getId(String text) {
+   public Integer splitId(String text) {
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
         Integer id = null;
         while (m.find()) {
@@ -107,6 +112,17 @@ public abstract class StandardController {
         }
 
         return id;
+    }
+    
+    public String splitName(String text) {
+       // Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
+        
+            System.out.println(getSaveUrl() + "\n text: " + text);
+            
+            System.out.println(getSaveUrl() + "\n name: " + text.split("\\(")[0].trim());
+        
+
+        return text.split("\\(")[0].trim();
     }
 
     //generic method to bind auto completion to text fields!

@@ -105,6 +105,7 @@ public class ProjectController extends StandardController implements Initializab
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Project> event) {
                 Project project = event.getCompletion();
                 //fill other item related fields
+                id.setText(splitId(name.getText()) + "");
                 name.setText(project.getName());
                desc.setText(project.getDesc());
                 remarks.setText(project.getRemarks());
@@ -208,14 +209,22 @@ public class ProjectController extends StandardController implements Initializab
         project.setRemarks(getRemarks().getText());
 
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(getClient().getText());
-        Integer id = null;
+        Integer clientId = null;
         while (m.find()) {
-            id = Integer.parseInt(m.group(1).split(":")[1]);
+            clientId = Integer.parseInt(m.group(1).split(":")[1]);
         }
 
-        client.setId(id);
+        client.setId(clientId);
 
         project.setClient(client);
+        
+        System.out.println("getId(this.name.getText() .... " + id.getText());
+        if (id.getText().equals("")) {
+            System.out.println("id is  null... " + id.getText());
+
+        } else {
+            project.setId(Integer.valueOf(id.getText()));
+        }
 
         return new JsonHelper().getJsonString(project);
     }
@@ -226,8 +235,8 @@ public class ProjectController extends StandardController implements Initializab
     }
 
     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
-        String response = delete("projects",getId(this.name.getText()));
+         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
+        String response = delete("projects",splitId(this.name.getText()));
         
         
        clear();
@@ -241,6 +250,20 @@ public class ProjectController extends StandardController implements Initializab
        this.client.setText("");
        this.desc.setText("");       
         this.remarks.setText("");
+        this.id.setText("");
      
+    }
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            Project project = (Project)helper.convertJsonStringToObject(response, new TypeReference<Project>() {
+            });
+            id.setText(project.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

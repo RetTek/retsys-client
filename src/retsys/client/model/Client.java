@@ -6,6 +6,8 @@
 
 package retsys.client.model;
 
+import javafx.scene.control.TextField;
+
 /**
  *
  * @author ranju
@@ -16,6 +18,8 @@ public class Client extends Model {
     private String mobile;
     private String remarks;
     private String email;
+   // private Integer clientId;
+    private Integer Id;
 
 
     /**
@@ -31,7 +35,7 @@ public class Client extends Model {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    
     /**
      * @return the phone
      */
@@ -87,6 +91,28 @@ public class Client extends Model {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    /*public Integer getClientId() {
+        return clientId;
+    }*/
+
+    /**
+     * @param Id the email to set
+     */
+    /*public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }*/
+    
+     /*  public Integer getId() {
+        return id;
+    }*/
+
+    /**
+     * @param Id the email to set
+     */
+   /* public void setId(Integer id) {
+        this.id = id;
+    }*/
 
 
 }

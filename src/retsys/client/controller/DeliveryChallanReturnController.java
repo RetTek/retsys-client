@@ -236,7 +236,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
-        proj.setId(getId(project.getText()));
+        proj.setId(splitId(project.getText()));
         dc.setProject(proj);
         dc.setIsDelivery(false);
         

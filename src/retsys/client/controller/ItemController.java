@@ -127,6 +127,7 @@ public class ItemController extends StandardController implements Initializable 
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Item> event) {
                 Item item = event.getCompletion();
                 //fill other item related fields
+                id.setText(splitId(name.getText()) + "");
                 name.setText(item.getName());
                 rate.setText(item.getRate() + "");
                 brand.setText(item.getBrand());
@@ -145,9 +146,9 @@ public class ItemController extends StandardController implements Initializable 
                 godown_name.setText(item.getGodownName());
                 location1.setText(item.getLocation1());
                 
-                minreorder.setText(item.getMinReorder());
-                product.setText(item.getProduct().getName() + " ("+ item.getProduct().getId() +")");
-                discount_percentage.setText(item.getDiscountPercentage()+"");
+                minreorder.setText(item.getminreorder());
+                product.setText(item.getProduct().getName() + " (ID:"+ item.getProduct().getId() +")");
+                discount_percentage.setText(item.getdiscount_percentage()+"");
                 
                 
             }
@@ -271,13 +272,21 @@ public class ItemController extends StandardController implements Initializable 
         item.setLocation2(location2.getText());
         item.setLocation3(location3.getText());
 
-        vendorObj.setId(getId(vendor.getText()));
+        vendorObj.setId(splitId(vendor.getText()));
         item.setVendor(vendorObj);
         
-        productObj.setId(getId(product.getText()));
+        productObj.setId(splitId(product.getText()));
         item.setProduct(productObj);
-        item.setMinReorder(minreorder.getText());
-        item.setDiscountPercentage(new Double(discount_percentage.getText()));
+        item.setminreorder(minreorder.getText());
+        item.setdiscount_percentage(new Double(discount_percentage.getText()));
+        
+        System.out.println("getId(this.name.getText() .... " + id.getText());
+        if (id.getText().equals("")) {
+            System.out.println("id is  null... " + id.getText());
+
+        } else {
+            item.setId(Integer.valueOf(id.getText()));
+        }
 
         return new JsonHelper().getJsonString(item);
     }
@@ -288,8 +297,8 @@ public class ItemController extends StandardController implements Initializable 
     }
     
     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+getId(this.name.getText()));
-        String response = delete("items",getId(this.name.getText()));     
+         System.out.println("getId(this.name.getText() .... "+this.id.getText());
+        String response = delete("items",Integer.valueOf(this.id.getText()));     
         
         clear();
         return response;
@@ -322,6 +331,20 @@ public class ItemController extends StandardController implements Initializable 
         //productObj
         minreorder.setText("");
         discount_percentage.setText("");
+        id.setText("");
+    }
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            Item item = (Item)helper.convertJsonStringToObject(response, new TypeReference<Item>() {
+            });
+            id.setText(item.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

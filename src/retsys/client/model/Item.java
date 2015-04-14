@@ -285,14 +285,14 @@ public class Item extends Model {
     public void setDrawerNo(String drawerNo) {
         this.drawerNo = drawerNo;
     }
-    public String getMinReorder() {
+    public String getminreorder() {
         return minreorder;
     }
 
     /**
      * @param minreorder the drawerNo to set
      */
-    public void setMinReorder(String minreorder) {
+    public void setminreorder(String minreorder) {
         this.minreorder = minreorder;
     }
     public Product getProduct() {
@@ -305,14 +305,14 @@ public class Item extends Model {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public Double getDiscountPercentage() {
+    public Double getdiscount_percentage() {
         return discount_percentage;
     }
 
     /**
      * @param discount_percentage the drawerNo to set
      */
-    public void setDiscountPercentage(Double discount_percentage) {
+    public void setdiscount_percentage(Double discount_percentage) {
         this.discount_percentage = discount_percentage;
     }
 

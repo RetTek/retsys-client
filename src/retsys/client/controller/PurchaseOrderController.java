@@ -361,13 +361,13 @@ reportmap.put("PODETAIL", poItemRow);
         po.setDate(Date.from(Instant.now()));
 
         Project projectObj = new Project();
-        projectObj.setId(getId(project.getText()));
+        projectObj.setId(splitId(project.getText()));
         po.setProject(projectObj);
 
         po.setDeliveryAddress(delivery_address.getText());
 
         Vendor vendorObj = new Vendor();
-        vendorObj.setId(getId(vendor.getText()));
+        vendorObj.setId(splitId(vendor.getText()));
         po.setVendor(vendorObj);
 
         Iterator<POItem> items = poDetail.getItems().iterator();
@@ -378,7 +378,7 @@ reportmap.put("PODETAIL", poItemRow);
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
             
             Item item = new Item();
-            item.setId(getId(poItem.getName().get()));
+            item.setId(splitId(poItem.getName().get()));
 
             poDetail.setItem(item);
             poDetail.setQuantity(poItem.getQuantity().get());

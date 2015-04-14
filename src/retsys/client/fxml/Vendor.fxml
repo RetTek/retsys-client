@@ -13,18 +13,37 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lbl_vendor_name" layoutX="75.0" layoutY="50.0" text="Vendor Name" />
-                        <TextField fx:id="name" layoutX="179.0" layoutY="44.0" />
-                        <Label fx:id="lbl_vendor_remarks" layoutX="75.0" layoutY="280.0" text="Remarks" />
-                        <Label fx:id="lbl_vendor_address" layoutX="74.0" layoutY="81.0" text="Address" />
-                        <TextArea fx:id="remarks" layoutX="179.0" layoutY="280.0" prefHeight="107.0" prefWidth="200.0" />
-                        <TextArea fx:id="address" layoutX="179.0" layoutY="83.0" prefHeight="78.0" prefWidth="200.0" />
-                        <TextField fx:id="phone" layoutX="179.0" layoutY="169.0" />
-                        <Label fx:id="lbl_vendor_phone" layoutX="77.0" layoutY="171.0" text="Phone" />
-                        <TextField fx:id="mobile" layoutX="180.0" layoutY="202.0" />
-                        <TextField fx:id="email" layoutX="180.0" layoutY="239.0" />
-                        <Label fx:id="lbl_vendor_mobile" layoutX="77.0" layoutY="199.0" text="Mobile" />
-                        <Label fx:id="lbl_vendor_email" layoutX="79.0" layoutY="238.0" text="Email" />
+                        <GridPane hgap="10.0" layoutX="357.0" layoutY="38.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                          <columnConstraints>
+                            <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="lbl_vendor_name" text="Vendor Name" GridPane.rowIndex="1" />
+                              <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="id" GridPane.columnIndex="1" />
+                              <Label fx:id="lbl_vendor_id" text="Vendor ID" />
+                              <TextArea fx:id="address" prefHeight="78.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="lbl_vendor_address" text="Address" GridPane.rowIndex="2" />
+                              <TextField fx:id="phone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="lbl_vendor_phone" text="Phone" GridPane.rowIndex="3" />
+                              <TextField fx:id="mobile" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="lbl_vendor_mobile" text="Mobile" GridPane.rowIndex="4" />
+                              <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="lbl_vendor_email" text="Email" GridPane.rowIndex="5" />
+                              <Label fx:id="lbl_vendor_remarks" text="Remarks" GridPane.rowIndex="6" />
+                              <TextArea fx:id="remarks" prefHeight="107.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
                      </children>
                   </AnchorPane>
             </content>
