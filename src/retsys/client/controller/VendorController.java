@@ -219,7 +219,7 @@ public class VendorController extends StandardController implements Initializabl
     
     public  String delete(ActionEvent event) throws IOException {
          System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
-        String response = delete("vendors",splitId(this.name.getText()));
+        String response = delete("vendors",Integer.valueOf(this.id.getText()));
         
         clear();
 

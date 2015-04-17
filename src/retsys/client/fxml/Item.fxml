@@ -123,12 +123,12 @@
                               <Label fx:id="lbl_transport_mode" text="Transport Mode" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                               <Label fx:id="lbl_supervisor2" text="Transport Charges" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                               <TextField fx:id="transport_charges" text="0.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                              <TextField fx:id="minreorder" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                              <TextField fx:id="minReorder" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                               <Label fx:id="lbl_minimum_reorder" text="Re Order Level" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                               <TextField fx:id="product" GridPane.columnIndex="3" GridPane.rowIndex="11" />
                               <Label fx:id="lbl_product" text="Product" GridPane.columnIndex="2" GridPane.rowIndex="11" />
                               <Label fx:id="lbl_discount_percent" text="Vendor Discount %" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-                              <TextField fx:id="discount_percentage" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                              <TextField fx:id="discountPercentage" GridPane.columnIndex="3" GridPane.rowIndex="12" />
                               <Label fx:id="lbl_item_id" text="Item ID" />
                               <TextField fx:id="id" GridPane.columnIndex="1">
                                  <GridPane.margin>

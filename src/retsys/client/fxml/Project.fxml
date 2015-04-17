@@ -30,7 +30,7 @@
                               <Label fx:id="lbl_project_id" text="Project ID" />
                               <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="lbl_project_name" text="Project Name" GridPane.rowIndex="1" />
-                              <TextField fx:id="desc" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="projectDesc" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="lbl_project_desc" text="Project Description" GridPane.rowIndex="2" />
                               <TextField fx:id="client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label fx:id="lbl_project_code" text="Client Name" GridPane.rowIndex="3" />

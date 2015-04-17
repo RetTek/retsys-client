@@ -74,11 +74,11 @@ public class ItemController extends StandardController implements Initializable 
     @FXML
     private TextField drawer_no;
     @FXML
-    private TextField minreorder;
+    private TextField minReorder;
     @FXML
     private TextField product;
     @FXML
-    private TextField discount_percentage;
+    private TextField discountPercentage;
 
     /**
      * Initializes the controller class.
@@ -146,9 +146,9 @@ public class ItemController extends StandardController implements Initializable 
                 godown_name.setText(item.getGodownName());
                 location1.setText(item.getLocation1());
                 
-                minreorder.setText(item.getminreorder());
+                minReorder.setText(item.getMinReorder());
                 product.setText(item.getProduct().getName() + " (ID:"+ item.getProduct().getId() +")");
-                discount_percentage.setText(item.getdiscount_percentage()+"");
+                discountPercentage.setText(item.getDiscountPercentage()+"");
                 
                 
             }
@@ -277,8 +277,8 @@ public class ItemController extends StandardController implements Initializable 
         
         productObj.setId(splitId(product.getText()));
         item.setProduct(productObj);
-        item.setminreorder(minreorder.getText());
-        item.setdiscount_percentage(new Double(discount_percentage.getText()));
+        item.setMinReorder(minReorder.getText());
+        item.setDiscountPercentage(new Double(discountPercentage.getText()));
         
         System.out.println("getId(this.name.getText() .... " + id.getText());
         if (id.getText().equals("")) {
@@ -329,8 +329,8 @@ public class ItemController extends StandardController implements Initializable 
         //vendorObj        
         product.setText("");
         //productObj
-        minreorder.setText("");
-        discount_percentage.setText("");
+        minReorder.setText("");
+        discountPercentage.setText("");
         id.setText("");
     }
     @Override

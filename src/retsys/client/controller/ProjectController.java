@@ -51,7 +51,7 @@ public class ProjectController extends StandardController implements Initializab
     @FXML
     private TextField name;
     @FXML
-    private TextField desc;
+    private TextField projectDesc;
     @FXML
     private Label lbl_project_remarks;
     @FXML
@@ -107,10 +107,10 @@ public class ProjectController extends StandardController implements Initializab
                 //fill other item related fields
                 id.setText(splitId(name.getText()) + "");
                 name.setText(project.getName());
-               desc.setText(project.getDesc());
+               projectDesc.setText(project.getProjectDesc());
                 remarks.setText(project.getRemarks());
                 
-                client.setText(project.getClient().getName() + " (" + project.getClient().getId() + ")");
+                client.setText(project.getClient().getName() + " (ID:" + project.getClient().getId() + ")");
                 
                 
                 
@@ -173,17 +173,17 @@ public class ProjectController extends StandardController implements Initializab
     }
 
     /**
-     * @return the desc
+     * @return the projectDesc
      */
-    public TextField getDesc() {
-        return desc;
+    public TextField getProjectDesc() {
+        return projectDesc;
     }
 
     /**
-     * @param desc the desc to set
+     * @param desc the projectDesc to set
      */
-    public void setDesc(TextField desc) {
-        this.desc = desc;
+    public void setProjectDesc(TextField desc) {
+        this.projectDesc = desc;
     }
 
     /**
@@ -206,6 +206,7 @@ public class ProjectController extends StandardController implements Initializab
         Client client = new Client();
 
         project.setName(getName().getText());
+        project.setProjectDesc(getProjectDesc().getText());
         project.setRemarks(getRemarks().getText());
 
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(getClient().getText());
@@ -236,7 +237,7 @@ public class ProjectController extends StandardController implements Initializab
 
     public  String delete(ActionEvent event) throws IOException {
          System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
-        String response = delete("projects",splitId(this.name.getText()));
+        String response = delete("projects",Integer.valueOf(this.id.getText()));
         
         
        clear();
@@ -248,7 +249,7 @@ public class ProjectController extends StandardController implements Initializab
     
        name.setText("");
        this.client.setText("");
-       this.desc.setText("");       
+       this.projectDesc.setText("");       
         this.remarks.setText("");
         this.id.setText("");
      
