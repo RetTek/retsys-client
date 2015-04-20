@@ -14,25 +14,25 @@
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Label text="Created By:" />
-                  <TextField fx:id="createdBy" prefWidth="100.0" />
+                  <TextField fx:id="createdBy" editable="false" prefWidth="100.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Label text="Created On:" />
-                  <DatePicker fx:id="createdOn" prefWidth="150.0" />
+                  <DatePicker fx:id="createdOn" editable="false" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Label text="Modified By:" />
-                  <TextField fx:id="modifiedBy" />
+                  <TextField fx:id="modifiedBy" editable="false" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <Label text="Modified On:" />
-                  <DatePicker fx:id="modifiedOn" />
+                  <DatePicker fx:id="modifiedOn" editable="false" />
                </children>
             </HBox>
          </children>

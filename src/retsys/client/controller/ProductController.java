@@ -96,7 +96,7 @@ public class ProductController extends StandardController implements Initializab
                 remarks.setText(product.getRemarks());
                 //desc.setText(product.getDesc());
                 
-                
+                populateAuditValues(product);
             }
         });
     }    

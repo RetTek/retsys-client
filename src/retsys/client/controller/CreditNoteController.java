@@ -139,6 +139,7 @@ public class CreditNoteController extends StandardController implements Initiali
                 model.setText(null); //?? add model?
                 amount.setText(item.getRate().toString());
                 quantity.setText(item.getQuantity().toString());
+                
             }
         });
 
@@ -199,7 +200,7 @@ public class CreditNoteController extends StandardController implements Initiali
     }
 
     @Override
-    protected String buildRequestMsg() {
+    protected Object buildRequestMsg() {
         CreditNote creditNote = new CreditNote();
         if (!creditNoteNo.getText().isEmpty()) {
             // update operation
@@ -232,7 +233,7 @@ public class CreditNoteController extends StandardController implements Initiali
 
         creditNote.setCreditNoteDetails(details);
 
-        return new JsonHelper().getJsonString(creditNote);
+        return creditNote;
     }
 
     @Override

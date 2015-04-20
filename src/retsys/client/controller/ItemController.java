@@ -150,7 +150,7 @@ public class ItemController extends StandardController implements Initializable 
                 product.setText(item.getProduct().getName() + " (ID:"+ item.getProduct().getId() +")");
                 discountPercentage.setText(item.getDiscountPercentage()+"");
                 
-                
+                populateAuditValues(item);
             }
         });
 
@@ -249,7 +249,7 @@ public class ItemController extends StandardController implements Initializable 
         });
     }   
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         Item item = new Item();
         Vendor vendorObj = new Vendor();
         Product productObj = new Product();
@@ -288,7 +288,7 @@ public class ItemController extends StandardController implements Initializable 
             item.setId(Integer.valueOf(id.getText()));
         }
 
-        return new JsonHelper().getJsonString(item);
+        return item;
     }
 
     @Override

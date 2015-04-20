@@ -15,13 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -106,7 +104,8 @@ public class ClientController extends StandardController implements Initializabl
                 mobile.setText(client.getMobile());
                 remarks.setText(client.getRemarks());
                 email.setText(client.getEmail());
-
+                
+                populateAuditValues(client);
             }
         });
     }
@@ -196,7 +195,7 @@ public class ClientController extends StandardController implements Initializabl
     }
 
     @Override
-    public String buildRequestMsg() {
+    public Object buildRequestMsg() {
         String request = null;
 
         Client client = new Client();
@@ -215,10 +214,7 @@ public class ClientController extends StandardController implements Initializabl
             client.setId(Integer.valueOf(id.getText()));
         }
 
-        JsonHelper helper = new JsonHelper();
-        request = helper.getJsonString(client);
-
-        return request;
+        return client;
     }
 
     public String getSaveUrl() {

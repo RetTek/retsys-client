@@ -101,6 +101,7 @@ public class VendorController extends StandardController implements Initializabl
                 remarks.setText(vendor.getRemarks());
                 email.setText(vendor.getEmail());
                 
+                populateAuditValues(vendor);
             }
         });
     }    
@@ -176,7 +177,7 @@ public class VendorController extends StandardController implements Initializabl
     }
 
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         String message = null;
         
         Vendor vendorObj = new Vendor();
@@ -195,9 +196,7 @@ public class VendorController extends StandardController implements Initializabl
             vendorObj.setId(Integer.valueOf(id.getText()));
         }
         
-        message = new JsonHelper().getJsonString(vendorObj);
-
-        return message;
+        return vendorObj;
     }
 
     @Override

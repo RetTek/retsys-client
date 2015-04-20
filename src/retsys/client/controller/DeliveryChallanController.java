@@ -159,6 +159,7 @@ public class DeliveryChallanController extends StandardController implements Ini
                 txt_name.setUserData(item.getId());
                 txt_brand.setText(item.getBrand());
                 txt_model.setText(null); // item doesn't have this field. add??
+                
             }
         });
         
@@ -193,7 +194,7 @@ public class DeliveryChallanController extends StandardController implements Ini
     }    
     
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         DeliveryChallan dc =  new DeliveryChallan();
         dc.setChallanDate(Date.from(Instant.now()));
 
@@ -223,7 +224,7 @@ public class DeliveryChallanController extends StandardController implements Ini
         
         dc.setDeliveryChallanDetail(dcDetails);
 
-        return new JsonHelper().getJsonString(dc);
+        return dc;
     }
 
     @Override

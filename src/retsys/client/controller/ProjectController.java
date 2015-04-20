@@ -112,7 +112,7 @@ public class ProjectController extends StandardController implements Initializab
                 
                 client.setText(project.getClient().getName() + " (ID:" + project.getClient().getId() + ")");
                 
-                
+                populateAuditValues(project);
                 
             }
         });
@@ -201,7 +201,7 @@ public class ProjectController extends StandardController implements Initializab
     }
 
     @Override
-    public String buildRequestMsg() {
+    public Object buildRequestMsg() {
         Project project = new Project();
         Client client = new Client();
 
@@ -227,7 +227,7 @@ public class ProjectController extends StandardController implements Initializab
             project.setId(Integer.valueOf(id.getText()));
         }
 
-        return new JsonHelper().getJsonString(project);
+        return project;
     }
 
     @Override

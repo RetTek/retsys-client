@@ -356,7 +356,7 @@ reportmap.put("PODETAIL", poItemRow);
     }
 
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         PurchaseOrder po = new PurchaseOrder();
         po.setDate(Date.from(Instant.now()));
 
@@ -389,7 +389,7 @@ reportmap.put("PODETAIL", poItemRow);
 
         po.setPurchaseOrderDetail(poDetails);
 
-        return new JsonHelper().getJsonString(po);
+        return po;
     }
 
     @Override

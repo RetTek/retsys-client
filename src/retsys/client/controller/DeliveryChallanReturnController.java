@@ -55,13 +55,13 @@ import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
 
-
 /**
  * FXML Controller class
  *
  * @author Fahad
  */
 public class DeliveryChallanReturnController extends StandardController implements Initializable {
+
     @FXML
     private TableView<DCItem> dcDetail;
     @FXML
@@ -97,7 +97,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
     @FXML
     private TextField txt_brand;
     @FXML
-    private TextField txt_model;    
+    private TextField txt_model;
     @FXML
     private TextField txt_qty;
     @FXML
@@ -105,25 +105,25 @@ public class DeliveryChallanReturnController extends StandardController implemen
     @FXML
     private TextField txt_amount;
 
-    
     private ObservableList<DeliveryChallanDetail> dcDetailRecs = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dc_date.setValue(LocalDate.now());
-        
+
         material_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("name"));
         brand_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("brand"));
         model_code.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("model"));
         units.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("model"));
         quantity.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, Integer>("quantity"));
         amount.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, Integer>("amount"));
-        
-        dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,amount);
+
+        dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity, amount);
         // TODO
-        
+
         AutoCompletionBinding<Item> bindForTxt_name = TextFields.bindAutoCompletion(txt_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() {
 
             @Override
@@ -132,7 +132,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 try {
                     LovHandler lovHandler = new LovHandler("items", "name");
                     String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<Item>)  new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
+                    list = (List<Item>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,8 +166,8 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 txt_model.setText(null); // item doesn't have this field. add??
             }
         });
-        
-          AutoCompletionBinding<DeliveryChallan> bindForProject = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<DeliveryChallan>>() {
+
+        AutoCompletionBinding<DeliveryChallan> bindForProject = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<DeliveryChallan>>() {
 
             @Override
             public Collection<DeliveryChallan> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -223,54 +223,58 @@ public class DeliveryChallanReturnController extends StandardController implemen
                     int amount = detail.getAmount();
                     String units = detail.getUnits();
 
-                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model, quantity,units,amount));
+                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model, quantity, units, amount));
                 }
                 dcDetail.setItems(items);
+                
+                populateAuditValues(dc);
+
             }
         });
-    }    
-    
+    }
+
     @Override
-    String buildRequestMsg() {
-        DeliveryChallan dc =  new DeliveryChallan();
+    Object buildRequestMsg() {
+        DeliveryChallan dc = new DeliveryChallan();
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
         proj.setId(splitId(project.getText()));
         dc.setProject(proj);
         dc.setIsDelivery(false);
-        
+
         DeliveryChallan originalChallanDetail = new DeliveryChallan();
         originalChallanDetail.setId(Integer.parseInt(dc_no.getText()));
         dc.setOriginalDeliveryChallan(originalChallanDetail);
 
         Iterator<DeliveryChallanReturnController.DCItem> items = dcDetail.getItems().iterator();
         List<DeliveryChallanDetail> dcDetails = new ArrayList<>();
-        
+
         while (items.hasNext()) {
             DeliveryChallanReturnController.DCItem dcItem = items.next();
             DeliveryChallanDetail dcDetail = new DeliveryChallanDetail();
-            
+
             Item item = new Item();
             item.setId(dcItem.id.get());
-            
+
             dcDetail.setItem(item);
             dcDetail.setQuantity(dcItem.quantity.get());
             dcDetail.setUnits(dcItem.units.get());
             dcDetail.setAmount(dcItem.amount.get());
-            
+
             dcDetails.add(dcDetail);
         }
-        
+
         dc.setDeliveryChallanDetail(dcDetails);
 
-        return new JsonHelper().getJsonString(dc);
+        return dc;
     }
 
     @Override
     String getSaveUrl() {
         return "deliverychallans";
     }
+
     public class DCItem {
 
         private SimpleIntegerProperty id = new SimpleIntegerProperty();
@@ -290,7 +294,6 @@ public class DeliveryChallanReturnController extends StandardController implemen
             this.units.set(units);
             this.amount.set(amount);
         }
-
 
         public StringProperty nameProperty() {
             if (name == null) {
@@ -323,7 +326,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
 
             return quantity;
         }
-        
+
         public StringProperty unitsProperty() {
             if (units == null) {
                 units = new SimpleStringProperty(this, "units");
@@ -331,7 +334,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
 
             return units;
         }
-        
+
         public IntegerProperty amountProperty() {
             if (amount == null) {
                 amount = new SimpleIntegerProperty(this, "amount");
@@ -340,15 +343,15 @@ public class DeliveryChallanReturnController extends StandardController implemen
             return amount;
         }
     }
-    
+
     public void addItem(ActionEvent event) {
-        
+
         ObservableList<DeliveryChallanReturnController.DCItem> list = dcDetail.getItems();
         if (list == null) {
             list = FXCollections.observableArrayList();
         }
 
-        DeliveryChallanReturnController.DCItem item = new DeliveryChallanReturnController.DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DeliveryChallanReturnController.DCItem item = new DeliveryChallanReturnController.DCItem((int) txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
         list.add(item);
         dcDetail.setItems(list);
     }
@@ -357,6 +360,6 @@ public class DeliveryChallanReturnController extends StandardController implemen
         if (dcDetail.getSelectionModel().getSelectedItem() != null) {
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
-    }    
-    
+    }
+
 }
