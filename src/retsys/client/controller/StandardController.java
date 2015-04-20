@@ -15,17 +15,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.apache.http.impl.client.HttpClients;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.dialog.Dialogs;
+import retsys.client.helper.DateUtils;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
+import retsys.client.model.Audit;
 import retsys.client.model.Model;
 
 /**
@@ -33,7 +37,17 @@ import retsys.client.model.Model;
  * @author ranju
  */
 public abstract class StandardController {
-
+    @FXML
+    protected VBox functionNode;
+    @FXML
+    protected TextField createdBy;
+    @FXML
+    protected DatePicker createdOn;
+    @FXML
+    protected TextField modifiedBy;
+    @FXML
+    protected DatePicker modifiedOn;
+    
     @FXML
     protected TextArea remarks;
     @FXML
@@ -46,10 +60,33 @@ public abstract class StandardController {
 
     }
     
-    
+    private Audit getAudit(){
+        Audit audit = new Audit();
+        
+        audit.setCreatedBy(createdBy.getText());
+        audit.setCreatedOn(DateUtils.asDate(createdOn.getValue()));
+        audit.setModifiedBy(modifiedBy.getText());
+        audit.setModifiedOn(DateUtils.asDate(modifiedOn.getValue()));
+        
+        return audit;
+    }
 
+    private String getJsonRequestWithAudit(Model model){
+        String jsonRequest = null;
+        model.setAudit(getAudit());
+        
+        JsonHelper jsonHelper = new JsonHelper();
+        jsonRequest = jsonHelper.getJsonString(model);
+        
+        
+        return jsonRequest;
+    }
+    
     public String save(ActionEvent event) throws IOException {
-        String jsonRequest = buildRequestMsg();
+        Model model = (Model) buildRequestMsg();
+        
+        String jsonRequest = getJsonRequestWithAudit(model);
+        
         String response = null;
 
         HttpHelper helper = new HttpHelper();
@@ -67,7 +104,10 @@ public abstract class StandardController {
     }
 
     public String update(ActionEvent event) throws IOException {
-        String jsonRequest = buildRequestMsg();
+        Model model = (Model) buildRequestMsg();
+        
+        String jsonRequest = getJsonRequestWithAudit(model);
+        
         String response = null;
 
         HttpHelper helper = new HttpHelper();
@@ -178,7 +218,7 @@ public abstract class StandardController {
     protected void postSave(String response){
     }
     
-    abstract String buildRequestMsg();
+    abstract Object buildRequestMsg();
 
     abstract String getSaveUrl();
     

@@ -3,8 +3,6 @@ package retsys.client.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -428,6 +426,8 @@ public static HostServices hostServices;
     }
 
     private void openScreen(String screenName, String title) {
+        URL baseFxmlLocation = getClass().getResource("/retsys/client/fxml/base-fxml.fxml");
+        FXMLLoader baseFxmlLoader = new FXMLLoader(baseFxmlLocation);
         URL location = getClass().getResource(screenName);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);
@@ -435,6 +435,10 @@ public static HostServices hostServices;
         Parent root;
         try {
             root = (Parent) fxmlLoader.load(location.openStream());
+            baseFxmlLoader.setController(fxmlLoader.getController());
+            Node baseNode = baseFxmlLoader.load();
+            StandardController controller = fxmlLoader.getController();
+            controller.functionNode.getChildren().add(root);
             Tab funcTab = new Tab();
             funcTab.setClosable(true);
             
@@ -443,7 +447,7 @@ public static HostServices hostServices;
             this.landingTabPane.getTabs().add(funcTab);
             this.landingTabPane.getSelectionModel().select(funcTab);
            
-            funcTab.setContent(root);
+            funcTab.setContent(baseNode);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch(Exception e){
