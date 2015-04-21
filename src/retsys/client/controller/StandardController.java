@@ -50,6 +50,8 @@ public abstract class StandardController {
     protected TextField modifiedBy;
     @FXML
     protected DatePicker modifiedOn;
+    @FXML
+    protected TextField auditId;
 
     @FXML
     protected TextArea remarks;
@@ -59,18 +61,19 @@ public abstract class StandardController {
     @FXML
     public TextField id;
 
-    public void init() {
+    protected void init(Model model) {
 
     }
-
-    public void populateAuditValues(Model model){
+    
+    public void populateAuditValues(Model model) {
+        auditId.setText(String.valueOf(model.getAudit().getId()));
         createdBy.setText(model.getAudit().getCreatedBy());
         createdOn.setValue(DateUtils.asLocalDate(model.getAudit().getCreatedOn()));
-        
+
         modifiedBy.setText(model.getAudit().getModifiedBy());
         modifiedOn.setValue(DateUtils.asLocalDate(model.getAudit().getModifiedOn()));
     }
-    
+
     public void setAuditValues() {
         if (!createdBy.getText().isEmpty()) { //modification
             modifiedBy.setText(AppContext.getInstance().getUsername());
@@ -84,7 +87,9 @@ public abstract class StandardController {
 
     private Audit getAudit() {
         Audit audit = new Audit();
-
+        if (!auditId.getText().isEmpty()) {
+            audit.setId(Integer.parseInt(auditId.getText()));
+        }
         audit.setCreatedBy(createdBy.getText());
         audit.setCreatedOn(DateUtils.asDate(createdOn.getValue()));
         audit.setModifiedBy(modifiedBy.getText());
@@ -126,9 +131,9 @@ public abstract class StandardController {
 
     public String update(ActionEvent event) throws IOException {
         Model model = (Model) buildRequestMsg();
-        
+
         setAuditValues();
-        
+
         String jsonRequest = getJsonRequestWithAudit(model);
 
         String response = null;
@@ -175,7 +180,7 @@ public abstract class StandardController {
     }
 
     public String splitName(String text) {
-       // Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
+        // Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
 
         System.out.println(getSaveUrl() + "\n text: " + text);
 

@@ -1168,3 +1168,11 @@
     -fx-background-color:gray;
     -fx-rotate:180;
 }
+.pendingpo-content-heading{
+    -fx-font-style:italic;
+    -fx-font-weight:bold;
+    -fx-font-size:12px;
+}
+.pendingpo-content-body{
+    -fx-font-size:12px;
+}

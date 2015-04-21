@@ -13,6 +13,7 @@
          <children>
             <HBox alignment="CENTER_LEFT">
                <children>
+                  <TextField fx:id="auditId" maxWidth="1.0" visible="false" />
                   <Label text="Created By:" />
                   <TextField fx:id="createdBy" editable="false" prefWidth="100.0" />
                </children>

@@ -51,9 +51,8 @@ public class VendorController extends StandardController implements Initializabl
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        AutoCompletionBinding<Vendor> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() 
-        {
+
+        AutoCompletionBinding<Vendor> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
             @Override
             public Collection<Vendor> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -70,8 +69,7 @@ public class VendorController extends StandardController implements Initializabl
 
                 return list;
             }
-            
-            
+
         }, new StringConverter<Vendor>() {
 
             @Override
@@ -84,7 +82,7 @@ public class VendorController extends StandardController implements Initializabl
                 throw new UnsupportedOperationException("Not supported yet.");
             }
         });
-        
+
         //event handler for setting other Client fields with values from selected Client object
         //fires after autocompletion
         txt_name.setOnAutoCompleted(new EventHandler<AutoCompletionBinding.AutoCompletionEvent<Vendor>>() {
@@ -100,12 +98,12 @@ public class VendorController extends StandardController implements Initializabl
                 mobile.setText(vendor.getMobile());
                 remarks.setText(vendor.getRemarks());
                 email.setText(vendor.getEmail());
-                
+
                 populateAuditValues(vendor);
             }
         });
-    }    
-    
+    }
+
     /**
      * @return the name
      */
@@ -179,7 +177,7 @@ public class VendorController extends StandardController implements Initializabl
     @Override
     Object buildRequestMsg() {
         String message = null;
-        
+
         Vendor vendorObj = new Vendor();
         vendorObj.setName(name.getText());
         vendorObj.setAddress(address.getText());
@@ -187,7 +185,7 @@ public class VendorController extends StandardController implements Initializabl
         vendorObj.setPhone(phone.getText());
         vendorObj.setRemarks(remarks.getText());
         vendorObj.setEmail(email.getText());
-        
+
         System.out.println("getId(this.name.getText() .... " + id.getText());
         if (id.getText().equals("")) {
             System.out.println("id is  null... " + id.getText());
@@ -195,7 +193,7 @@ public class VendorController extends StandardController implements Initializabl
         } else {
             vendorObj.setId(Integer.valueOf(id.getText()));
         }
-        
+
         return vendorObj;
     }
 
@@ -205,33 +203,33 @@ public class VendorController extends StandardController implements Initializabl
     }
 
     void clear() {
-    
-       name.setText("");
-       this.address.setText("");
-       this.email.setText("");
-       this.phone.setText("");
-       this.mobile.setText("");
+
+        name.setText("");
+        this.address.setText("");
+        this.email.setText("");
+        this.phone.setText("");
+        this.mobile.setText("");
         this.remarks.setText("");
         this.id.setText("");
-     
+
     }
-    
-    public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
-        String response = delete("vendors",Integer.valueOf(this.id.getText()));
-        
+
+    public String delete(ActionEvent event) throws IOException {
+        System.out.println("getId(this.name.getText() .... " + splitId(this.name.getText()));
+        String response = delete("vendors", Integer.valueOf(this.id.getText()));
+
         clear();
 
         return response;
-       
+
     }
-    
+
     @Override
     protected void postSave(String response) {
         JsonHelper helper = new JsonHelper();
         System.out.println("response .... " + response);
         try {
-            Vendor vendor = (Vendor)helper.convertJsonStringToObject(response, new TypeReference<Vendor>() {
+            Vendor vendor = (Vendor) helper.convertJsonStringToObject(response, new TypeReference<Vendor>() {
             });
             id.setText(vendor.getId().toString());
         } catch (IOException ex) {
@@ -239,5 +237,5 @@ public class VendorController extends StandardController implements Initializabl
         }
 
     }
-    
+
 }

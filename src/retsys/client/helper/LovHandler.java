@@ -19,17 +19,35 @@ public class LovHandler {
 
     private String entity;
     private String conditionFld;
+    private int startPosition;
+    private int maxResults;
 
     public LovHandler(String entity, String conditionFld) {
         this.entity = entity;
         this.conditionFld = conditionFld;
     }
 
+    public LovHandler(String entity, String conditionFld, int startPosition, int maxResults) {
+        this.entity = entity;
+        this.conditionFld = conditionFld;
+        this.startPosition = startPosition;
+        this.maxResults = maxResults;
+    }
+
     public String getSuggestions(String filterOn) {
         String response = null;
         HttpHelper helper = new HttpHelper();
+        StringBuilder queryString = new StringBuilder(entity);
         try {
-            response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj(entity+"/"+conditionFld+"/" + filterOn));
+            if (conditionFld != null && filterOn != null) {
+                queryString.append("/" + conditionFld + "/" + filterOn);
+            }
+
+            if (startPosition > 0 && maxResults > 0) {
+                queryString.append("?start=" + startPosition + "&max=" + maxResults);
+            }
+
+            response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpGetObj(queryString.toString()));
         } catch (IOException ex) {
             Logger.getLogger(LovHandler.class.getName()).log(Level.SEVERE, null, ex);
         }

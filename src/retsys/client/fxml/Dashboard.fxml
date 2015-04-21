@@ -150,7 +150,7 @@
                                                 </HBox>
                                                 <GridPane minHeight="31.0" prefHeight="31.0" prefWidth="39.0" styleClass="dock-pane" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                                     <children>
-                                                        <ListView id="commentList" fx:id="tblMyGroupTaskComments" prefHeight="90.0" prefWidth="200.0" styleClass="no-scroll" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                                                        <ListView id="commentList" fx:id="pendingPOs" prefHeight="90.0" prefWidth="200.0" styleClass="no-scroll" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                                                         <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="header-pane" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                             <children>
                                                                 <Label fx:id="pending_po" text="PENDING PURCHASE ORDERS" StackPane.alignment="CENTER_LEFT" />
