@@ -19,6 +19,8 @@ public class DeliveryChallan extends Model{
     private boolean isDelivery;
     private List<DeliveryChallanDetail> deliveryChallanDetail;
     private DeliveryChallan originalDeliveryChallan;
+    private String deliveryMode;
+    private String concernPerson;
 
     public DeliveryChallan getOriginalDeliveryChallan() {
         return originalDeliveryChallan;
@@ -76,6 +78,22 @@ public class DeliveryChallan extends Model{
      */
     public void setIsDelivery(boolean isDelivery) {
         this.isDelivery = isDelivery;
+    }
+
+    public String getDeliveryMode() {
+        return deliveryMode;
+    }
+
+    public void setDeliveryMode(String deliveryMode) {
+        this.deliveryMode = deliveryMode;
+    }
+
+    public String getConcernPerson() {
+        return concernPerson;
+    }
+
+    public void setConcernPerson(String concernPerson) {
+        this.concernPerson = concernPerson;
     }
 
 }

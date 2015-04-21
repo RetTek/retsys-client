@@ -49,6 +49,7 @@ import retsys.client.model.Project;
 import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
+import retsys.client.model.DCItem;
 
 
 /**
@@ -76,6 +77,14 @@ public class DeliveryChallanController extends StandardController implements Ini
     @FXML
     private Label lbl_projectname;
     @FXML
+    private TextField deliverymode;
+    @FXML
+    private Label lbl_deliverymode;
+    @FXML
+    private TextField concernperson;
+    @FXML
+    private Label lbl_concernperson;
+    @FXML
     private TextField dc_no;
     @FXML
     private Label lbl_po_no;
@@ -99,6 +108,8 @@ public class DeliveryChallanController extends StandardController implements Ini
     private TextField txt_units;
     @FXML
     private TextField txt_amount;
+    @FXML
+    private TextField txt_rate;
 
     
     private ObservableList<DeliveryChallanDetail> dcDetailRecs = FXCollections.observableArrayList();
@@ -109,14 +120,14 @@ public class DeliveryChallanController extends StandardController implements Ini
     public void initialize(URL url, ResourceBundle rb) {
         dc_date.setValue(LocalDate.now());
         
-        material_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, String>("name"));
-        brand_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, String>("brand"));
-        model_code.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, String>("model"));
-        units.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, String>("model"));
-        quantity.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, Integer>("quantity"));
-        amount.setCellValueFactory(new PropertyValueFactory<DeliveryChallanController.DCItem, Integer>("amount"));
+        material_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("name"));
+        brand_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("brand"));
+        model_code.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
+        units.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
+        quantity.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("quantity"));
+        amount.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("amount"));
         
-        dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,amount);
+        dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,units,amount);
         // TODO
         
         AutoCompletionBinding<Item> bindForTxt_name = TextFields.bindAutoCompletion(txt_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() {
@@ -159,6 +170,7 @@ public class DeliveryChallanController extends StandardController implements Ini
                 txt_name.setUserData(item.getId());
                 txt_brand.setText(item.getBrand());
                 txt_model.setText(null); // item doesn't have this field. add??
+                txt_rate.setText(String.valueOf(item.getRate()));
             }
         });
         
@@ -198,25 +210,27 @@ public class DeliveryChallanController extends StandardController implements Ini
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
-        proj.setId(splitId(project.getText()));
+        proj.setId(getId(project.getText()));
         dc.setProject(proj);
         dc.setIsDelivery(true);
         dc.setOriginalDeliveryChallan(null);
+        dc.setDeliveryMode(deliverymode.getText());
+        dc.setConcernPerson(concernperson.getText());
 
-        Iterator<DeliveryChallanController.DCItem> items = dcDetail.getItems().iterator();
+        Iterator<DCItem> items = dcDetail.getItems().iterator();
         List<DeliveryChallanDetail> dcDetails = new ArrayList<>();
         
         while (items.hasNext()) {
-            DeliveryChallanController.DCItem dcItem = items.next();
+            DCItem dcItem = items.next();
             DeliveryChallanDetail dcDetail = new DeliveryChallanDetail();
             
             Item item = new Item();
-            item.setId(dcItem.id.get());
+            item.setId(getId(String.valueOf(dcItem.getId().get())));
             
             dcDetail.setItem(item);
-            dcDetail.setQuantity(dcItem.quantity.get());
-            dcDetail.setUnits(dcItem.units.get());
-            dcDetail.setAmount(dcItem.amount.get());
+            dcDetail.setQuantity(dcItem.getQuantity().get());
+            dcDetail.setUnits(dcItem.getUnits().get());
+            dcDetail.setAmount(dcItem.getAmount().get());
             
             dcDetails.add(dcDetail);
         }
@@ -230,84 +244,16 @@ public class DeliveryChallanController extends StandardController implements Ini
     String getSaveUrl() {
         return "deliverychallans";
     }
-    public class DCItem {
-
-        private SimpleIntegerProperty id = new SimpleIntegerProperty();
-        private SimpleStringProperty name = new SimpleStringProperty();
-        private SimpleStringProperty brand = new SimpleStringProperty();
-        private SimpleStringProperty model = new SimpleStringProperty();
-        private SimpleIntegerProperty quantity = new SimpleIntegerProperty();
-        private SimpleStringProperty units = new SimpleStringProperty();
-        private SimpleIntegerProperty amount = new SimpleIntegerProperty();
-
-        public DCItem(int id, String name, String brand, String model, int quantity, String units, int amount) {
-            this.id.set(id);
-            this.name.set(name);
-            this.brand.set(brand);
-            this.model.set(model);
-            this.quantity.set(quantity);
-            this.units.set(units);
-            this.amount.set(amount);
-        }
-
-
-        public StringProperty nameProperty() {
-            if (name == null) {
-                name = new SimpleStringProperty(this, "name");
-            }
-
-            return name;
-        }
-
-        public StringProperty brandProperty() {
-            if (brand == null) {
-                brand = new SimpleStringProperty(this, "brand");
-            }
-
-            return brand;
-        }
-
-        public StringProperty modelProperty() {
-            if (model == null) {
-                model = new SimpleStringProperty(this, "model");
-            }
-
-            return model;
-        }
-
-        public IntegerProperty quantityProperty() {
-            if (quantity == null) {
-                quantity = new SimpleIntegerProperty(this, "quantity");
-            }
-
-            return quantity;
-        }
-        
-        public StringProperty unitsProperty() {
-            if (units == null) {
-                units = new SimpleStringProperty(this, "units");
-            }
-
-            return units;
-        }
-        
-        public IntegerProperty amountProperty() {
-            if (amount == null) {
-                amount = new SimpleIntegerProperty(this, "amount");
-            }
-
-            return amount;
-        }
-    }
+    
     
     public void addItem(ActionEvent event) {
         
-        ObservableList<DeliveryChallanController.DCItem> list = dcDetail.getItems();
+        ObservableList<DCItem> list = dcDetail.getItems();
         if (list == null) {
             list = FXCollections.observableArrayList();
         }
 
-        DeliveryChallanController.DCItem item = new DeliveryChallanController.DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DCItem item = new DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
         list.add(item);
         dcDetail.setItems(list);
     }
@@ -316,10 +262,12 @@ public class DeliveryChallanController extends StandardController implements Ini
         if (dcDetail.getSelectionModel().getSelectedItem() != null) {
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
-    } 
+    }    
     
-    void clear() {
-    System.out.println("To be defined .... ");
-     }
+    public void calcAmount(ActionEvent event){
+        if(txt_rate.getText()!=null && txt_qty.getText()!=null){
+            txt_amount.setText(String.valueOf(Integer.parseInt(txt_rate.getText()) * Integer.parseInt(txt_qty.getText())));
+        }
+    }
     
 }

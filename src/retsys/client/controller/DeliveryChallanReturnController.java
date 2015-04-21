@@ -54,7 +54,7 @@ import retsys.client.model.Project;
 import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
-
+import retsys.client.model.DCItem;
 
 /**
  * FXML Controller class
@@ -76,6 +76,15 @@ public class DeliveryChallanReturnController extends StandardController implemen
     private TableColumn<DCItem, String> units;
     @FXML
     private TableColumn<DCItem, Integer> amount;
+    @FXML
+    private TextField deliverymode;
+    @FXML
+    private Label lbl_deliverymode;
+    @FXML
+    private TextField concernperson;
+    @FXML
+    private Label lbl_concernperson;
+    
     @FXML
     private TextField project;
     @FXML
@@ -104,7 +113,8 @@ public class DeliveryChallanReturnController extends StandardController implemen
     private TextField txt_units;
     @FXML
     private TextField txt_amount;
-
+    @FXML
+    private TextField txt_rate;
     
     private ObservableList<DeliveryChallanDetail> dcDetailRecs = FXCollections.observableArrayList();
     /**
@@ -114,12 +124,12 @@ public class DeliveryChallanReturnController extends StandardController implemen
     public void initialize(URL url, ResourceBundle rb) {
         dc_date.setValue(LocalDate.now());
         
-        material_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("name"));
-        brand_name.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("brand"));
-        model_code.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("model"));
-        units.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, String>("model"));
-        quantity.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, Integer>("quantity"));
-        amount.setCellValueFactory(new PropertyValueFactory<DeliveryChallanReturnController.DCItem, Integer>("amount"));
+        material_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("name"));
+        brand_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("brand"));
+        model_code.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
+        units.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
+        quantity.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("quantity"));
+        amount.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("amount"));
         
         dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,amount);
         // TODO
@@ -164,6 +174,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 txt_name.setUserData(item.getId());
                 txt_brand.setText(item.getBrand());
                 txt_model.setText(null); // item doesn't have this field. add??
+                txt_rate.setText(String.valueOf(item.getRate()));
             }
         });
         
@@ -236,28 +247,30 @@ public class DeliveryChallanReturnController extends StandardController implemen
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
-        proj.setId(splitId(project.getText()));
+        proj.setId(getId(project.getText()));
         dc.setProject(proj);
         dc.setIsDelivery(false);
+        dc.setDeliveryMode(deliverymode.getText());
+        dc.setConcernPerson(concernperson.getText());
         
         DeliveryChallan originalChallanDetail = new DeliveryChallan();
         originalChallanDetail.setId(Integer.parseInt(dc_no.getText()));
         dc.setOriginalDeliveryChallan(originalChallanDetail);
 
-        Iterator<DeliveryChallanReturnController.DCItem> items = dcDetail.getItems().iterator();
+        Iterator<DCItem> items = dcDetail.getItems().iterator();
         List<DeliveryChallanDetail> dcDetails = new ArrayList<>();
         
         while (items.hasNext()) {
-            DeliveryChallanReturnController.DCItem dcItem = items.next();
+            DCItem dcItem = items.next();
             DeliveryChallanDetail dcDetail = new DeliveryChallanDetail();
             
             Item item = new Item();
-            item.setId(dcItem.id.get());
+            item.setId(dcItem.getId().get());
             
             dcDetail.setItem(item);
-            dcDetail.setQuantity(dcItem.quantity.get());
-            dcDetail.setUnits(dcItem.units.get());
-            dcDetail.setAmount(dcItem.amount.get());
+            dcDetail.setQuantity(dcItem.getQuantity().get());
+            dcDetail.setUnits(dcItem.getUnits().get());
+            dcDetail.setAmount(dcItem.getAmount().get());
             
             dcDetails.add(dcDetail);
         }
@@ -271,84 +284,16 @@ public class DeliveryChallanReturnController extends StandardController implemen
     String getSaveUrl() {
         return "deliverychallans";
     }
-    public class DCItem {
-
-        private SimpleIntegerProperty id = new SimpleIntegerProperty();
-        private SimpleStringProperty name = new SimpleStringProperty();
-        private SimpleStringProperty brand = new SimpleStringProperty();
-        private SimpleStringProperty model = new SimpleStringProperty();
-        private SimpleIntegerProperty quantity = new SimpleIntegerProperty();
-        private SimpleStringProperty units = new SimpleStringProperty();
-        private SimpleIntegerProperty amount = new SimpleIntegerProperty();
-
-        public DCItem(int id, String name, String brand, String model, int quantity, String units, int amount) {
-            this.id.set(id);
-            this.name.set(name);
-            this.brand.set(brand);
-            this.model.set(model);
-            this.quantity.set(quantity);
-            this.units.set(units);
-            this.amount.set(amount);
-        }
-
-
-        public StringProperty nameProperty() {
-            if (name == null) {
-                name = new SimpleStringProperty(this, "name");
-            }
-
-            return name;
-        }
-
-        public StringProperty brandProperty() {
-            if (brand == null) {
-                brand = new SimpleStringProperty(this, "brand");
-            }
-
-            return brand;
-        }
-
-        public StringProperty modelProperty() {
-            if (model == null) {
-                model = new SimpleStringProperty(this, "model");
-            }
-
-            return model;
-        }
-
-        public IntegerProperty quantityProperty() {
-            if (quantity == null) {
-                quantity = new SimpleIntegerProperty(this, "quantity");
-            }
-
-            return quantity;
-        }
-        
-        public StringProperty unitsProperty() {
-            if (units == null) {
-                units = new SimpleStringProperty(this, "units");
-            }
-
-            return units;
-        }
-        
-        public IntegerProperty amountProperty() {
-            if (amount == null) {
-                amount = new SimpleIntegerProperty(this, "amount");
-            }
-
-            return amount;
-        }
-    }
+    
     
     public void addItem(ActionEvent event) {
         
-        ObservableList<DeliveryChallanReturnController.DCItem> list = dcDetail.getItems();
+        ObservableList<DCItem> list = dcDetail.getItems();
         if (list == null) {
             list = FXCollections.observableArrayList();
         }
 
-        DeliveryChallanReturnController.DCItem item = new DeliveryChallanReturnController.DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DCItem item = new DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
         list.add(item);
         dcDetail.setItems(list);
     }
@@ -358,5 +303,10 @@ public class DeliveryChallanReturnController extends StandardController implemen
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
     }    
+    public void calcAmount(ActionEvent event){
+        if(txt_rate.getText()!=null && txt_qty.getText()!=null){
+            txt_amount.setText(String.valueOf(Integer.parseInt(txt_rate.getText()) * Integer.parseInt(txt_qty.getText())));
+        }
+    }
     
 }

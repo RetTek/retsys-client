@@ -174,7 +174,15 @@ public abstract class StandardController {
         return response;
         
     }
-    
+    public Integer getId(String text) {
+        Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
+        Integer id = null;
+        while (m.find()) {
+            id = Integer.parseInt(m.group(1).split(":")[1]);
+        }
+
+        return id;
+    }
     protected void postSave(String response){
     }
     
