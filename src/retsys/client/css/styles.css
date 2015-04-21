@@ -12,11 +12,14 @@
 .yui3-button {
     margin:3px;
 }
+
+ .required label:after { content:"*"; }
+
 .list-view .list-cell ,.table-view .table-cell, .table-view .table-cell:hover{
     -fx-font-size:15px;
     -fx-font-family:Verdana;
 }
-.required input:after { content:"*";}
+.required { -fx-content-display: "";}
 .button{
     -fx-background-color:#666666,linear-gradient(#ffffff,#E6E7E8);/*linear-gradient(#ffffff,derive(gray,50%));*/
     -fx-background-insets: 0px,0.047em;

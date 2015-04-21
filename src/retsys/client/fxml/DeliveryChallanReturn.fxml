@@ -23,8 +23,8 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TextField fx:id="project" layoutX="474.0" layoutY="23.0" prefHeight="25.0" prefWidth="229.0" />
-      <Label fx:id="lbl_projectname" layoutX="369.0" layoutY="27.0" prefHeight="17.0" prefWidth="78.0" text="Project Name" />
+      <TextField fx:id="project" layoutX="495.0" layoutY="23.0" prefHeight="25.0" prefWidth="229.0" />
+      <Label fx:id="lbl_projectname" layoutX="369.0" layoutY="27.0" prefHeight="17.0" prefWidth="116.0" text="Project Name" />
       <TextField fx:id="dc_no" layoutX="107.0" layoutY="55.0" prefHeight="25.0" prefWidth="106.0" />
       <Label fx:id="lbl_po_no" layoutX="31.0" layoutY="60.0" prefHeight="17.0" prefWidth="70.0" text="DC. No." />
       <DatePicker fx:id="dc_date" layoutX="107.0" layoutY="26.0" />
@@ -55,16 +55,22 @@
                            </font>
                         </Label>
                         <TextField fx:id="txt_name" layoutX="32.0" layoutY="149.0" prefHeight="25.0" prefWidth="149.0" promptText="Material name" />
-                        <TextField fx:id="txt_brand" editable="false" layoutX="196.0" layoutY="149.0" prefHeight="25.0" prefWidth="116.0" promptText="Brand" />
-                        <TextField fx:id="txt_model" editable="false" layoutX="329.0" layoutY="149.0" prefHeight="25.0" prefWidth="157.0" promptText="Model" />
+                        <TextField fx:id="txt_brand" editable="false" layoutX="196.0" layoutY="149.0" prefHeight="25.0" prefWidth="95.0" promptText="Brand" />
+                        <TextField fx:id="txt_model" editable="false" layoutX="307.0" layoutY="149.0" prefHeight="25.0" prefWidth="95.0" promptText="Model" />
                         <Label layoutX="32.0" layoutY="131.0" text="Material name" />
                         <Label layoutX="198.0" layoutY="130.0" text="Brand" />
-                        <Label layoutX="329.0" layoutY="132.0" text="Model" />
+                        <Label layoutX="307.0" layoutY="132.0" text="Model" />
                         <Label layoutX="500.0" layoutY="132.0" text="Quantity" />
-                        <TextField fx:id="txt_qty" layoutX="500.0" layoutY="149.0" prefHeight="25.0" prefWidth="53.0" />
+                        <TextField fx:id="txt_qty" onAction="#calcAmount"  layoutX="500.0" layoutY="149.0" prefHeight="25.0" prefWidth="53.0" />
       <TextField fx:id="txt_units" layoutX="567.0" layoutY="148.0" prefHeight="25.0" prefWidth="53.0" />
       <Label layoutX="567.0" layoutY="131.0" text="Units" />
       <Label layoutX="635.0" layoutY="131.0" text="Amount" />
       <TextField fx:id="txt_amount" layoutX="635.0" layoutY="148.0" prefHeight="25.0" prefWidth="77.0" />
+      <TextField fx:id="deliverymode" layoutX="494.0" layoutY="54.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label fx:id="lbl_deliverymode" layoutX="370.0" layoutY="59.0" prefHeight="17.0" prefWidth="95.0" text="Delivery Mode" />
+      <Label fx:id="lbl_concernperson" layoutX="371.0" layoutY="90.0" prefHeight="17.0" prefWidth="95.0" text="Concern Person" />
+      <TextField fx:id="concernperson" layoutX="494.0" layoutY="87.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txt_rate" layoutX="414.0" layoutY="149.0" prefHeight="25.0" prefWidth="70.0" />
+      <Label layoutX="414.0" layoutY="132.0" text="Rate" />
    </children>
 </AnchorPane>
