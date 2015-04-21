@@ -7,15 +7,12 @@ package retsys.client.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import retsys.client.json.JsonHelper;
-import retsys.client.model.Client;
 import retsys.client.model.User;
 
 /**
@@ -45,7 +42,7 @@ public class UserController extends StandardController implements Initializable 
     }
  
     @Override
-    public String buildRequestMsg() {
+    public Object buildRequestMsg() {
         String request = null;
         
         User user = new User();
@@ -58,10 +55,7 @@ public class UserController extends StandardController implements Initializable 
         else
           user.setUsertype("A");
         
-        JsonHelper helper = new JsonHelper();
-        request = helper.getJsonString(user);
-        
-        return request;
+        return user;
     }
 
     public PasswordField getPassword() {

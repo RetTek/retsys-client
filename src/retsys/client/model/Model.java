@@ -14,6 +14,7 @@ public class Model {
     protected Integer id;
     protected Integer version;
     protected String name;
+    private Audit audit;
 
     /**
      * @return the name
@@ -55,6 +56,20 @@ public class Model {
      */
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    /**
+     * @return the audit
+     */
+    public Audit getAudit() {
+        return audit;
+    }
+
+    /**
+     * @param audit the audit to set
+     */
+    public void setAudit(Audit audit) {
+        this.audit = audit;
     }
     
 }

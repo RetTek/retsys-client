@@ -7,6 +7,7 @@ package retsys.client.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,17 +16,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.apache.http.impl.client.HttpClients;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.controlsfx.dialog.Dialogs;
+import retsys.client.helper.DateUtils;
 import retsys.client.helper.LovHandler;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
+import retsys.client.main.AppContext;
+import retsys.client.model.Audit;
 import retsys.client.model.Model;
 
 /**
@@ -35,21 +41,73 @@ import retsys.client.model.Model;
 public abstract class StandardController {
 
     @FXML
+    protected VBox functionNode;
+    @FXML
+    protected TextField createdBy;
+    @FXML
+    protected DatePicker createdOn;
+    @FXML
+    protected TextField modifiedBy;
+    @FXML
+    protected DatePicker modifiedOn;
+
+    @FXML
     protected TextArea remarks;
     @FXML
     protected TextField name;
-    
+
     @FXML
     public TextField id;
 
     public void init() {
 
     }
+
+    public void populateAuditValues(Model model){
+        createdBy.setText(model.getAudit().getCreatedBy());
+        createdOn.setValue(DateUtils.asLocalDate(model.getAudit().getCreatedOn()));
+        
+        modifiedBy.setText(model.getAudit().getModifiedBy());
+        modifiedOn.setValue(DateUtils.asLocalDate(model.getAudit().getModifiedOn()));
+    }
     
-    
+    public void setAuditValues() {
+        if (!createdBy.getText().isEmpty()) { //modification
+            modifiedBy.setText(AppContext.getInstance().getUsername());
+            modifiedOn.setValue(LocalDate.now());
+        } else { //new record
+            createdBy.setText(AppContext.getInstance().getUsername());
+            createdOn.setValue(LocalDate.now());
+        }
+
+    }
+
+    private Audit getAudit() {
+        Audit audit = new Audit();
+
+        audit.setCreatedBy(createdBy.getText());
+        audit.setCreatedOn(DateUtils.asDate(createdOn.getValue()));
+        audit.setModifiedBy(modifiedBy.getText());
+        audit.setModifiedOn(DateUtils.asDate(modifiedOn.getValue()));
+
+        return audit;
+    }
+
+    private String getJsonRequestWithAudit(Model model) {
+        String jsonRequest = null;
+        model.setAudit(getAudit());
+
+        JsonHelper jsonHelper = new JsonHelper();
+        jsonRequest = jsonHelper.getJsonString(model);
+
+        return jsonRequest;
+    }
 
     public String save(ActionEvent event) throws IOException {
-        String jsonRequest = buildRequestMsg();
+        Model model = (Model) buildRequestMsg();
+        setAuditValues();
+        String jsonRequest = getJsonRequestWithAudit(model);
+
         String response = null;
 
         HttpHelper helper = new HttpHelper();
@@ -67,7 +125,12 @@ public abstract class StandardController {
     }
 
     public String update(ActionEvent event) throws IOException {
-        String jsonRequest = buildRequestMsg();
+        Model model = (Model) buildRequestMsg();
+        
+        setAuditValues();
+        
+        String jsonRequest = getJsonRequestWithAudit(model);
+
         String response = null;
 
         HttpHelper helper = new HttpHelper();
@@ -82,11 +145,11 @@ public abstract class StandardController {
         return response;
     }
 
-    public String delete(String operation,Integer id) throws IOException {
+    public String delete(String operation, Integer id) throws IOException {
         String response = null;
 
         HttpHelper helper = new HttpHelper();
-        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpDeleteObj(operation,id));
+        response = helper.executeHttpRequest(HttpClients.createDefault(), helper.getHttpDeleteObj(operation, id));
 
         if ("!ERROR!".equals(response)) {
             displayMessage(true, "Delete failed!");
@@ -96,15 +159,12 @@ public abstract class StandardController {
 
         return response;
     }
-    
-    
-    
 
     public void displayMessage(boolean error, String message) {
         Dialogs.create().title(error ? "Error" : "Information").message(message).showInformation();
     }
 
-   public Integer splitId(String text) {
+    public Integer splitId(String text) {
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
         Integer id = null;
         while (m.find()) {
@@ -113,14 +173,13 @@ public abstract class StandardController {
 
         return id;
     }
-    
+
     public String splitName(String text) {
        // Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
-        
-            System.out.println(getSaveUrl() + "\n text: " + text);
-            
-            System.out.println(getSaveUrl() + "\n name: " + text.split("\\(")[0].trim());
-        
+
+        System.out.println(getSaveUrl() + "\n text: " + text);
+
+        System.out.println(getSaveUrl() + "\n name: " + text.split("\\(")[0].trim());
 
         return text.split("\\(")[0].trim();
     }
@@ -158,8 +217,8 @@ public abstract class StandardController {
             }
         });
     }
-    
-    protected String query(String operation) throws IOException{
+
+    protected String query(String operation) throws IOException {
         String response = null;
 
         HttpHelper helper = new HttpHelper();
@@ -172,7 +231,7 @@ public abstract class StandardController {
         }
 
         return response;
-        
+
     }
     public Integer getId(String text) {
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
@@ -184,10 +243,11 @@ public abstract class StandardController {
         return id;
     }
     protected void postSave(String response){
+
     }
-    
-    abstract String buildRequestMsg();
+
+    abstract Object buildRequestMsg();
 
     abstract String getSaveUrl();
-    
+
 }

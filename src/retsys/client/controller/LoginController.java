@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import static retsys.client.controller.DashboardController.stage;
 import retsys.client.helper.GetCurrentDateTime;
+import retsys.client.main.AppContext;
 
 /**
  * FXML Controller class
@@ -60,6 +61,9 @@ public class LoginController implements Initializable {
            
             DashboardController profile = (DashboardController) replaceSceneContent("/retsys/client/fxml/Dashboard.fxml");
         //Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
+            AppContext ctx = AppContext.getInstance();
+            ctx.setUsername(userId.getText());
+            ctx.setPassword(password.getText());
         stage.fullScreenProperty();
         //Scene scene = new Scene(root);
         GetCurrentDateTime GetCurrentDateTime= new GetCurrentDateTime();

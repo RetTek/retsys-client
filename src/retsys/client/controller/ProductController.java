@@ -6,40 +6,21 @@
 
 package retsys.client.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.concurrent.Service;
 import javafx.scene.control.TextField;
-import javax.json.Json;
-import javax.json.JsonWriter;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import retsys.client.http.HttpHelper;
 import retsys.client.json.JsonHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import javafx.scene.control.TextArea;
-import java.io.StringWriter;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -115,7 +96,7 @@ public class ProductController extends StandardController implements Initializab
                 remarks.setText(product.getRemarks());
                 //desc.setText(product.getDesc());
                 
-                
+                populateAuditValues(product);
             }
         });
     }    
@@ -123,19 +104,19 @@ public class ProductController extends StandardController implements Initializab
    
 
     @Override
-    public String buildRequestMsg() {
+    public Object buildRequestMsg() {
         String request = null;
         
         Product product = new Product();
         
         product.setName(this.getName().getText());
-        product.setDesc(this.getDesc().getText());
+        product.setProdDesc(this.getDesc().getText());
         product.setRemarks(this.getRemarks().getText());
         
-        JsonHelper helper = new JsonHelper();
-        request = helper.getJsonString(product);
+//        JsonHelper helper = new JsonHelper();
+//        request = helper.getJsonString(product);
         
-        return request;
+        return product;
     }
 
    public String getSaveUrl(){

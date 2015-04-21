@@ -205,7 +205,7 @@ public class DeliveryChallanController extends StandardController implements Ini
     }    
     
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         DeliveryChallan dc =  new DeliveryChallan();
         dc.setChallanDate(Date.from(Instant.now()));
 
@@ -237,7 +237,7 @@ public class DeliveryChallanController extends StandardController implements Ini
         
         dc.setDeliveryChallanDetail(dcDetails);
 
-        return new JsonHelper().getJsonString(dc);
+        return dc;
     }
 
     @Override

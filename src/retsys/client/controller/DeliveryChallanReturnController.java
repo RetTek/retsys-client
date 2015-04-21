@@ -62,6 +62,7 @@ import retsys.client.model.DCItem;
  * @author Fahad
  */
 public class DeliveryChallanReturnController extends StandardController implements Initializable {
+
     @FXML
     private TableView<DCItem> dcDetail;
     @FXML
@@ -106,7 +107,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
     @FXML
     private TextField txt_brand;
     @FXML
-    private TextField txt_model;    
+    private TextField txt_model;
     @FXML
     private TextField txt_qty;
     @FXML
@@ -117,6 +118,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
     private TextField txt_rate;
     
     private ObservableList<DeliveryChallanDetail> dcDetailRecs = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      */
@@ -133,7 +135,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
         
         dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,amount);
         // TODO
-        
+
         AutoCompletionBinding<Item> bindForTxt_name = TextFields.bindAutoCompletion(txt_name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Item>>() {
 
             @Override
@@ -142,7 +144,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 try {
                     LovHandler lovHandler = new LovHandler("items", "name");
                     String response = lovHandler.getSuggestions(param.getUserText());
-                    list = (List<Item>)  new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
+                    list = (List<Item>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<Item>>() {
                     });
                 } catch (IOException ex) {
                     Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,8 +179,8 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 txt_rate.setText(String.valueOf(item.getRate()));
             }
         });
-        
-          AutoCompletionBinding<DeliveryChallan> bindForProject = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<DeliveryChallan>>() {
+
+        AutoCompletionBinding<DeliveryChallan> bindForProject = TextFields.bindAutoCompletion(project, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<DeliveryChallan>>() {
 
             @Override
             public Collection<DeliveryChallan> call(AutoCompletionBinding.ISuggestionRequest param) {
@@ -234,16 +236,19 @@ public class DeliveryChallanReturnController extends StandardController implemen
                     int amount = detail.getAmount();
                     String units = detail.getUnits();
 
-                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model, quantity,units,amount));
+                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model, quantity, units, amount));
                 }
                 dcDetail.setItems(items);
+                
+                populateAuditValues(dc);
+
             }
         });
-    }    
-    
+    }
+
     @Override
-    String buildRequestMsg() {
-        DeliveryChallan dc =  new DeliveryChallan();
+    Object buildRequestMsg() {
+        DeliveryChallan dc = new DeliveryChallan();
         dc.setChallanDate(Date.from(Instant.now()));
 
         Project proj = new Project();
@@ -259,11 +264,11 @@ public class DeliveryChallanReturnController extends StandardController implemen
 
         Iterator<DCItem> items = dcDetail.getItems().iterator();
         List<DeliveryChallanDetail> dcDetails = new ArrayList<>();
-        
+
         while (items.hasNext()) {
             DCItem dcItem = items.next();
             DeliveryChallanDetail dcDetail = new DeliveryChallanDetail();
-            
+
             Item item = new Item();
             item.setId(dcItem.getId().get());
             
@@ -274,10 +279,10 @@ public class DeliveryChallanReturnController extends StandardController implemen
             
             dcDetails.add(dcDetail);
         }
-        
+
         dc.setDeliveryChallanDetail(dcDetails);
 
-        return new JsonHelper().getJsonString(dc);
+        return dc;
     }
 
     @Override

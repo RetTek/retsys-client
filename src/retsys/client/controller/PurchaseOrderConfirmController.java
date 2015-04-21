@@ -259,6 +259,8 @@ public class PurchaseOrderConfirmController extends StandardController implement
                     items.add(new POItem(detail.getId(), site, name + " (ID:" + id + ")", brand, model, quantity, confirm, detail.getReceivedDate()));
                 }
                 poDetail.setItems(items);
+                
+                populateAuditValues(po);
             }
         });
 
@@ -395,7 +397,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
     }
 
     @Override
-    String buildRequestMsg() {
+    Object buildRequestMsg() {
         PurchaseOrder po = new PurchaseOrder();
         po.setId(Integer.parseInt(po_no.getText()));
         po.setDate(Date.from(Instant.now()));
@@ -433,7 +435,7 @@ public class PurchaseOrderConfirmController extends StandardController implement
 
         po.setPurchaseOrderDetail(poDetails);
 
-        return new JsonHelper().getJsonString(po);
+        return po;
     }
 
     @Override
