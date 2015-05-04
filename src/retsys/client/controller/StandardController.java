@@ -75,6 +75,13 @@ public abstract class StandardController {
     }
 
     public void setAuditValues() {
+        if(id != null && id.getText().isEmpty()){
+            auditId.setText("");
+            createdBy.setText("");
+            createdOn.setValue(null);
+            modifiedBy.setText("");
+            modifiedOn.setValue(null);
+        }
         if (!createdBy.getText().isEmpty()) { //modification
             modifiedBy.setText(AppContext.getInstance().getUsername());
             modifiedOn.setValue(LocalDate.now());

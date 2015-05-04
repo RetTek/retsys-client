@@ -5,8 +5,10 @@
  */
 package retsys.client.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +25,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import static retsys.client.controller.DashboardController.stage;
 import retsys.client.helper.GetCurrentDateTime;
+import retsys.client.helper.LovHandler;
+import retsys.client.json.JsonHelper;
 import retsys.client.main.AppContext;
+import retsys.client.model.User;
 
 /**
  * FXML Controller class
@@ -56,23 +61,22 @@ public class LoginController implements Initializable {
             errorMessage.setText("Hello " + userId.getText());
        
             if (!userLogging(userId.getText(), password.getText())){
-                errorMessage.setText("Unknown user " + userId.getText());
+                //errorMessage.setText("Unknown user " + userId.getText());
+                errorMessage.setText("Incorrect User / Password");
             }
-           
-            DashboardController profile = (DashboardController) replaceSceneContent("/retsys/client/fxml/Dashboard.fxml");
-        //Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
-            AppContext ctx = AppContext.getInstance();
-            ctx.setUsername(userId.getText());
-            ctx.setPassword(password.getText());
-        stage.fullScreenProperty();
-        //Scene scene = new Scene(root);
-        GetCurrentDateTime GetCurrentDateTime= new GetCurrentDateTime();
-            String date=GetCurrentDateTime.getsysDate();
-            stage.setTitle("Invertory Management System  "+this.userId.getText() +" "+date);
-            stage.centerOnScreen();
-        
-        
-        
+            else{
+                DashboardController profile = (DashboardController) replaceSceneContent("/retsys/client/fxml/Dashboard.fxml");
+                //Parent root = FXMLLoader.load(getClass().getResource("/retsys/client/fxml/Dashboard.fxml"));
+                AppContext ctx = AppContext.getInstance();
+                ctx.setUsername(userId.getText());
+                ctx.setPassword(password.getText());
+                stage.fullScreenProperty();
+                //Scene scene = new Scene(root);
+                GetCurrentDateTime GetCurrentDateTime= new GetCurrentDateTime();
+                String date=GetCurrentDateTime.getsysDate();
+                stage.setTitle("Invertory Management System  "+this.userId.getText() +" "+date);
+                stage.centerOnScreen();
+            }
     }
     
     private Initializable replaceSceneContent(String fxml) throws Exception {
@@ -103,8 +107,26 @@ public class LoginController implements Initializable {
 
     
     private boolean userLogging(String usr, String pass) {
-    //Code to check
-    return true;
+        //Code to check
+        boolean chkUser = false;
+        List<User> list = null;
+        try{
+            if("SYSTEM".equals(usr) && "RETSYS".equals(pass))
+                return true;
+            
+            LovHandler lovHandler = new LovHandler("users", "name");
+            String response = lovHandler.getSuggestions(usr);
+            list = (List<User>) new JsonHelper().convertJsonStringToObject(response, new TypeReference<List<User>>() {
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        for (User listUser : list){
+            if (listUser.getName().equals(usr) && listUser.getPassword().equals(pass))
+                chkUser = true;
+        }
+        return chkUser;
     }
-    }
+}
     

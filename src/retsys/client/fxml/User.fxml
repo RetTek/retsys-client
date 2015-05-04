@@ -8,7 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.collections.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="retsys.client.controller.UserController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.UserController">
     <children>
       <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -16,19 +16,21 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lbl_user_name" layoutX="75.0" layoutY="51.0" text="User Name" />
-                        <TextField fx:id="name" layoutX="179.0" layoutY="45.0" />
-                        <Label fx:id="lbl_user_password" layoutX="77.0" layoutY="87.0" text="Password" />
-                        <PasswordField fx:id="password" layoutX="179.0" layoutY="84.0" prefHeight="23.0" prefWidth="148.0" />
-                        <ChoiceBox fx:id="usertype" layoutX="179.0" layoutY="123.0" >
+                        <Label fx:id="lbl_user_name" layoutX="75.0" layoutY="80.0" text="User Name" styleClass="label-bright"/>
+                        <TextField fx:id="name" layoutX="179.0" layoutY="74.0" />
+                        <Label fx:id="lbl_user_password" layoutX="77.0" layoutY="116.0" text="Password" styleClass="label-bright"/>
+                        <PasswordField fx:id="password" layoutX="179.0" layoutY="113.0" prefHeight="23.0" prefWidth="148.0" />
+                        <ChoiceBox fx:id="usertype" layoutX="179.0" layoutY="152.0">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Normal"/>
-                                    <String fx:value="Admin"/>
+                                    <String fx:value="Normal" />
+                                    <String fx:value="Admin" />
                                 </FXCollections>
                             </items>
                         </ChoiceBox>
-                        <Label fx:id="lbl_user_type" layoutX="77.0" layoutY="125.0" text="User Type" />                        
+                        <Label fx:id="lbl_user_type" layoutX="77.0" layoutY="154.0" text="User Type" styleClass="label-bright"/>
+                        <TextField fx:id="id" layoutX="179.0" layoutY="36.0" />
+                        <Label fx:id="lbl_user_name1" layoutX="75.0" layoutY="40.0" text="User Id" />                        
                      </children>
                   </AnchorPane>
             </content>

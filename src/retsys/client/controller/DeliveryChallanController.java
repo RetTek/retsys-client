@@ -123,8 +123,8 @@ public class DeliveryChallanController extends StandardController implements Ini
         material_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("name"));
         brand_name.setCellValueFactory(new PropertyValueFactory<DCItem, String>("brand"));
         model_code.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
-        units.setCellValueFactory(new PropertyValueFactory<DCItem, String>("model"));
         quantity.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("quantity"));
+        units.setCellValueFactory(new PropertyValueFactory<DCItem, String>("units"));
         amount.setCellValueFactory(new PropertyValueFactory<DCItem, Integer>("amount"));
         
         dcDetail.getColumns().setAll(material_name, brand_name, model_code, quantity,units,amount);
@@ -169,7 +169,7 @@ public class DeliveryChallanController extends StandardController implements Ini
                 //fill other item related fields
                 txt_name.setUserData(item.getId());
                 txt_brand.setText(item.getBrand());
-                txt_model.setText(null); // item doesn't have this field. add??
+                txt_model.setText(item.getBrand()); // item doesn't have this field. add??
                 txt_rate.setText(String.valueOf(item.getRate()));
             }
         });
@@ -253,7 +253,7 @@ public class DeliveryChallanController extends StandardController implements Ini
             list = FXCollections.observableArrayList();
         }
 
-        DCItem item = new DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DCItem item = new DCItem(splitId(txt_name.getText()), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
         list.add(item);
         dcDetail.setItems(list);
     }

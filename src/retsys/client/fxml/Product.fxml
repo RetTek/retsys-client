@@ -16,12 +16,14 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label fx:id="lbl_product_name" layoutX="75.0" layoutY="47.0" text="Product Name" />
-                                <TextField fx:id="name" layoutX="201.0" layoutY="47.0" />
-                                <TextField fx:id="productDesc" layoutX="201.0" layoutY="81.0" />
-                                <Label fx:id="lbl_product_remarks" layoutX="75.0" layoutY="152.0" text="Remarks" />
-                                <Label fx:id="lbl_product_desc" layoutX="74.0" layoutY="81.0" text="Product Description" />
-                                <TextArea fx:id="remarks" layoutX="199.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0" />
+                                <Label fx:id="lbl_product_name" layoutX="75.0" layoutY="67.0" prefHeight="17.0" prefWidth="113.0" styleClass="label-bright" text="Product Name" />
+                                <TextField fx:id="name" layoutX="201.0" layoutY="67.0" />
+                                <TextField fx:id="productDesc" layoutX="201.0" layoutY="101.0" />
+                                <Label fx:id="lbl_product_remarks" layoutX="75.0" layoutY="172.0" text="Remarks" />
+                                <Label fx:id="lbl_product_desc" layoutX="74.0" layoutY="101.0" text="Product Description" />
+                                <TextArea fx:id="remarks" layoutX="199.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
+                        <TextField fx:id="id" layoutX="202.0" layoutY="31.0" />
+                        <Label fx:id="lbl_product_name1" layoutX="75.0" layoutY="38.0" text="Product Id" />
                             </children>
                         </AnchorPane>
                     </content>

@@ -92,7 +92,9 @@ public class ProductController extends StandardController implements Initializab
             public void handle(AutoCompletionBinding.AutoCompletionEvent<Product> event) {
                 Product product = event.getCompletion();
                 //fill other item related fields
+                id.setText(String.valueOf(product.getId()));
                 name.setText(product.getName());
+                productDesc.setText(product.getProdDesc());
                 remarks.setText(product.getRemarks());
                 //desc.setText(product.getDesc());
                 
@@ -113,6 +115,12 @@ public class ProductController extends StandardController implements Initializab
         product.setProdDesc(this.getDesc().getText());
         product.setRemarks(this.getRemarks().getText());
         
+        if (id.getText().equals("")) {
+            System.out.println("id is  null... " + id.getText());
+
+        } else {
+            product.setId(Integer.valueOf(id.getText()));
+        }
 //        JsonHelper helper = new JsonHelper();
 //        request = helper.getJsonString(product);
         
@@ -170,8 +178,8 @@ public class ProductController extends StandardController implements Initializab
     }
     
     public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
-        String response = delete("products",splitId(this.name.getText()));
+         System.out.println("getId(this.name.getText() .... "+Integer.valueOf(this.id.getText()));
+        String response = delete("products",Integer.valueOf(this.id.getText()));
         
         clear();
 
@@ -179,12 +187,29 @@ public class ProductController extends StandardController implements Initializab
        
     }
     void clear() {
-    
+       id.setText("");
        name.setText("");
        this.productDesc.setText("");
-        this.remarks.setText("");
-        
-     
+       this.remarks.setText(""); 
+       this.auditId.setText("");
+       this.createdBy.setText("");
+       this.createdOn.setValue(null);
+       this.modifiedBy.setText("");
+       this.modifiedOn.setValue(null);
+    }
+    
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            Product product = (Product) helper.convertJsonStringToObject(response, new TypeReference<Product>() {
+            });
+            id.setText(product.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
 }

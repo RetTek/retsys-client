@@ -8,11 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanController">
    <children>
-      <AnchorPane layoutX="72.0" layoutY="182.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <AnchorPane layoutX="72.0" layoutY="15.0" prefHeight="730.0" prefWidth="682.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <TableView fx:id="dcDetail" editable="true" layoutY="24.0" prefHeight="276.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+            <TableView fx:id="dcDetail" editable="true" layoutY="210.0" prefHeight="276.0" prefWidth="682.0">
               <columns>
-                <!--<TableColumn fx:id="sno" prefWidth="46.0" text="S.No" /> -->
                   <TableColumn fx:id="material_name" editable="false" prefWidth="128.0" text="Material Name" />
                   <TableColumn fx:id="brand_name" editable="false" prefWidth="125.0" text="Brand Name" />
                   <TableColumn fx:id="model_code" editable="false" prefWidth="99.0" text="Model Code" />
@@ -21,8 +20,6 @@
                   <TableColumn fx:id="amount" editable="false" minWidth="3.0" prefWidth="134.0" text="Amount" />
               </columns>
             </TableView>
-         </children>
-      </AnchorPane>
       <TextField fx:id="project" layoutX="493.0" layoutY="23.0" prefHeight="25.0" prefWidth="229.0" />
       <Label fx:id="lbl_projectname" layoutX="369.0" layoutY="27.0" prefHeight="17.0" prefWidth="116.0" text="Project Name" />
       <TextField fx:id="dc_no" layoutX="107.0" layoutY="55.0" prefHeight="25.0" prefWidth="106.0" />
@@ -37,7 +34,7 @@
          </children>
       </HBox>
       
-      <HBox layoutY="179.0" prefHeight="308.0" prefWidth="742.0" spacing="10.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="179.0">
+      <HBox layoutY="180.0" prefHeight="308.0" prefWidth="742.0" spacing="10.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#addItem" styleClass="button-func" text="Update" />
                               <Button mnemonicParsing="false" onAction="#deleteItem" styleClass="button-func" text="Delete" />
@@ -61,7 +58,7 @@
                         <Label layoutX="198.0" layoutY="130.0" text="Brand" />
                         <Label layoutX="305.0" layoutY="132.0" text="Model" />
                         <Label layoutX="500.0" layoutY="132.0" text="Quantity" />
-                        <TextField fx:id="txt_qty" onAction="#calcAmount"  layoutX="500.0" layoutY="149.0" prefHeight="25.0" prefWidth="53.0" />
+                        <TextField fx:id="txt_qty" layoutX="500.0" layoutY="149.0" onAction="#calcAmount" prefHeight="25.0" prefWidth="53.0" />
       <TextField fx:id="txt_units" layoutX="567.0" layoutY="148.0" prefHeight="25.0" prefWidth="53.0" />
       <Label layoutX="567.0" layoutY="131.0" text="Units" />
       <Label layoutX="635.0" layoutY="131.0" text="Amount" />
@@ -72,5 +69,8 @@
       <TextField fx:id="concernperson" layoutX="494.0" layoutY="87.0" prefHeight="25.0" prefWidth="149.0" />
       <TextField fx:id="txt_rate" layoutX="426.0" layoutY="149.0" prefHeight="25.0" prefWidth="61.0" />
       <Label layoutX="426.0" layoutY="132.0" text="Rate" />
+               </children>
+      </AnchorPane>
+
    </children>
 </AnchorPane>
