@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanReturnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanReturnController">
    <children>
       <AnchorPane layoutX="72.0" layoutY="182.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
@@ -37,7 +37,7 @@
          </children>
       </HBox>
       
-      <HBox layoutY="179.0" prefHeight="27.0" prefWidth="779.0" spacing="10.0" AnchorPane.bottomAnchor="227.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="179.0">
+      <HBox layoutY="179.0" prefHeight="26.0" prefWidth="742.0" spacing="10.0" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="179.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#addItem" styleClass="button-func" text="Update" />
                               <Button mnemonicParsing="false" onAction="#deleteItem" styleClass="button-func" text="Delete" />
@@ -61,7 +61,7 @@
                         <Label layoutX="198.0" layoutY="130.0" text="Brand" />
                         <Label layoutX="307.0" layoutY="132.0" text="Model" />
                         <Label layoutX="500.0" layoutY="132.0" text="Quantity" />
-                        <TextField fx:id="txt_qty" onAction="#calcAmount"  layoutX="500.0" layoutY="149.0" prefHeight="25.0" prefWidth="53.0" />
+                        <TextField fx:id="txt_qty" layoutX="500.0" layoutY="149.0" onAction="#calcAmount" prefHeight="25.0" prefWidth="53.0" />
       <TextField fx:id="txt_units" layoutX="567.0" layoutY="148.0" prefHeight="25.0" prefWidth="53.0" />
       <Label layoutX="567.0" layoutY="131.0" text="Units" />
       <Label layoutX="635.0" layoutY="131.0" text="Amount" />

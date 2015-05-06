@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanController">
    <children>
-      <AnchorPane layoutX="72.0" layoutY="15.0" prefHeight="730.0" prefWidth="682.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <AnchorPane layoutX="72.0" layoutY="15.0" prefHeight="730.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="dcDetail" editable="true" layoutY="210.0" prefHeight="276.0" prefWidth="682.0">
+            <TableView fx:id="dcDetail" editable="true" layoutY="210.0" prefHeight="276.0">
               <columns>
                   <TableColumn fx:id="material_name" editable="false" prefWidth="128.0" text="Material Name" />
                   <TableColumn fx:id="brand_name" editable="false" prefWidth="125.0" text="Brand Name" />
@@ -34,7 +34,7 @@
          </children>
       </HBox>
       
-      <HBox layoutY="180.0" prefHeight="308.0" prefWidth="742.0" spacing="10.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0">
+      <HBox layoutY="180.0" prefHeight="26.0" prefWidth="742.0" spacing="10.0" AnchorPane.bottomAnchor="357.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="180.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#addItem" styleClass="button-func" text="Update" />
                               <Button mnemonicParsing="false" onAction="#deleteItem" styleClass="button-func" text="Delete" />
