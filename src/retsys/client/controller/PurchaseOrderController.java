@@ -400,5 +400,19 @@ reportmap.put("PODETAIL", poItemRow);
     void clear() {
     System.out.println("To be defined .... ");
      }
+    
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            PurchaseOrder po = (PurchaseOrder) helper.convertJsonStringToObject(response, new TypeReference<PurchaseOrder>() {
+            });
+            id.setText(po.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 }
