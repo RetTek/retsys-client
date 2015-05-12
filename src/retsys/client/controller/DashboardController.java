@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -195,7 +198,36 @@ public class DashboardController extends AnchorPane implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initializeNewMenuTree();
         initializePendingPO();
+
+        LocalDate todaysDate = LocalDate.now();
+        today.setText(todaysDate.format(DateTimeFormatter.ofPattern("d MMMM y")));
+
+        scheduleTimeRefresh();
     }
+
+    private void scheduleTimeRefresh() {
+        TimerTask headerClock = new TimerTask() {
+
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+                    }
+                });
+            }
+        };
+
+        time.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+        long delay = 60 - LocalTime.now().getSecond();
+
+        Timer timerTask = new Timer(true);
+
+        timerTask.schedule(headerClock, delay * 1000, 60000);
+    }
+
     SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
 
     private void initializePendingPO() {
@@ -231,7 +263,7 @@ public class DashboardController extends AnchorPane implements Initializable {
 
                                 @Override
                                 public void handle(MouseEvent event) {
-                                    StandardController controller = openScreen("/retsys/client/fxml/PurchaseOrderConfirm.fxml","Purchase Order Confirmation");
+                                    StandardController controller = openScreen("/retsys/client/fxml/PurchaseOrderConfirm.fxml", "Purchase Order Confirmation");
                                     controller.init(item);
                                 }
                             });
@@ -547,7 +579,7 @@ public class DashboardController extends AnchorPane implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return controller;
     }
 

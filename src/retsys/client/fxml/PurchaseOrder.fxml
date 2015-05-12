@@ -34,7 +34,7 @@
             <Label fx:id="lbl_po_date" prefHeight="17.0" prefWidth="70.0" text="P.O. Date" />
             <DatePicker fx:id="po_date" GridPane.columnIndex="1" />
             <Label fx:id="lbl_po_no" prefHeight="17.0" prefWidth="70.0" text="P.O. No." GridPane.rowIndex="1" />
-            <TextField fx:id="Po_no" editable="false" prefHeight="25.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="id" editable="false" prefHeight="25.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lbl_shop_name" prefHeight="17.0" prefWidth="79.0" text="Shop Name" GridPane.rowIndex="2" />
                    <TextField fx:id="vendor" prefHeight="25.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lbl_sitename" prefHeight="17.0" prefWidth="91.0" text="Project Name" GridPane.columnIndex="2" />

@@ -6,37 +6,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="functionNode" layoutX="29.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <FlowPane alignment="CENTER_LEFT" hgap="20.0" prefHeight="40.0" vgap="5.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT">
+            <ScrollPane fitToWidth="true">
+               <content>
+                  <VBox fx:id="functionNode" />
+               </content>
+            </ScrollPane>
+            <FlowPane alignment="CENTER_LEFT" hgap="20.0" prefHeight="40.0" vgap="5.0">
                <children>
-                  <TextField fx:id="auditId" maxWidth="1.0" visible="false" />
-                  <Label text="Created By:" />
-                  <TextField fx:id="createdBy" editable="false" prefWidth="100.0" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <TextField fx:id="auditId" maxWidth="1.0" visible="false" />
+                        <Label text="Created By:" />
+                        <TextField fx:id="createdBy" editable="false" prefWidth="100.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Created On:" />
+                        <DatePicker fx:id="createdOn" editable="false" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Modified By:" />
+                        <TextField fx:id="modifiedBy" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="Modified On:" />
+                        <DatePicker fx:id="modifiedOn" editable="false" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Label text="Created On:" />
-                  <DatePicker fx:id="createdOn" editable="false" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Label text="Modified By:" />
-                  <TextField fx:id="modifiedBy" editable="false" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Label text="Modified On:" />
-                  <DatePicker fx:id="modifiedOn" editable="false" />
-               </children>
-            </HBox>
+            </FlowPane>
          </children>
-      </FlowPane>
+      </VBox>
    </children>
 </AnchorPane>
