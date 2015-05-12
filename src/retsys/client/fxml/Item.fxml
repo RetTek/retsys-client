@@ -16,8 +16,8 @@
                      <children>
                         <GridPane layoutX="-62.0" layoutY="6.0" prefHeight="460.0" prefWidth="671.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="92.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="178.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="97.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="175.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="137.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
                           </columnConstraints>
@@ -39,7 +39,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="lbl_item_name" text="Item Name" GridPane.rowIndex="1" />
+                              <Label fx:id="lbl_item_name" styleClass="label-bright" text="Item Name" GridPane.rowIndex="1" />
                               <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -57,13 +57,13 @@
                                  </GridPane.margin>
                               </TextField>
                               <Label fx:id="lbl_billno1" text="Brand Code" GridPane.rowIndex="3" />
-                              <Label fx:id="lbl_rate" text="Rate" GridPane.rowIndex="4" />
+                              <Label fx:id="lbl_rate" styleClass="label-bright" text="Rate" GridPane.rowIndex="4" />
                               <TextField fx:id="rate" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label fx:id="lbl_quantity" text="Quantity" GridPane.rowIndex="5" />
+                              <Label fx:id="lbl_quantity" styleClass="label-bright" text="Quantity" GridPane.rowIndex="5" />
                               <TextField fx:id="quantity" text="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -87,7 +87,7 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label fx:id="lbl_vendor" prefHeight="17.0" prefWidth="44.0" text="Vendor" GridPane.rowIndex="8" />
+                              <Label fx:id="lbl_vendor" prefHeight="17.0" prefWidth="70.0" styleClass="label-bright" text="Vendor" GridPane.rowIndex="8" />
                               <TextField fx:id="vendor" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
@@ -107,7 +107,7 @@
                               </TextArea>
                               <Label fx:id="lbl_supervisor" text="Supervisor" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <TextField fx:id="supervisor" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <Label fx:id="lbl_site" text="Site Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="lbl_site" styleClass="label-bright" text="Site Name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <TextField fx:id="Site" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                               <Label fx:id="lbl_godown" text="Godown Name" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                               <TextField fx:id="godown_name" GridPane.columnIndex="3" GridPane.rowIndex="3" />
@@ -124,13 +124,13 @@
                               <Label fx:id="lbl_supervisor2" text="Transport Charges" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                               <TextField fx:id="transport_charges" text="0.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                               <TextField fx:id="minReorder" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                              <Label fx:id="lbl_minimum_reorder" text="Re Order Level" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                              <Label fx:id="lbl_minimum_reorder" styleClass="label-bright" text="Re Order Level" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                               <TextField fx:id="product" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                              <Label fx:id="lbl_product" text="Product" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                              <Label fx:id="lbl_discount_percent" text="Vendor Discount %" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                              <Label fx:id="lbl_product" styleClass="label-bright" text="Product" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                              <Label fx:id="lbl_discount_percent" styleClass="label-bright" text="Vendor Discount %" GridPane.columnIndex="2" GridPane.rowIndex="12" />
                               <TextField fx:id="discountPercentage" GridPane.columnIndex="3" GridPane.rowIndex="12" />
                               <Label fx:id="lbl_item_id" text="Item ID" />
-                              <TextField fx:id="id" GridPane.columnIndex="1">
+                              <TextField fx:id="id" editable="false" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>

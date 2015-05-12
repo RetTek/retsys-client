@@ -30,7 +30,7 @@
                           </rowConstraints>
                            <children>
                               <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="lbl_client_name" text="Client Name" GridPane.rowIndex="1" />
+                              <Label fx:id="lbl_client_name" styleClass="label-bright" text="Client Name" GridPane.rowIndex="1" />
                               <TextArea fx:id="address" prefHeight="78.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="lbl_client_address" text="Address" GridPane.rowIndex="2" />
                               <TextField fx:id="phone" prefHeight="25.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -41,7 +41,7 @@
                               <Label fx:id="lbl_client_email" text="Email" GridPane.rowIndex="5" />
                               <TextArea fx:id="remarks" prefHeight="107.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label fx:id="lbl_client_remarks" text="Remarks" GridPane.rowIndex="6" />
-                              <TextField fx:id="id" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1">
+                              <TextField fx:id="id" editable="false" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1">
                                  <padding>
                                     <Insets left="20.0" right="20.0" />
                                  </padding>

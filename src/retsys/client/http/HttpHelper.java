@@ -29,7 +29,7 @@ import org.apache.http.impl.client.HttpClients;
 public class HttpHelper {
 
     String hostName = "localhost";
-    String hostPort = "8082";
+    String hostPort = "8080";
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {

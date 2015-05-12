@@ -26,14 +26,14 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="id" GridPane.columnIndex="1" />
+                              <TextField fx:id="id" editable="false" GridPane.columnIndex="1" />
                               <Label fx:id="lbl_project_id" text="Project ID" />
                               <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="lbl_project_name" text="Project Name" GridPane.rowIndex="1" />
+                              <Label fx:id="lbl_project_name" styleClass="label-bright" text="Project Name" GridPane.rowIndex="1" />
                               <TextField fx:id="projectDesc" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="lbl_project_desc" text="Project Description" GridPane.rowIndex="2" />
                               <TextField fx:id="client" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label fx:id="lbl_project_code" text="Client Name" GridPane.rowIndex="3" />
+                              <Label fx:id="lbl_project_code" styleClass="label-bright" text="Client Name" GridPane.rowIndex="3" />
                               <Label fx:id="lbl_project_remarks" text="Remarks" GridPane.rowIndex="4" />
                               <TextArea fx:id="remarks" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
