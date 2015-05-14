@@ -35,7 +35,7 @@ public class PrintHandler {
       String k =null;        
     try {
     k = vm.generateReport(dataMap, reportName);//"<html><body> This is my Project </body></html>";
-    OutputStream file = new FileOutputStream(new File("C:\\Temp\\Test.pdf"));
+    OutputStream file = new FileOutputStream(new File("C:\\Temp\\"+reportName+".pdf"));
     Document document = new Document();
     PdfWriter writer = PdfWriter.getInstance(document, file);
     document.open();

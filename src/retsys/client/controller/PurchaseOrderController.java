@@ -222,8 +222,8 @@ public class PurchaseOrderController extends StandardController implements Initi
     Map reportmap =new HashMap();
     reportmap.put("pono", Po_no.getText());
     reportmap.put("podate", po_date.getValue());
-    reportmap.put("ShopName", vendor.getText());
-    reportmap.put("SiteName", project.getText());
+    reportmap.put("ShopName",splitName(vendor.getText()));
+    reportmap.put("SiteName", splitName(project.getText()));
     reportmap.put("DeliveryAddress",delivery_address.getText());
     
     
@@ -233,10 +233,11 @@ public class PurchaseOrderController extends StandardController implements Initi
         List poItemRow =  new ArrayList();
         while (items.hasNext()) {
             POItem poItem = items.next();
+            sno=sno++;
             List poItemList =  new ArrayList();
             poItemList.add(sno);
             poItemList.add((poItem.getLocation().get()));
-            poItemList.add((poItem.getName().get()));
+            poItemList.add(splitName((poItem.getName().get())));
             poItemList.add((poItem.getBrand().get()));
             poItemList.add((poItem.getModel().get()));
             poItemList.add((poItem.getQuantity().get()));

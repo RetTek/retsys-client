@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.fxml.INVENTORY_REPORTController">
+  <children>
+        <TabPane layoutX="159.0" layoutY="105.0" prefHeight="489.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="tab_product" text="Product Detail">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                        <TextField fx:id="PROJECT" layoutX="202.0" layoutY="31.0" />
+                        <Label fx:id="lbl_project_name" layoutX="75.0" layoutY="38.0" text="Project Name" />
+                        <Button layoutX="202.0" layoutY="69.0" mnemonicParsing="false" onAction="#printRep" text="Generate Report" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>   
+</AnchorPane>
