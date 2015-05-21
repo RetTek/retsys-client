@@ -130,7 +130,7 @@
                               <Label fx:id="lbl_discount_percent" styleClass="label-bright" text="Vendor Discount %" GridPane.columnIndex="2" GridPane.rowIndex="12" />
                               <TextField fx:id="discountPercentage" GridPane.columnIndex="3" GridPane.rowIndex="12" />
                               <Label fx:id="lbl_item_id" text="Item ID" />
-                              <TextField fx:id="id" editable="false" GridPane.columnIndex="1">
+                              <TextField fx:id="id" editable="false" onMouseClicked="#enableid" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="retsys.client.controller.DeliveryChallanController">
    <children>
       <AnchorPane layoutX="72.0" layoutY="15.0" prefHeight="730.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,6 @@
       <Label fx:id="lbl_dc_date" layoutX="31.0" layoutY="32.0" prefHeight="17.0" prefWidth="70.0" text="DC. Date" />
       <HBox layoutX="31.0" layoutY="491.0">
          <children>
-            <Button layoutX="31.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Generate DC" />
             <Button layoutX="208.0" layoutY="491.0" mnemonicParsing="false" onAction="#save" prefHeight="37.0" prefWidth="167.0" text="Save DC" />
             <Button layoutX="385.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Print DC" />
          </children>

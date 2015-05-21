@@ -30,7 +30,7 @@
                            <children>
                               <Label fx:id="lbl_vendor_name" styleClass="label-bright" text="Vendor Name" GridPane.rowIndex="1" />
                               <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="id" editable="false" GridPane.columnIndex="1" />
+                              <TextField fx:id="id" editable="false" onMouseClicked="#enableid" GridPane.columnIndex="1" />
                               <Label fx:id="lbl_vendor_id" text="Vendor ID" />
                               <TextArea fx:id="address" prefHeight="78.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label fx:id="lbl_vendor_address" text="Address" GridPane.rowIndex="2" />

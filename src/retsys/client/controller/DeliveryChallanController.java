@@ -225,8 +225,8 @@ public class DeliveryChallanController extends StandardController implements Ini
             DeliveryChallanDetail dcDetail = new DeliveryChallanDetail();
             
             Item item = new Item();
-            item.setId(getId(String.valueOf(dcItem.getId().get())));
-            
+            //item.setId(getId(String.valueOf(dcItem.getId().get())));
+            item.setId(dcItem.getId().get());
             dcDetail.setItem(item);
             dcDetail.setQuantity(dcItem.getQuantity().get());
             dcDetail.setUnits(dcItem.getUnits().get());

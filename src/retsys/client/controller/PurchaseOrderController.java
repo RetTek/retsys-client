@@ -220,7 +220,7 @@ public class PurchaseOrderController extends StandardController implements Initi
     public Map getReportDataMap()
     {
     Map reportmap =new HashMap();
-    reportmap.put("pono", Po_no.getText());
+    reportmap.put("pono", id.getText());
     reportmap.put("podate", po_date.getValue());
     reportmap.put("ShopName",splitName(vendor.getText()));
     reportmap.put("SiteName", splitName(project.getText()));

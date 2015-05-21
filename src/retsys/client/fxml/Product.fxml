@@ -22,7 +22,7 @@
                                 <Label fx:id="lbl_product_remarks" layoutX="75.0" layoutY="172.0" text="Remarks" />
                                 <Label fx:id="lbl_product_desc" layoutX="74.0" layoutY="101.0" text="Product Description" />
                                 <TextArea fx:id="remarks" layoutX="199.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
-                        <TextField fx:id="id" layoutX="202.0" layoutY="31.0" />
+                        <TextField fx:id="id" layoutX="202.0" layoutY="31.0" onMouseClicked="#enableid" />
                         <Label fx:id="lbl_product_name1" layoutX="75.0" layoutY="38.0" text="Product Id" />
                             </children>
                         </AnchorPane>

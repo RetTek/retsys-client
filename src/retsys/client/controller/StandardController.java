@@ -257,7 +257,9 @@ public abstract class StandardController {
     protected void postSave(String response){
 
     }
-
+public void enableid () throws IOException {
+id.editableProperty().setValue(Boolean.TRUE);
+}
     abstract Object buildRequestMsg();
 
     abstract String getSaveUrl();

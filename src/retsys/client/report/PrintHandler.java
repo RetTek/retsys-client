@@ -35,14 +35,14 @@ public class PrintHandler {
       String k =null;        
     try {
     k = vm.generateReport(dataMap, reportName);//"<html><body> This is my Project </body></html>";
-    OutputStream file = new FileOutputStream(new File("C:\\Temp\\"+reportName+".pdf"));
-    Document document = new Document();
-    PdfWriter writer = PdfWriter.getInstance(document, file);
-    document.open();
-    InputStream is = new ByteArrayInputStream(k.getBytes());
-    XMLWorkerHelper.getInstance().parseXHtml(writer, document, is);
-    document.close();
-    file.close();
+            try (OutputStream file = new FileOutputStream(new File("C:\\Temp\\"+reportName+".pdf"))) {
+                Document document = new Document();
+                PdfWriter writer = PdfWriter.getInstance(document, file);
+                document.open();
+                InputStream is = new ByteArrayInputStream(k.getBytes());
+                XMLWorkerHelper.getInstance().parseXHtml(writer, document, is);
+                document.close();
+            }
 } catch (Exception e) {
     e.printStackTrace();
 }
