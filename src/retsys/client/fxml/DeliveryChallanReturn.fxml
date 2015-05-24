@@ -10,7 +10,7 @@
    <children>
       <AnchorPane layoutX="72.0" layoutY="182.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <TableView fx:id="dcDetail" editable="true" layoutY="24.0" prefHeight="276.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+            <TableView fx:id="dcDetail" editable="true" onMouseClicked="#modifyItem" layoutY="24.0" prefHeight="276.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
               <columns>
                 <!--<TableColumn fx:id="sno" prefWidth="46.0" text="S.No" /> -->
                   <TableColumn fx:id="material_name" editable="false" prefWidth="128.0" text="Material Name" />
@@ -31,9 +31,9 @@
       <Label fx:id="lbl_dc_date" layoutX="31.0" layoutY="32.0" prefHeight="17.0" prefWidth="70.0" text="DC. Date" />
       <HBox layoutX="31.0" layoutY="491.0">
          <children>
-            <Button layoutX="31.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Generate DC" />
+            <!--<Button layoutX="31.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Generate DC" /> -->
             <Button layoutX="208.0" layoutY="491.0" mnemonicParsing="false" onAction="#save" prefHeight="37.0" prefWidth="167.0" text="Save DC" />
-            <Button layoutX="385.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Print DC" />
+            <!-- <Button layoutX="385.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Print DC" /> -->
          </children>
       </HBox>
       

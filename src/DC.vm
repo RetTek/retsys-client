@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<table align="center" border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="text-align: center;"><strong>SUN INTERIORS AND BUILDERS</strong></td>
+		</tr>
+		<tr>
+			<td>MATERIAL DELIVERY CHELLAN NO: $dcno</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SITE NAME:$sitename</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DATE:$dcdate</p>
+
+<table align="center" border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="text-align: center;">S.No</td>
+			<td>MATERIAL</td>
+			<td>QTY</td>
+			<td>UNITS</td>
+			<td>RATE</td>
+			<td>AMOUNT</td>
+		</tr>
+#foreach($!itemrec in $!DCDETAIL)
+		<tr>
+			<td scope="col">$!itemrec.get(0)</td>
+			<td scope="col">$!itemrec.get(1)</td>
+			<td scope="col">$!itemrec.get(2)</td>
+			<td scope="col">$!itemrec.get(3)</td>
+			<td scope="col">$!itemrec.get(4)</td>
+			<td scope="col">$!itemrec.get(5)</td>
+		</tr>
+#end		
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>

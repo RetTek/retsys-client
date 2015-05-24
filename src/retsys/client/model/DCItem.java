@@ -23,14 +23,17 @@ public class DCItem {
         private SimpleStringProperty brand = new SimpleStringProperty();
         private SimpleStringProperty model = new SimpleStringProperty();
         private SimpleIntegerProperty quantity = new SimpleIntegerProperty();
+        private SimpleIntegerProperty rate = new SimpleIntegerProperty();
+
         private SimpleStringProperty units = new SimpleStringProperty();
         private SimpleIntegerProperty amount = new SimpleIntegerProperty();
 
-        public DCItem(int id, String name, String brand, String model, int quantity, String units, int amount) {
+        public DCItem(int id, String name, String brand, String model, int rate, int quantity, String units, int amount) {
             this.id.set(id);
             this.name.set(name);
             this.brand.set(brand);
             this.model.set(model);
+            this.rate.set(rate);
             this.quantity.set(quantity);
             this.units.set(units);
             this.amount.set(amount);
@@ -139,5 +142,12 @@ public class DCItem {
 
         public void setAmount(SimpleIntegerProperty amount) {
             this.amount = amount;
+        }        
+        public SimpleIntegerProperty getRate() {
+            return rate;
+        }
+
+        public void setRate(SimpleIntegerProperty rate) {
+            this.rate = rate;
         }        
     }

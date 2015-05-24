@@ -26,6 +26,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -221,7 +224,10 @@ public class DeliveryChallanReturnController extends StandardController implemen
                 dc_date.setValue(LocalDateTime.ofInstant(dc.getChallanDate().toInstant(), ZoneId.systemDefault()).toLocalDate());
                 dc_no.setText(dc.getId().toString());
                 project.setText(dc.getProject().getName() + " (ID:" + dc.getProject().getId() + ")");
-
+                deliverymode.setText(dc.getDeliveryMode());
+                concernperson.setText(dc.getConcernPerson());
+                
+                
                 ObservableList<DCItem> items = FXCollections.observableArrayList();
                 Iterator detailsIt = dc.getDeliveryChallanDetail().iterator();
                 while (detailsIt.hasNext()) {
@@ -232,17 +238,27 @@ public class DeliveryChallanReturnController extends StandardController implemen
                     String name = item.getName();
                     String brand = item.getBrand();
                     String model = null;
+                    int rate    = item.getRate().intValue();
                     int quantity = detail.getQuantity();
                     int amount = detail.getAmount();
                     String units = detail.getUnits();
 
-                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model, quantity, units, amount));
+                    items.add(new DCItem(id, name + " (ID:" + id + ")", brand, model,rate, quantity, units, amount));
                 }
                 dcDetail.setItems(items);
                 
                 populateAuditValues(dc);
 
             }
+        });
+        
+        txt_qty.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            if(!newValue) {
+                calcAmount();
+            }
+        }
         });
     }
 
@@ -298,7 +314,7 @@ public class DeliveryChallanReturnController extends StandardController implemen
             list = FXCollections.observableArrayList();
         }
 
-        DCItem item = new DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DCItem item = new DCItem((int)txt_name.getUserData(), txt_name.getText(), txt_brand.getText(), txt_model.getText(),Double.valueOf(txt_rate.getText()).intValue(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Double.valueOf(txt_amount.getText()).intValue());
         list.add(item);
         dcDetail.setItems(list);
     }
@@ -308,10 +324,27 @@ public class DeliveryChallanReturnController extends StandardController implemen
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
     }    
-    public void calcAmount(ActionEvent event){
+    public void calcAmount(){
         if(txt_rate.getText()!=null && txt_qty.getText()!=null){
-            txt_amount.setText(String.valueOf(Integer.parseInt(txt_rate.getText()) * Integer.parseInt(txt_qty.getText())));
+            txt_amount.setText(String.valueOf(Double.valueOf(txt_rate.getText()) * Double.valueOf(txt_qty.getText())));
+            
         }
     }
     
+    public void modifyItem(MouseEvent event) {
+        if (dcDetail.getSelectionModel().getSelectedItem() != null) {
+            DCItem item = dcDetail.getSelectionModel().getSelectedItem();
+            txt_name.setUserData(item.getId().getValue());
+            txt_name.setText(item.getName().getValue());
+            txt_brand.setText(item.getBrand().getValue());
+            txt_model.setText(item.getBrand().getValue()); // item doesn't have this field. add??
+            txt_rate.setText(String.valueOf(item.getRate().getValue()));
+            txt_units.setText(item.getUnits().getValue());
+            txt_qty.setText(String.valueOf(item.getQuantity().getValue()));
+            txt_amount.setText(String.valueOf(item.getAmount().getValue()));
+            txt_qty.requestFocus();
+            dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
+        }
+    }    
+
 }
