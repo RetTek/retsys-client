@@ -13,15 +13,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +41,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -50,6 +57,7 @@ import retsys.client.model.PurchaseOrder;
 import retsys.client.model.PurchaseOrderDetail;
 import retsys.client.model.Vendor;
 import retsys.client.model.DCItem;
+import retsys.client.report.PrintHandler;
 
 
 /**
@@ -171,6 +179,10 @@ public class DeliveryChallanController extends StandardController implements Ini
                 txt_brand.setText(item.getBrand());
                 txt_model.setText(item.getBrand()); // item doesn't have this field. add??
                 txt_rate.setText(String.valueOf(item.getRate()));
+                txt_units.setText(item.getUnit());
+                txt_qty.setText("");
+                txt_amount.setText("");
+                txt_qty.requestFocus();
             }
         });
         
@@ -201,6 +213,15 @@ public class DeliveryChallanController extends StandardController implements Ini
             public Project fromString(String string) {
                 throw new UnsupportedOperationException();
             }
+        });
+          
+        txt_qty.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            if(!newValue) {
+                calcAmount();
+            }
+        }
         });
     }    
     
@@ -253,7 +274,7 @@ public class DeliveryChallanController extends StandardController implements Ini
             list = FXCollections.observableArrayList();
         }
 
-        DCItem item = new DCItem(splitId(txt_name.getText()), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Integer.parseInt(txt_amount.getText()));
+        DCItem item = new DCItem(splitId(txt_name.getText()), txt_name.getText(), txt_brand.getText(), txt_model.getText(),Double.valueOf(txt_rate.getText()).intValue(), Integer.parseInt(txt_qty.getText()), txt_units.getText(), Double.valueOf(txt_amount.getText()).intValue());
         list.add(item);
         dcDetail.setItems(list);
     }
@@ -263,11 +284,76 @@ public class DeliveryChallanController extends StandardController implements Ini
             dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
     }    
-    
-    public void calcAmount(ActionEvent event){
-        if(txt_rate.getText()!=null && txt_qty.getText()!=null){
-            txt_amount.setText(String.valueOf(Integer.parseInt(txt_rate.getText()) * Integer.parseInt(txt_qty.getText())));
+    public void modifyItem(MouseEvent event) {
+        if (dcDetail.getSelectionModel().getSelectedItem() != null) {
+            DCItem item = dcDetail.getSelectionModel().getSelectedItem();
+            txt_name.setUserData(item.getId().getValue());
+            txt_name.setText(item.getName().getValue());
+            txt_brand.setText(item.getBrand().getValue());
+            txt_model.setText(item.getBrand().getValue()); // item doesn't have this field. add??
+            txt_rate.setText(String.valueOf(item.getRate().getValue()));
+            txt_units.setText(item.getUnits().getValue());
+            txt_qty.setText(String.valueOf(item.getQuantity().getValue()));
+            txt_amount.setText(String.valueOf(item.getAmount().getValue()));
+            txt_qty.requestFocus();
+            dcDetail.getItems().remove(dcDetail.getSelectionModel().getSelectedItem());
         }
+    }    
+    
+    public void calcAmount(){
+        if(txt_rate.getText()!=null && txt_qty.getText()!=null){
+            txt_amount.setText(String.valueOf(Double.valueOf(txt_rate.getText()) * Double.valueOf(txt_qty.getText())));
+            
+        }
+    }
+    
+    @Override
+    protected void postSave(String response) {
+        JsonHelper helper = new JsonHelper();
+        System.out.println("response .... " + response);
+        try {
+            DeliveryChallan dc = (DeliveryChallan) helper.convertJsonStringToObject(response, new TypeReference<DeliveryChallan>() {
+            });
+            id.setText(dc.getId().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(DeliveryChallanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    @FXML
+    private void printDoc(ActionEvent event) {
+      PrintHandler printhandler =new PrintHandler("DC", getReportDataMap());
+      System.out.println(printhandler.generatePrintData());
+    }
+    
+    public Map getReportDataMap()
+    {
+        Map reportmap =new HashMap();
+        reportmap.put("dcno", id.getText());
+        reportmap.put("dcdate", dc_date.getValue());
+        reportmap.put("sitename", splitName(project.getText()));    
+    
+        //poItem.add((String))
+        Iterator<DCItem> items = dcDetail.getItems().iterator();
+        Set<DeliveryChallanDetail> poDetails = new HashSet<>();
+        List dcItemRow =  new ArrayList();
+        int sno = 0;
+        while (items.hasNext()) {
+            DCItem dcItem = items.next();
+            List dcItemList =  new ArrayList();
+            sno++;
+            dcItemList.add(sno);
+            dcItemList.add(splitName((dcItem.getName().get())));
+            dcItemList.add(dcItem.getQuantity().getValue());
+            dcItemList.add(dcItem.getUnits().getValue());
+            dcItemList.add(dcItem.getRate().getValue());
+            dcItemList.add(dcItem.getAmount().getValue());
+
+            dcItemRow.add(dcItemList);
+        }
+        reportmap.put("DCDETAIL", dcItemRow);    
+        return reportmap;
     }
     
 }

@@ -10,7 +10,7 @@
    <children>
       <AnchorPane layoutX="72.0" layoutY="15.0" prefHeight="730.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="dcDetail" editable="true" layoutY="210.0" prefHeight="276.0">
+            <TableView fx:id="dcDetail" editable="true" layoutY="210.0" onMouseClicked="#modifyItem" prefHeight="276.0">
               <columns>
                   <TableColumn fx:id="material_name" editable="false" prefWidth="128.0" text="Material Name" />
                   <TableColumn fx:id="brand_name" editable="false" prefWidth="125.0" text="Brand Name" />
@@ -22,14 +22,14 @@
             </TableView>
       <TextField fx:id="project" layoutX="493.0" layoutY="23.0" prefHeight="25.0" prefWidth="229.0" />
       <Label fx:id="lbl_projectname" layoutX="369.0" layoutY="27.0" prefHeight="17.0" prefWidth="116.0" text="Project Name" />
-      <TextField fx:id="dc_no" layoutX="107.0" layoutY="55.0" prefHeight="25.0" prefWidth="106.0" />
+      <TextField fx:id="id" layoutX="107.0" layoutY="55.0" prefHeight="25.0" prefWidth="106.0" />
       <Label fx:id="lbl_po_no" layoutX="31.0" layoutY="60.0" prefHeight="17.0" prefWidth="70.0" text="DC. No." />
       <DatePicker fx:id="dc_date" layoutX="107.0" layoutY="26.0" />
       <Label fx:id="lbl_dc_date" layoutX="31.0" layoutY="32.0" prefHeight="17.0" prefWidth="70.0" text="DC. Date" />
       <HBox layoutX="31.0" layoutY="491.0">
          <children>
             <Button layoutX="208.0" layoutY="491.0" mnemonicParsing="false" onAction="#save" prefHeight="37.0" prefWidth="167.0" text="Save DC" />
-            <Button layoutX="385.0" layoutY="491.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="167.0" text="Print DC" />
+            <Button layoutX="385.0" layoutY="491.0" mnemonicParsing="false" onAction="#printDoc" prefHeight="37.0" prefWidth="167.0" text="Print DC" />
          </children>
       </HBox>
       
@@ -57,7 +57,7 @@
                         <Label layoutX="198.0" layoutY="130.0" text="Brand" />
                         <Label layoutX="305.0" layoutY="132.0" text="Model" />
                         <Label layoutX="500.0" layoutY="132.0" text="Quantity" />
-                        <TextField fx:id="txt_qty" layoutX="500.0" layoutY="149.0" onAction="#calcAmount" prefHeight="25.0" prefWidth="53.0" />
+                        <TextField fx:id="txt_qty" layoutX="500.0" layoutY="149.0" prefHeight="25.0" prefWidth="53.0" />
       <TextField fx:id="txt_units" layoutX="567.0" layoutY="148.0" prefHeight="25.0" prefWidth="53.0" />
       <Label layoutX="567.0" layoutY="131.0" text="Units" />
       <Label layoutX="635.0" layoutY="131.0" text="Amount" />
