@@ -21,6 +21,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.HttpClients;
+import retsys.client.main.AppContext;
 
 /**
  *
@@ -28,8 +29,8 @@ import org.apache.http.impl.client.HttpClients;
  */
 public class HttpHelper {
 
-    String hostName = "localhost";
-    String hostPort = "8080";
+    String hostName = AppContext.getInstance().getHost();
+    String hostPort = AppContext.getInstance().getPort();
     String context = "retsys/rest";
 
     public HttpGet getHttpGetObj(String operation) throws IOException {

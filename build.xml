@@ -26,6 +26,7 @@
           <!-- This mapper strips off all leading directory information -->
           <mapper type="flatten" />
         </copy> 
+        <copy file="retsys.properties" toFile="dist/retsys.properties"/> 
     </target>
     
     <!--
