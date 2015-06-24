@@ -63,7 +63,7 @@
                                     <Label text="Material name" />
                                     <Label text="Location" GridPane.columnIndex="1" />
                                     <TextField fx:id="txt_name" prefHeight="25.0" prefWidth="149.0" promptText="Material name" GridPane.rowIndex="1" />
-                                    <TextField fx:id="txt_location" editable="false" prefHeight="25.0" prefWidth="159.0" promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txt_location" prefHeight="25.0" prefWidth="159.0" promptText="Location" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="txt_brand" editable="false" prefHeight="25.0" prefWidth="131.0" promptText="Brand" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                     <Label text="Brand" GridPane.columnIndex="2" />
                                     <Label text="Model" GridPane.columnIndex="3" />

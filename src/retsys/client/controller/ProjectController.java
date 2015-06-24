@@ -64,8 +64,7 @@ public class ProjectController extends StandardController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+
         AutoCompletionBinding<Project> txt_name = TextFields.bindAutoCompletion(name, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Project>>() {
 
             @Override
@@ -107,18 +106,16 @@ public class ProjectController extends StandardController implements Initializab
                 //fill other item related fields
                 id.setText(splitId(name.getText()) + "");
                 name.setText(project.getName());
-               projectDesc.setText(project.getProjectDesc());
+                projectDesc.setText(project.getProjectDesc());
                 remarks.setText(project.getRemarks());
-                
+
                 client.setText(project.getClient().getName() + " (ID:" + project.getClient().getId() + ")");
-                
+
                 populateAuditValues(project);
-                
+
             }
         });
-        
-        
-        
+
         TextFields.bindAutoCompletion(client, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Client>>() {
 
             @Override
@@ -149,7 +146,6 @@ public class ProjectController extends StandardController implements Initializab
             }
         });
     }
-     
 
     /**
      * @return the client
@@ -218,7 +214,7 @@ public class ProjectController extends StandardController implements Initializab
         client.setId(clientId);
 
         project.setClient(client);
-        
+
         System.out.println("getId(this.name.getText() .... " + id.getText());
         if (id.getText().equals("")) {
             System.out.println("id is  null... " + id.getText());
@@ -235,31 +231,31 @@ public class ProjectController extends StandardController implements Initializab
         return "projects";
     }
 
-    public  String delete(ActionEvent event) throws IOException {
-         System.out.println("getId(this.name.getText() .... "+splitId(this.name.getText()));
-        String response = delete("projects",Integer.valueOf(this.id.getText()));
-        
-        
-       clear();
+    public String delete(ActionEvent event) throws IOException {
+        System.out.println("getId(this.name.getText() .... " + splitId(this.name.getText()));
+        String response = delete("projects", Integer.valueOf(this.id.getText()));
+
+        clear();
         return response;
-       
+
     }
-    
+
     void clear() {
-    
-       name.setText("");
-       this.client.setText("");
-       this.projectDesc.setText("");       
+
+        name.setText("");
+        this.client.setText("");
+        this.projectDesc.setText("");
         this.remarks.setText("");
         this.id.setText("");
-     
+
     }
+
     @Override
     protected void postSave(String response) {
         JsonHelper helper = new JsonHelper();
         System.out.println("response .... " + response);
         try {
-            Project project = (Project)helper.convertJsonStringToObject(response, new TypeReference<Project>() {
+            Project project = (Project) helper.convertJsonStringToObject(response, new TypeReference<Project>() {
             });
             id.setText(project.getId().toString());
         } catch (IOException ex) {

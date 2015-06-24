@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -64,7 +65,7 @@ public abstract class StandardController {
     protected void init(Model model) {
 
     }
-    
+
     public void populateAuditValues(Model model) {
         auditId.setText(String.valueOf(model.getAudit().getId()));
         createdBy.setText(model.getAudit().getCreatedBy());
@@ -75,7 +76,7 @@ public abstract class StandardController {
     }
 
     public void setAuditValues() {
-        if(id != null && id.getText().isEmpty()){
+        if (id != null && id.getText().isEmpty()) {
             auditId.setText("");
             createdBy.setText("");
             createdOn.setValue(null);
@@ -245,6 +246,7 @@ public abstract class StandardController {
         return response;
 
     }
+
     public Integer getId(String text) {
         Matcher m = Pattern.compile("\\(([^)]+)\\)").matcher(text);
         Integer id = null;
@@ -254,12 +256,17 @@ public abstract class StandardController {
 
         return id;
     }
-    protected void postSave(String response){
+
+    protected void postSave(String response) {
 
     }
-public void enableid () throws IOException {
-id.editableProperty().setValue(Boolean.TRUE);
-}
+
+    public void enableid(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            id.editableProperty().setValue(Boolean.TRUE);
+        }
+    }
+
     abstract Object buildRequestMsg();
 
     abstract String getSaveUrl();

@@ -96,7 +96,8 @@ public class PurchaseOrderController extends StandardController implements Initi
 
     /**
      * Initializes the controller class.
-     */    @Override
+     */
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         po_date.setValue(LocalDate.now());
 
@@ -146,7 +147,6 @@ public class PurchaseOrderController extends StandardController implements Initi
                 Item item = event.getCompletion();
                 //fill other item related fields
                 txt_brand.setText(item.getBrand());
-                txt_location.setText(item.getSite());
                 txt_location.setUserData(item.getId());
                 txt_model.setText(null); // item doesn't have this field. add??
             }
@@ -180,7 +180,7 @@ public class PurchaseOrderController extends StandardController implements Initi
                 throw new UnsupportedOperationException();
             }
         });
-        
+
         TextFields.bindAutoCompletion(vendor, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<Vendor>>() {
 
             @Override
@@ -213,43 +213,39 @@ public class PurchaseOrderController extends StandardController implements Initi
 
     @FXML
     private void printDoc(ActionEvent event) {
-      PrintHandler printhandler =new PrintHandler("PO", getReportDataMap());
-      System.out.println(printhandler.generatePrintData());
+        PrintHandler printhandler = new PrintHandler("PO", getReportDataMap());
+        System.out.println(printhandler.generatePrintData());
     }
-    
-    public Map getReportDataMap()
-    {
-    Map reportmap =new HashMap();
-    reportmap.put("pono", id.getText());
-    reportmap.put("podate", po_date.getValue());
-    reportmap.put("ShopName",splitName(vendor.getText()));
-    reportmap.put("SiteName", splitName(project.getText()));
-    reportmap.put("DeliveryAddress",delivery_address.getText());
-    
-    
-    //poItem.add((String))
-    Iterator<POItem> items = poDetail.getItems().iterator();
+
+    public Map getReportDataMap() {
+        Map reportmap = new HashMap();
+        reportmap.put("pono", id.getText());
+        reportmap.put("podate", po_date.getValue());
+        reportmap.put("ShopName", splitName(vendor.getText()));
+        reportmap.put("SiteName", splitName(project.getText()));
+        reportmap.put("DeliveryAddress", delivery_address.getText());
+
+        //poItem.add((String))
+        Iterator<POItem> items = poDetail.getItems().iterator();
         Set<PurchaseOrderDetail> poDetails = new HashSet<>();
-        List poItemRow =  new ArrayList();
+        List poItemRow = new ArrayList();
         while (items.hasNext()) {
             POItem poItem = items.next();
-            sno=sno++;
-            List poItemList =  new ArrayList();
+            sno = sno++;
+            List poItemList = new ArrayList();
             poItemList.add(sno);
             poItemList.add((poItem.getLocation().get()));
             poItemList.add(splitName((poItem.getName().get())));
             poItemList.add((poItem.getBrand().get()));
             poItemList.add((poItem.getModel().get()));
             poItemList.add((poItem.getQuantity().get()));
-            
+
             poItemRow.add(poItemList);
         }
-reportmap.put("PODETAIL", poItemRow);
-        
- 
-    
-    return reportmap;
-    
+        reportmap.put("PODETAIL", poItemRow);
+
+        return reportmap;
+
     }
 
     /**
@@ -286,8 +282,6 @@ reportmap.put("PODETAIL", poItemRow);
     public TextField getPo_no() {
         return Po_no;
     }
-    
-    
 
     /**
      * @param Po_no the Po_no to set
@@ -345,7 +339,7 @@ reportmap.put("PODETAIL", poItemRow);
             list = FXCollections.observableArrayList();
         }
 
-        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Double.parseDouble(txt_qty.getText()), false,null);
+        POItem item = new POItem((int) txt_location.getUserData(), txt_location.getText(), txt_name.getText(), txt_brand.getText(), txt_model.getText(), Double.parseDouble(txt_qty.getText()), false, null);
         list.add(item);
         poDetail.setItems(list);
     }
@@ -377,7 +371,7 @@ reportmap.put("PODETAIL", poItemRow);
         while (items.hasNext()) {
             POItem poItem = items.next();
             PurchaseOrderDetail poDetail = new PurchaseOrderDetail();
-            
+
             Item item = new Item();
             item.setId(splitId(poItem.getName().get()));
 
@@ -397,11 +391,11 @@ reportmap.put("PODETAIL", poItemRow);
     String getSaveUrl() {
         return "purchaseorders";
     }
-    
+
     void clear() {
-    System.out.println("To be defined .... ");
-     }
-    
+        System.out.println("To be defined .... ");
+    }
+
     @Override
     protected void postSave(String response) {
         JsonHelper helper = new JsonHelper();
